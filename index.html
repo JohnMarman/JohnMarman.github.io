@@ -12,16 +12,16 @@
 		<div class="line2"></div>
 		<div class="line3"></div>
 		
-		<canvas id="ScreenCanvas"></canvas>  
-		<script>
+		<canvas id="ScreenCanvas" width="500" height="200"></canvas>
 		
-		var canvas = document.getElementById('ScreenCanvas');
-		//Always check for properties and methods, to make sure your code doesn't break in other browsers.
-		function draw() {
+		<script>
+			var canvas = document.getElementById('ScreenCanvas');
+			//Always check for properties and methods, to make sure your code doesn't break in other browsers.
 			if (canvas.getContext)
-				var ctx = canvas.getContext('2d');
-				ctx.canvas.width  = window.innerWidth;
-				ctx.canvas.height = window.innerHeight;
+			{
+				var context = canvas.getContext('2d');
+				canvas.width  = window.innerWidth;
+				canvas.height = window.innerHeight;
 				// Reset the current path
 				context.beginPath(); 
 				// Staring point (10,45)
@@ -33,7 +33,6 @@
 				context.strokeStyle = 'white';
 				context.stroke();
 			}
-		}
 		</script> 
 	</body>
 </html>
