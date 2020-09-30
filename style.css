@@ -2,33 +2,6 @@ body
 {
 	content: '';
 	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
 	background: black;
-}
-
-.l1
-{
-	top: 25%;
-	left: 33.3%;
-	width: 2%;
-	height: 1px;
-}
-  
-.l2
-{
-	top: 25%;
-	left: 33.3%;
-	width: 1px;
-	height: 15%;
-}
-  
-.l3
-{
-	top: 40%;
-	left: 33.3%;
-	width: 2%;
-	height: 1px;
+	margin: 0
 }

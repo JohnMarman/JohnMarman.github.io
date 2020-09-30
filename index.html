@@ -9,30 +9,19 @@
 		
 		<script>
 			var canvas = document.getElementById('ScreenCanvas');
-			//Always check for properties and methods, to make sure your code doesn't break in other browsers.
 			if (canvas.getContext)
 			{
 				var context = canvas.getContext('2d');
 				canvas.width  = window.innerWidth;
 				canvas.height = window.innerHeight;
-				// Reset the current path
 				context.beginPath(); 
-				// Staring point (10,45)
 				context.moveTo(10,45);
-				// End point (180,47)
 				context.lineTo(180,47);
-				// Make the line visible
 				context.lineWidth = 1;
 				context.strokeStyle = 'white';
 				context.stroke();
 			}
 		</script>
-		
-		<div style="content: ''; position: absolute; display: block; background: #fff; z-index: 2; transform-origin: left">
-			<div class="l1"></div>
-			<div class="l2"></div>
-			<div class="l3"></div>
-		</div>
 		
 	</body>
 </html>
