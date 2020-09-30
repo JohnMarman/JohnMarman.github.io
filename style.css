@@ -9,6 +9,13 @@ body
   background: #262626;
 }
 
+.foreground
+{
+	position: absolute;
+	display: block;
+	z-index: 3;
+}
+
 .line
 {
   content: '';
