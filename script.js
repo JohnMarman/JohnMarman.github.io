@@ -30,12 +30,11 @@ function drawRightBracket(){
 	context.stroke();
 }
 
-function drawBottomLine(ratio){
+function drawBottomLine(y2,ratio){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,canvas.height/2);
-	x2 = (canvas.width/2) + ratio * (x2-(canvas.width/2));
-	y2 = (canvas.height/2) + ratio * (y2-(canvas.height/2));
-	context.lineTo(x2,y2);
+	context.moveTo(canvas.width/2,0);
+	y2 = ratio * y2;
+	context.lineTo(canvas.width/2,y2);
 	context.lineWidth = 1;
 	context.strokeStyle = 'white';
 	context.stroke();
@@ -43,7 +42,7 @@ function drawBottomLine(ratio){
 
 function animate(ratio) {
   ratio = ratio || 0;
-  drawBottomLine(ratio);
+  drawBottomLine(300,ratio);
   if(ratio<1) {
     requestAnimationFrame(function() {
       animate(ratio + 0.01);
