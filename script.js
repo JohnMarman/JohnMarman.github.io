@@ -30,7 +30,7 @@ function drawRightBracket(){
 	context.stroke();
 }
 
-function drawBottomLine(){
+function drawBottomLine(ratio){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,canvas.height/2);
 	x2 = (canvas.width/2) + ratio * (x2-(canvas.width/2));
