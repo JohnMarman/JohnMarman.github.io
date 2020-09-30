@@ -62,8 +62,8 @@ function drawBottomLine(y2,ratio){
 
 function animate(ratio) {
   ratio = ratio || 0;
-  drawLeftLine(0,ratio);
-  drawRightLine(canvas.width,ratio);
+  drawLeftLine(ratio,canvas.height/4);
+  drawRightLine(ratio,canvas.height/4);
   drawBottomLine(canvas.height,ratio);
   if(ratio<1) {
     requestAnimationFrame(function() {
