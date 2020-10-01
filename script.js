@@ -25,7 +25,7 @@ function drawLeftBracket(offset) {
 function drawRightBracket(offset){
 	context.beginPath();
 	startpointW = canvas.width/2 + offset;
-	startpointH = brackerstartH;
+	startpointH = bracketstartH;
 	context.moveTo(startpointW,startpointH);
 	context.lineTo(startpointW+10,startpointH);
 	context.lineTo(startpointW+10,startpointH+50);
