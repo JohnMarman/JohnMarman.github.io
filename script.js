@@ -77,7 +77,9 @@ function animate(offset) {
 	drawLeftLine(offset);
 	drawRightLine(offset);
 	drawBottomLine(offset);
-	animate(offset + 1);
+	requestAnimationFrame(function() {
+		animate(offset + 1);
+	});
 }
 
 animate();
