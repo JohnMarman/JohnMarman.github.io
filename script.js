@@ -22,54 +22,57 @@ function drawRightBracket(){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,canvas.height/2);
 	context.lineTo((canvas.width/2)+10,canvas.height/2);
-	context.lineTo((canvas.width/2)+10,(canvas.height/2)+50);
-	context.lineTo((canvas.width/2),(canvas.height/2)+50);
+	context.lineTo((canvas.width/2)+10,(canvas.height/2)-50);
+	context.lineTo((canvas.width/2),(canvas.height/2)-50);
 	context.lineJoin = 'round';
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
-function drawLeftLine(y2,ratio){
+function drawLeftLine(current){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,canvas.height/4);
-	y2 = ratio * y2;
-	context.lineTo(y2,canvas.height/4);
+	context.moveTo(canvas.width/2,canvas.height/8);
+	if (current > 0)
+	{
+		context.lineTo(canvas.width/2 - current,canvas.height/8);
+	}
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
-function drawRightLine(y2,ratio){
+function drawRightLine(current){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,canvas.height/4);
-	y2 = ratio * y2;
-	context.lineTo(y2,canvas.height/4);
+	context.moveTo(canvas.width/2,canvas.height/8);
+	if (current < canvas.width)
+	{
+		context.lineTo(canvas.width/2 + current,canvas.height/8);
+	}
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
-function drawBottomLine(y2,ratio){
+function drawBottomLine(current){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,0);
-	y2 = ratio * y2;
-	context.lineTo(canvas.width/2,y2);
+	if (current < canvas.height) 
+	{
+		context.lineTo(canvas.width/2,current);
+	}
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
-function animate(ratio) {
-  ratio = ratio || 0;
-  drawLeftLine(ratio,canvas.height/4);
-  drawRightLine(ratio,canvas.height/4);
-  drawBottomLine(canvas.height,ratio);
-  if(ratio<1) {
-    requestAnimationFrame(function() {
-      animate(ratio + 0.05);
+function animate() {
+  drawLeftLine(current);
+  drawRightLine(current);
+  drawBottomLine(current);
+  requestAnimationFrame(function() {
+      animate(current + 0.05);
     });
-  }
 }
 
 drawLeftBracket();
