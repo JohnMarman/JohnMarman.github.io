@@ -8,10 +8,10 @@ if (canvas.getContext)
 
 function drawLeftBracket() {
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,canvas.height/2);
-	context.lineTo((canvas.width/2)-10,canvas.height/2);
-	context.lineTo((canvas.width/2)-10,(canvas.height/2)-50);
-	context.lineTo((canvas.width/2),(canvas.height/2)-50);
+	context.moveTo(canvas.width/2,canvas.height/8);
+	context.lineTo((canvas.width/2)-10,canvas.height/8);
+	context.lineTo((canvas.width/2)-10,(canvas.height/8)-50);
+	context.lineTo((canvas.width/2),(canvas.height/8)-50);
 	context.lineJoin = 'round';
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
@@ -20,10 +20,10 @@ function drawLeftBracket() {
 
 function drawRightBracket(){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,canvas.height/2);
-	context.lineTo((canvas.width/2)+10,canvas.height/2);
-	context.lineTo((canvas.width/2)+10,(canvas.height/2)-50);
-	context.lineTo((canvas.width/2),(canvas.height/2)-50);
+	context.moveTo(canvas.width/2,canvas.height/8);
+	context.lineTo((canvas.width/2)+10,canvas.height/8);
+	context.lineTo((canvas.width/2)+10,(canvas.height/8)-50);
+	context.lineTo((canvas.width/2),(canvas.height/8)-50);
 	context.lineJoin = 'round';
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
