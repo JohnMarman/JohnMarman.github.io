@@ -6,7 +6,7 @@ if (canvas.getContext)
 	canvas.height = window.innerHeight;
 }
 
-function drawLeftBracket() {
+function defineLeftBracket() {
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,canvas.height/8);
 	context.lineTo((canvas.width/2)-10,canvas.height/8);
@@ -18,7 +18,7 @@ function drawLeftBracket() {
 	context.stroke();
 }
 
-function drawRightBracket(){
+function defineRightBracket(){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,canvas.height/8);
 	context.lineTo((canvas.width/2)+10,canvas.height/8);
@@ -76,6 +76,6 @@ function animate(current) {
 	});
 }
 
-drawLeftBracket();
-drawRightBracket();
+defineLeftBracket();
+defineRightBracket();
 animate();
