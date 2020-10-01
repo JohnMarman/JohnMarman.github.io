@@ -20,6 +20,7 @@ function drawLeftBracket(offset) {
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
 function drawRightBracket(offset){
@@ -34,6 +35,7 @@ function drawRightBracket(offset){
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawLeftLine(offset){
@@ -63,9 +65,9 @@ function drawRightLine(offset){
 function drawBottomLine(offset){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,bracketstartH);
-	if (offset < canvas.height) 
+	if (offset < canvas.height)
 	{
-		context.lineTo(canvas.width/2,offset);
+		context.lineTo(canvas.width/2,bracketstartH + offset);
 	}
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
