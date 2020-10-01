@@ -11,7 +11,7 @@ function drawLeftBracket(offset) {
 	startpointW = canvas.width/2 - offset;
 	startpointH = canvas.height/8;
 	context.moveTo(startpointW,startpointH);
-	context.lineTo((startpointW-10) - offsetX,startpointH);
+	context.lineTo((startpointW-10),startpointH);
 	context.lineTo(startpointW-10,startpointH-50);
 	context.lineTo(startpointW,startpointH-50);
 	context.lineJoin = 'round';
@@ -20,7 +20,7 @@ function drawLeftBracket(offset) {
 	context.stroke();
 }
 
-function drawRightBracket(){
+function drawRightBracket(offset){
 	context.beginPath();
 	startpointW = canvas.width/2 + offset;
 	startpointH = canvas.height/8;
