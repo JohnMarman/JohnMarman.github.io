@@ -33,10 +33,7 @@ function drawRightBracket(){
 function drawLeftLine(current){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,canvas.height/8);
-	if (current > 0)
-	{
-		context.lineTo(canvas.width/2 - current,canvas.height/8);
-	}
+	context.lineTo(canvas.width/2 - current,canvas.height/8);
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
@@ -45,10 +42,7 @@ function drawLeftLine(current){
 function drawRightLine(current){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,canvas.height/8);
-	if (current < canvas.width)
-	{
-		context.lineTo(canvas.width/2 + current,canvas.height/8);
-	}
+	context.lineTo(canvas.width/2 + current,canvas.height/8);
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
@@ -57,10 +51,7 @@ function drawRightLine(current){
 function drawBottomLine(current){
 	context.beginPath(); 
 	context.moveTo(canvas.width/2,0);
-	if (current < canvas.height) 
-	{
-		context.lineTo(canvas.width/2,current);
-	}
+	context.lineTo(canvas.width/2,current);
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
