@@ -72,8 +72,8 @@ function drawBottomLine(offset){
 
 function animate(offset) {
 	offset = offset || 0;
-	drawLeftBracket();
-	drawRightBracket();
+	drawLeftBracket(offset);
+	drawRightBracket(offset);
 	drawLeftLine(offset);
 	drawRightLine(offset);
 	drawBottomLine(offset);
