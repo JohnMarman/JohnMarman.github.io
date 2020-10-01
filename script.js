@@ -7,6 +7,7 @@ if (canvas.getContext)
 }
 
 function drawLeftBracket(offset) {
+	context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 	context.beginPath();
 	startpointW = canvas.width/2 - offset;
 	startpointH = canvas.height/8;
@@ -21,6 +22,7 @@ function drawLeftBracket(offset) {
 }
 
 function drawRightBracket(offset){
+	context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 	context.beginPath();
 	startpointW = canvas.width/2 + offset;
 	startpointH = canvas.height/8;
