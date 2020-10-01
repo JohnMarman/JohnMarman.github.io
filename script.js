@@ -72,7 +72,7 @@ function animate(current) {
 	drawRightLine(current);
 	drawBottomLine(current);
 	requestAnimationFrame(function() {
-		animate(current + 0.05);
+		animate(current + 1);
 	});
 }
 
