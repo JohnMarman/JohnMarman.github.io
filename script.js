@@ -66,7 +66,7 @@ function drawBottomLine(current){
 	context.stroke();
 }
 
-function animate() {
+function animate(current) {
 	current = current || 0;
 	drawLeftLine(current);
 	drawRightLine(current);
