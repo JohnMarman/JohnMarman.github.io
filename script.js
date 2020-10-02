@@ -8,6 +8,7 @@ if (canvas.getContext)
 
 bracketbottomH = canvas.height/8;
 bracketH = 50;
+bracketarmW = 10;
 sidelineH = bracketbottomH - (bracketH/2);
 bracketclamp = 300;
 
@@ -20,7 +21,7 @@ function drawLeftBracket(bracketoffset) {
 	context.lineTo(startpointW-10,startpointH-50);
 	context.lineTo(startpointW,startpointH-50);
 	context.lineJoin = 'round';
-	context.lineWidth = 0.5;
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
@@ -34,19 +35,19 @@ function drawRightBracket(bracketoffset){
 	context.lineTo(startpointW+10,startpointH-50);
 	context.lineTo(startpointW,startpointH-50);
 	context.lineJoin = 'round';
-	context.lineWidth = 0.5;
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
 function drawLeftLine(sidelineoffset){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,sidelineH);
-	if (sidelineoffset > canvas.width)
+	context.moveTo((canvas.width/2)-bracketclamp,sidelineH);
+	if (sidelineoffset > 0)
 	{
 		context.lineTo(canvas.width/2 - sidelineoffset,sidelineH);
 	}
-	context.lineWidth = 0.5;
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
@@ -58,7 +59,7 @@ function drawRightLine(sidelineoffset){
 	{
 		context.lineTo(canvas.width/2 + sidelineoffset,sidelineH);
 	}
-	context.lineWidth = 0.5;
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
@@ -70,7 +71,7 @@ function drawBottomLine(bottomlineoffset){
 	{
 		context.lineTo(canvas.width/2,bracketbottomH + bottomlineoffset);
 	}
-	context.lineWidth = 0.5;
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
@@ -90,7 +91,7 @@ function animate(offset) {
 		drawBottomLine(offset);
 	}
 	requestAnimationFrame(function() {
-		animate(offset + 1);
+		animate(offset+1);
 	});
 }
 
