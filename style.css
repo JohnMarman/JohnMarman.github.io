@@ -5,3 +5,11 @@ body
 	background: white;
 	margin: 0
 }
+
+.my-element
+{
+  position: absolute;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}

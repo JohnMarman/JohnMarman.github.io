@@ -6,6 +6,8 @@ if (canvas.getContext)
 	canvas.height = window.innerHeight;
 }
 
+a=0;
+var txt = 'John Marman';
 bracketstartpointW = Math.round(canvas.width/2) - 0.5;
 bracketstartpointH = Math.round(canvas.height/6) + 0.5;
 bracketH = 50;
@@ -124,6 +126,7 @@ function animate(offset) {
     if (offset < bracketDistance)
     {
       context.clearRect(0, 0, canvas.width, canvas.height);
+      typeWriter();
       drawTopLeftBracket(offset);
       drawBottomLeftBracket(offset);
       drawTopRightBracket(offset);
@@ -141,14 +144,29 @@ function animate(offset) {
      if (offset < linedistance)
       {
         drawLeftLine(offset);
-     drawRightLine(offset);
-     drawBottomLine(offset);
+        drawRightLine(offset);
+        drawBottomLine(offset);
       }
-     
+	
    }
 	requestAnimationFrame(function() {
 		animate(offset + 1);
 	});
 }
 
+var newStyles = document.createElement('style')
+document.head.append(newStyles)
+newStyles.innerHTML = ".my-element {" +
+  "top: " + bracketstartpointH + "px;"
+"}"
+
+
+function typeWriter() {
+  if (a < txt.length) {
+    document.getElementById("name").innerHTML += txt.charAt(a);
+    a++;
+  }
+}
+
 animate();
+typeWriter();
