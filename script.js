@@ -6,8 +6,8 @@ if (canvas.getContext)
 	canvas.height = window.innerHeight;
 }
 
-bracketstartpointW = canvas.width/2;
-bracketstartpointH = canvas.height/6;
+bracketstartpointW = Math.round(canvas.width/2) - 0.5;
+bracketstartpointH = Math.round(canvas.height/6) + 0.5;
 bracketH = 50;
 bracketDistance = 300;
 bottomlinestartpoint = bracketstartpointH + bracketH;
@@ -76,7 +76,7 @@ function drawBottomRightBracket(offset) {
 
 function drawLeftLine(offset){
 	context.beginPath();
-  linestartpointW = canvas.width/2 - bracketDistance;
+  linestartpointW = bracketstartpointW - bracketDistance;
 	context.moveTo(linestartpointW,bracketstartpointH);
 	context.lineTo(linestartpointW - offset,bracketstartpointH);
 	context.lineWidth = 1;
@@ -86,7 +86,7 @@ function drawLeftLine(offset){
 
 function drawRightLine(offset){
 	context.beginPath(); 
-  linestartpointW = canvas.width/2 + bracketDistance;
+  linestartpointW = bracketstartpointW + bracketDistance;
 	context.moveTo(linestartpointW,bracketstartpointH);
 	context.lineTo(linestartpointW + offset,bracketstartpointH);
 	context.lineWidth = 1;
@@ -96,9 +96,9 @@ function drawRightLine(offset){
 
 function drawBottomLine(offset){
 	context.beginPath();
-	context.moveTo(canvas.width/2,bottomlinestartpoint);
-	context.lineTo(canvas.width/2,bottomlinestartpoint + offset);
-	context.lineWidth = 0.5;
+	context.moveTo(bracketstartpointW,bottomlinestartpoint);
+	context.lineTo(bracketstartpointW,bottomlinestartpoint + offset);
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
