@@ -157,7 +157,8 @@ function animate(offset) {
 var newStyles = document.createElement('style')
 document.head.append(newStyles)
 newStyles.innerHTML = ".my-element {" +
-  "top: " + bracketstartpointH + "px;"
+  "top: " + bracketstartpointH + "px;" +
+  "left: " + bracketstartpointW + "px;"
 "}"
 
 
