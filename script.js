@@ -6,88 +6,131 @@ if (canvas.getContext)
 	canvas.height = window.innerHeight;
 }
 
-bracketstartH = canvas.height/8;
+bracketstartpointW = canvas.width/2;
+bracketstartpointH = canvas.height/6;
 bracketH = 50;
-sidelineH = bracketstartH-(bracketH/2);
+stage1 = true;
+stage2 = false;
+stage3 = false;
 
-function drawLeftBracket(bracketoffset) {
+function drawCenterLine(offset)
+{
 	context.beginPath();
-	startpointW = canvas.width/2 - offset;
-    startpointH = bracketstartH;
-    context.moveTo(startpointW,startpointH);
-    context.lineTo(startpointW-10,startpointH);
-    context.lineTo(startpointW-10,startpointH-bracketH);
-    context.lineTo(startpointW,startpointH-bracketH);
-    context.lineJoin = 'round';
-    context.lineWidth = 0.5;
+	context.moveTo(bracketstartpointW,bracketstartpointH + offset);
+	context.lineTo(bracketstartpointW,bracketstartpointH - offset);
+	context.lineWidth = 1;
     context.strokeStyle = 'black';
     context.stroke();
 }
 
-function drawRightBracket(bracketoffset){
-    context.beginPath();
-    startpointW = canvas.width/2 + offset;
-    startpointH = bracketstartH;
-    context.moveTo(startpointW,startpointH);
-    context.lineTo(startpointW+10,startpointH);
-    context.lineTo(startpointW+10,startpointH-bracketH);
-    context.lineTo(startpointW,startpointH-bracketH);
+function drawTopLeftBracket(offset) {
+	context.beginPath();
+	currentbracketpointW = bracketstartpointW - offset;
+    context.moveTo(currentbracketpointW,bracketstartpointH);
+    context.lineTo(currentbracketpointW,bracketstartpointH - bracketH);
+	context.lineTo(bracketstartpointW,bracketstartpointH - bracketH);
     context.lineJoin = 'round';
-    context.lineWidth = 0.5;
+    context.lineWidth = 1;
     context.strokeStyle = 'black';
     context.stroke();
 }
 
-function drawLeftLine(lineoffset){
+function drawBottomLeftBracket(offset) {
 	context.beginPath();
-	context.moveTo(canvas.width/2,sidelineH);
-	if (offset > 0)
-	{
-		context.lineTo(canvas.width/2 - offset,sidelineH);
-	}
-	context.lineWidth = 0.5;
+	currentbracketpointW = bracketstartpointW - offset;
+    context.moveTo(currentbracketpointW,bracketstartpointH);
+    context.lineTo(currentbracketpointW,bracketstartpointH + bracketH);
+	context.lineTo(bracketstartpointW,bracketstartpointH + bracketH);
+    context.lineJoin = 'round';
+    context.lineWidth = 1;
+    context.strokeStyle = 'black';
+    context.stroke();
+}
+
+function drawTopRightBracket(offset) {
+	context.beginPath();
+	currentbracketpointW = bracketstartpointW + offset;
+    context.moveTo(currentbracketpointW,bracketstartpointH);
+    context.lineTo(currentbracketpointW,bracketstartpointH - bracketH);
+	context.lineTo(bracketstartpointW,bracketstartpointH - bracketH);
+    context.lineJoin = 'round';
+    context.lineWidth = 1;
+    context.strokeStyle = 'black';
+    context.stroke();
+}
+
+function drawBottomRightBracket(offset) {
+	context.beginPath();
+	currentbracketpointW = bracketstartpointW + offset;
+    context.moveTo(currentbracketpointW,bracketstartpointH);
+    context.lineTo(currentbracketpointW,bracketstartpointH + bracketH);
+	context.lineTo(bracketstartpointW,bracketstartpointH + bracketH);
+    context.lineJoin = 'round';
+    context.lineWidth = 1;
+    context.strokeStyle = 'black';
+    context.stroke();
+}
+
+function drawLeftLine(offset){
+	context.beginPath();
+	context.moveTo(canvas.width/2,bracketstartpointH);
+	context.lineTo(canvas.width/2 - offset,bracketstartpointH);
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
-function drawRightLine(sidelineoffset){
+function drawRightLine(offset){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,sidelineH);
-	if (offset < canvas.width)
-	{
-		context.lineTo(canvas.width/2 + offset,sidelineH);
-	}
-	context.lineWidth = 0.5;
+	context.moveTo(canvas.width/2,bracketstartpointH);
+	context.lineTo(canvas.width/2 + offset,bracketstartpointH);
+	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
-function drawBottomLine(bottomlineoffset){
+function drawBottomLine(offset){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,bracketstartH);
-	if (offset < canvas.height)
-	{
-		context.lineTo(canvas.width/2,bracketstartH + offset);
-	}
+	context.moveTo(canvas.width/2,bracketstartpointH);
+	context.lineTo(canvas.width/2,bracketstartpointH + offset);
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
 function animate(offset) {
-	offset = offset || 0;
-  if (offset < 300)
-  {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    drawLeftBracket(bracketoffset);
-    drawRightBracket(bracketoffset);
-  }
-  else
-  {
-    drawLeftLine(offset);
-	  drawRightLine(offset);
-	  drawBottomLine(offset);
-  }
+  offset = offset || 0;
+  //context.clearRect(0, 0, canvas.width, canvas.height);
+	if (stage1)
+	{
+		if (offset < bracketH)
+		{
+			drawCenterLine(offset);
+		}
+		else
+		{
+			stage2 = true;
+			stage1 = false;
+		}
+	}
+	else
+	{
+		if (stage2)
+		{
+			if (offset < 300)
+			{
+				drawTopLeftBracket(offset);
+				drawBottomLeftBracket(offset);
+				drawTopRightBracket(offset);
+				drawBottomRightBracket(offset);
+			}
+			else
+			{
+				stage3 = true;
+				stage2 = false;
+			}
+		}
+	}
 	requestAnimationFrame(function() {
 		animate(offset + 1);
 	});
