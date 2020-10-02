@@ -9,6 +9,9 @@ if (canvas.getContext)
 bracketstartpointW = canvas.width/2;
 bracketstartpointH = canvas.height/6;
 bracketH = 50;
+bracketDistance = 300;
+bottomlinestartpoint = bracketstartpointH + bracketH;
+linedistance = 2000;
 stage1 = true;
 stage2 = false;
 stage3 = false;
@@ -73,8 +76,9 @@ function drawBottomRightBracket(offset) {
 
 function drawLeftLine(offset){
 	context.beginPath();
-	context.moveTo(canvas.width/2,bracketstartpointH);
-	context.lineTo(canvas.width/2 - offset,bracketstartpointH);
+  linestartpointW = canvas.width/2 - bracketDistance;
+	context.moveTo(linestartpointW,bracketstartpointH);
+	context.lineTo(linestartpointW - offset,bracketstartpointH);
 	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
@@ -82,17 +86,18 @@ function drawLeftLine(offset){
 
 function drawRightLine(offset){
 	context.beginPath(); 
-	context.moveTo(canvas.width/2,bracketstartpointH);
-	context.lineTo(canvas.width/2 + offset,bracketstartpointH);
+  linestartpointW = canvas.width/2 + bracketDistance;
+	context.moveTo(linestartpointW,bracketstartpointH);
+	context.lineTo(linestartpointW + offset,bracketstartpointH);
 	context.lineWidth = 1;
 	context.strokeStyle = 'black';
 	context.stroke();
 }
 
 function drawBottomLine(offset){
-	context.beginPath(); 
-	context.moveTo(canvas.width/2,bracketstartpointH);
-	context.lineTo(canvas.width/2,bracketstartpointH + offset);
+	context.beginPath();
+	context.moveTo(canvas.width/2,bottomlinestartpoint);
+	context.lineTo(canvas.width/2,bottomlinestartpoint + offset);
 	context.lineWidth = 0.5;
 	context.strokeStyle = 'black';
 	context.stroke();
@@ -114,25 +119,33 @@ function animate(offset) {
 			stage1 = false;
 		}
 	}
-	else
-	{
-		if (stage2)
-		{
-			if (offset < 300)
-			{
-				context.clearRect(0, 0, canvas.width, canvas.height);
-				drawTopLeftBracket(offset);
-				drawBottomLeftBracket(offset);
-				drawTopRightBracket(offset);
-				drawBottomRightBracket(offset);
-			}
-			else
-			{
-				stage3 = true;
-				stage2 = false;
-			}
-		}
-	}
+  if (stage2)
+  {
+    if (offset < bracketDistance)
+    {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      drawTopLeftBracket(offset);
+      drawBottomLeftBracket(offset);
+      drawTopRightBracket(offset);
+      drawBottomRightBracket(offset);
+    }
+    else
+    {
+      offset = 0;
+      stage3 = true;
+      stage2 = false;
+    }
+  }
+	if (stage3)
+   {
+     if (offset < linedistance)
+      {
+        drawLeftLine(offset);
+     drawRightLine(offset);
+     drawBottomLine(offset);
+      }
+     
+   }
 	requestAnimationFrame(function() {
 		animate(offset + 1);
 	});
