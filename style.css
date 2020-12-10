@@ -72,14 +72,6 @@ html, body
   height: 100vh;
 }
 
-.active {
- display:content;
-}
-
-.inactive {
-  display:none;
-}
-
 .items {
   align-items: center;
   text-align: center;
