@@ -116,11 +116,6 @@ html, body
   justify-content: center;
 }
 
-.holder{
-  width: 75%;
-  margin-top: 75px;
-}
-
 .main-image{
  overflow: hidden;
 }
