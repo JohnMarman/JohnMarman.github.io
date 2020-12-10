@@ -73,7 +73,7 @@ html, body
 }
 
 .active {
- display:block;
+ display:content;
 }
 
 .inactive {
