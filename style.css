@@ -72,6 +72,14 @@ html, body
   height: 100vh;
 }
 
+.active-demo {
+ display:block;
+}
+
+.inactive {
+  display:none;
+}
+
 .items {
   align-items: center;
   text-align: center;
