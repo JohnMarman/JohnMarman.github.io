@@ -194,13 +194,17 @@ items.forEach((item, index) => {
     });
 
     mainImage.addEventListener('click', function() {
-      if (mainImage.classList.contains('expanded')) {
-        mainImage.classList.remove('expanded');
-        mainImageContainer.appendChild(mainImage); // Move the image back into the container
-      } else {
-        mainImage.classList.add('expanded');
-        document.body.appendChild(mainImage); // Move the image out of the container
-      }
-    });
+  if (mainImage.classList.contains('expanded')) {
+    mainImage.classList.remove('expanded');
+    mainImageContainer.appendChild(mainImage);
+    document.body.removeChild(expandedWrapper);
+  } else {
+    mainImage.classList.add('expanded');
+    const expandedWrapper = document.createElement('div');
+    expandedWrapper.className = 'expanded-wrapper';
+    expandedWrapper.appendChild(mainImage);
+    document.body.appendChild(expandedWrapper);
+  }
+});
   });
 });
