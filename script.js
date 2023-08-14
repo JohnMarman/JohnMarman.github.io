@@ -181,20 +181,18 @@ const items = document.querySelectorAll('.items');
 items.forEach((item, index) => {
   item.addEventListener('click', function() {
     document.querySelector('.main-content').innerHTML = contents[index];
-  });
-});
 
-items.forEach((item, index) => {
-  item.addEventListener('click', function() {
-    document.querySelector('.main-content').innerHTML = contents[index];
-    
     const imagesInSelection = document.querySelectorAll('.image-selection img');
     const mainImage = document.querySelector('.main-image img');
-    
+
     imagesInSelection.forEach(image => {
       image.addEventListener('click', function() {
         mainImage.src = image.src;
       });
+    });
+
+    mainImage.addEventListener('click', function() {
+      mainImage.classList.toggle('expanded');
     });
   });
 });
