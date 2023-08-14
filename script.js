@@ -1,6 +1,6 @@
 const contents = [
   <div class="main-content">
-				<div class="content-preview">
+				`<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
 							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg"></img>
@@ -41,9 +41,9 @@ const contents = [
 						process
 					</div>
 				</div>
-			</div>,
+			</div>`,
 
-  <div class="main-content">
+  `<div class="main-content">
 				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
@@ -85,9 +85,9 @@ const contents = [
 						process
 					</div>
 				</div>
-			</div>,
+			</div>`,
 
-  <div class="main-content">
+  `<div class="main-content">
 				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
@@ -129,9 +129,9 @@ const contents = [
 						process
 					</div>
 				</div>
-			</div>,
+			</div>`,
 
-  <div class="main-content">
+  `<div class="main-content">
 				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
@@ -173,7 +173,7 @@ const contents = [
 						process
 					</div>
 				</div>
-			</div>
+			</div>`
 ];
 
 // Get all items with the class name "items"
@@ -182,6 +182,6 @@ const items = document.querySelectorAll('.items');
 // Add click event listeners to each item
 items.forEach((item, index) => {
   item.addEventListener('click', function() {
-    document.getElementById('main-content').innerHTML = contents[index];
+    document.querySelector('.main-content').innerHTML = contents[index].outerHTML;
   });
 });
