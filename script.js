@@ -192,13 +192,15 @@ items.forEach((item, index) => {
       });
     });
 
-    mainImage.addEventListener('click', function() {
+  mainImage.addEventListener('click', function() {
   if (mainImage.classList.contains('expanded')) {
     mainImage.classList.remove('expanded');
-    mainImageContainer.classList.remove('expanded-container');
+    mainImage.style.zIndex = ''; // Reset the z-index
+    mainImageContainer.appendChild(mainImage); // Move the image back into the container
   } else {
     mainImage.classList.add('expanded');
-    mainImageContainer.classList.add('expanded-container');
+    mainImage.style.zIndex = '9999'; // Set a high z-index
+    document.body.appendChild(mainImage); // Move the image out of the container
   }
 });
   });
