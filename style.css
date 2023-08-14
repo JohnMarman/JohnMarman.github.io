@@ -125,14 +125,26 @@ html, body
  overflow: hidden;
 }
 
-.main-image img{
-  min-width: 100%;
-  min-height: 100%;
+.main-image img {
+  width: 100%;
+  height: auto;
   transform: translate(-50%, 0%);
   position: relative;
   left: 50%;
   top: 50%;
   border-radius: 20px;
+}
+
+.expanded {
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  width: 90%;
+  height: 90%;
+  z-index: 1000;
+  border-radius: 0;
 }
 
 .image-selection{
