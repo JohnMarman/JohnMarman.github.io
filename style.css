@@ -139,8 +139,8 @@ html, body
   transition: all 0.5s ease; /* Transition for all properties */
 }
 
-.expanded-wrapper .expanded {
-  position: fixed; /* Make the position fixed */
+#expanded-wrapper .expanded {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -150,17 +150,17 @@ html, body
   z-index: 9999;
 }
 
-.expanded-wrapper {
-  display: none; /* Hide the wrapper initially */
+#expanded-wrapper {
+  display: none;
 }
 
-.expanded-wrapper.active {
+#expanded-wrapper.active {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Grey transparent background */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
