@@ -134,9 +134,9 @@ html, body
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   border-radius: 20px;
-  transition: top 0.5s ease, left 0.5s ease, width 0.5s ease, height 0.5s ease;
+  transition: transform 0.5s ease; /* Transition for transform property */
 }
 
 .expanded-wrapper {
@@ -149,16 +149,12 @@ html, body
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10; /* Ensure the wrapper is above other content */
 }
 
 .expanded {
-  top: 0;
-  left: 0;
-  width: 90%;
-  height: 90%;
+  transform: translate(-50%, -50%) scale(2); /* Scale the image */
   border-radius: 0;
-  object-fit: contain;
-  position: absolute;
 }
 
 .image-selection{
