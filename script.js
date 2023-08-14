@@ -196,17 +196,16 @@ items.forEach((item, index) => {
     mainImage.addEventListener('click', function() {
   if (mainImage.classList.contains('expanded')) {
     mainImage.classList.remove('expanded');
-    mainImageContainer.appendChild(mainImage); // Move the image back into the container
+    mainImageContainer.appendChild(mainImage);
     const expandedWrapper = document.querySelector('.expanded-wrapper');
-    document.body.removeChild(expandedWrapper); // Remove the expanded wrapper
+    document.body.removeChild(expandedWrapper);
   } else {
     mainImage.classList.add('expanded');
     const expandedWrapper = document.createElement('div');
     expandedWrapper.className = 'expanded-wrapper';
     expandedWrapper.appendChild(mainImage);
     document.body.appendChild(expandedWrapper);
-    
-    // Add click event to expanded wrapper to close the expanded view
+
     expandedWrapper.addEventListener('click', () => {
       mainImage.classList.remove('expanded');
       mainImageContainer.appendChild(mainImage);
