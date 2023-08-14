@@ -196,21 +196,10 @@ items.forEach((item, index) => {
     mainImage.addEventListener('click', function() {
   if (mainImage.classList.contains('expanded')) {
     mainImage.classList.remove('expanded');
-    mainImageContainer.appendChild(mainImage);
-    const expandedWrapper = document.querySelector('.expanded-wrapper');
-    document.body.removeChild(expandedWrapper);
+    document.body.classList.remove('no-scroll'); // Enable scrolling
   } else {
     mainImage.classList.add('expanded');
-    const expandedWrapper = document.createElement('div');
-    expandedWrapper.className = 'expanded-wrapper';
-    expandedWrapper.appendChild(mainImage);
-    document.body.appendChild(expandedWrapper);
-
-    expandedWrapper.addEventListener('click', () => {
-      mainImage.classList.remove('expanded');
-      mainImageContainer.appendChild(mainImage);
-      document.body.removeChild(expandedWrapper);
-    });
+    document.body.classList.add('no-scroll'); // Disable scrolling
   }
 });
   });
