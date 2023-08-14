@@ -156,14 +156,13 @@ html, body
 }
 
 .expanded {
-  position: fixed; /* Change to fixed position */
+  position: fixed; // Fix the position relative to the viewport
   top: 5%;
   left: 5%;
   width: 90%;
   height: 90%;
   border-radius: 0;
   object-fit: contain;
-  z-index: 9999; /* High z-index to ensure it's on top of other elements */
 }
 
 .content-details{
