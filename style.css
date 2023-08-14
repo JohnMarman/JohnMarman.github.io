@@ -140,25 +140,21 @@ html, body
 }
 
 .expanded {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 90%;
-  height: 90%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 0;
-  object-fit: contain;
-  transform: translate(-50%, -50%) !important; /* Center the image on the screen */
+  object-fit: cover; /* Cover the entire screen */
   z-index: 9999; /* Ensure the image is above other content */
 }
 
-.expanded-wrapper {
-  display: none; /* Hide the expanded wrapper */
-}
-
+/* Add styles to disable scrolling when the image is expanded */
 .no-scroll {
   overflow: hidden;
 }
 
+/* Add styles for the grey transparent background */
 body.no-scroll::before {
   content: "";
   position: fixed;
