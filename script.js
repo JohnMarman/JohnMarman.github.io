@@ -187,21 +187,20 @@ items.forEach((item, index) => {
     const mainImage = document.querySelector('.main-image img');
 
     imagesInSelection.forEach(image => {
-      image.addEventListener('click', function() {
+      image.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent the event from propagating to the main image
         mainImage.src = image.src;
       });
     });
 
-  mainImage.addEventListener('click', function() {
-  if (mainImage.classList.contains('expanded')) {
-    mainImage.classList.remove('expanded');
-    mainImage.style.zIndex = ''; // Reset the z-index
-    mainImageContainer.appendChild(mainImage); // Move the image back into the container
-  } else {
-    mainImage.classList.add('expanded');
-    mainImage.style.zIndex = '9999'; // Set a high z-index
-    document.body.appendChild(mainImage); // Move the image out of the container
-  }
-});
+    mainImage.addEventListener('click', function() {
+      if (mainImage.classList.contains('expanded')) {
+        mainImage.classList.remove('expanded');
+        mainImageContainer.appendChild(mainImage); // Move the image back into the container
+      } else {
+        mainImage.classList.add('expanded');
+        document.body.appendChild(mainImage); // Move the image out of the container
+      }
+    });
   });
 });
