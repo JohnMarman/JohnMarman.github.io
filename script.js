@@ -176,12 +176,10 @@ const contents = [
 			</div>`
 ];
 
-// Get all items with the class name "items"
 const items = document.querySelectorAll('.items');
 
-// Add click event listeners to each item
 items.forEach((item, index) => {
   item.addEventListener('click', function() {
-    document.querySelector('.main-content').innerHTML = contents[index].outerHTML;
+    document.querySelector('.main-content').innerHTML = contents[index];
   });
 });
