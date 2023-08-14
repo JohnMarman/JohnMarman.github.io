@@ -150,6 +150,7 @@ html, body
   align-items: center;
   justify-content: center;
   z-index: 9998;
+  display: none;
 }
 
 #expanded-wrapper img.expanded {
@@ -160,7 +161,7 @@ html, body
 }
 
 #expanded-wrapper.active {
-  display: flex; /* Ensures that the wrapper is displayed when active */
+  display: flex;
 }
 
 /* Add styles to disable scrolling when the image is expanded */
