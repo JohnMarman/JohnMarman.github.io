@@ -193,25 +193,13 @@ items.forEach((item, index) => {
     });
 
     mainImage.addEventListener('click', function() {
-      if (mainImage.classList.contains('expanded')) {
-        mainImage.classList.remove('expanded');
-        mainImage.style.top = '50%';
-        mainImage.style.left = '50%';
-        mainImage.style.width = 'auto';
-        mainImage.style.height = 'auto';
-        mainImage.style.borderRadius = '20px';
-        mainImageContainer.style.width = '100%';
-        mainImageContainer.style.height = '400px';
-      } else {
-        mainImage.classList.add('expanded');
-        mainImage.style.top = '5%';
-        mainImage.style.left = '5%';
-        mainImage.style.width = '90%';
-        mainImage.style.height = '90%';
-        mainImage.style.borderRadius = '0';
-        mainImageContainer.style.width = '100vw';
-        mainImageContainer.style.height = '100vh';
-      }
-    });
+  if (mainImage.classList.contains('expanded')) {
+    mainImage.classList.remove('expanded');
+    mainImageContainer.classList.remove('expanded-container');
+  } else {
+    mainImage.classList.add('expanded');
+    mainImageContainer.classList.add('expanded-container');
+  }
+});
   });
 });
