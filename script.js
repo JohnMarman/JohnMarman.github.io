@@ -1,3 +1,5 @@
+const items = document.querySelectorAll('.items');
+
 const contents = [
   `<div class="main-content" id="main-image">
 				<div class="content-preview">
@@ -176,15 +178,13 @@ const contents = [
 			</div>`
 ];
 
-const items = document.querySelectorAll('.items');
-
 items.forEach((item, index) => {
   item.addEventListener('click', function() {
     document.querySelector('.main-content').innerHTML = contents[index];
 
     const imagesInSelection = document.querySelectorAll('.image-selection img');
     const mainImageContainer = document.querySelector('.main-image');
-    const mainImage = document.querySelector('.main-image img');
+    const mainImage = mainImageContainer.querySelector('img');
 
     imagesInSelection.forEach(image => {
       image.addEventListener('click', function(e) {
@@ -195,27 +195,22 @@ items.forEach((item, index) => {
 
     const expandedWrapper = document.getElementById('expanded-wrapper');
 
-const expandedWrapper = document.getElementById('expanded-wrapper');
-const mainImageContainer = document.getElementById('main-image');
+    mainImageContainer.addEventListener('click', function() {
+      if (expandedWrapper.classList.contains('active')) {
+        expandedWrapper.innerHTML = ''; // Remove the cloned image from the wrapper
+        expandedWrapper.classList.remove('active');
+      } else {
+        const clonedImage = mainImage.cloneNode(true);
+        clonedImage.classList.add('expanded');
+        expandedWrapper.appendChild(clonedImage); // Add the cloned image to the wrapper
+        expandedWrapper.classList.add('active');
 
-mainImageContainer.addEventListener('click', function() {
-  const mainImage = mainImageContainer.querySelector('img');
-  
-  if (expandedWrapper.classList.contains('active')) {
-    expandedWrapper.innerHTML = ''; // Remove the cloned image from the wrapper
-    expandedWrapper.classList.remove('active');
-  } else {
-    const clonedImage = mainImage.cloneNode(true);
-    clonedImage.classList.add('expanded');
-    expandedWrapper.appendChild(clonedImage); // Add the cloned image to the wrapper
-    expandedWrapper.classList.add('active');
-
-    // Add an event listener to the cloned image to close it when clicked
-    clonedImage.addEventListener('click', function() {
-      expandedWrapper.innerHTML = '';
-      expandedWrapper.classList.remove('active');
+        // Add an event listener to the cloned image to close it when clicked
+        clonedImage.addEventListener('click', function() {
+          expandedWrapper.innerHTML = '';
+          expandedWrapper.classList.remove('active');
+        });
+      }
     });
-  }
-});
   });
 });
