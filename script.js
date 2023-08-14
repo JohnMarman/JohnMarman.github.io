@@ -183,6 +183,7 @@ items.forEach((item, index) => {
     document.querySelector('.main-content').innerHTML = contents[index];
 
     const imagesInSelection = document.querySelectorAll('.image-selection img');
+    const mainImageContainer = document.querySelector('.main-image');
     const mainImage = document.querySelector('.main-image img');
 
     imagesInSelection.forEach(image => {
@@ -193,6 +194,12 @@ items.forEach((item, index) => {
 
     mainImage.addEventListener('click', function() {
       mainImage.classList.toggle('expanded');
+      
+      if (mainImage.classList.contains('expanded')) {
+        document.body.appendChild(mainImage); // Move the image out of the container
+      } else {
+        mainImageContainer.appendChild(mainImage); // Move the image back into the container
+      }
     });
   });
 });
