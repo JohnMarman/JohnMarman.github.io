@@ -134,27 +134,40 @@ html, body
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   border-radius: 20px;
-  transition: transform 0.5s ease; /* Transition for transform property */
+  transition: all 0.5s ease; /* Transition for all properties */
+}
+
+.expanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  border-radius: 0;
+  object-fit: contain;
+  transform: translate(-50%, -50%) !important; /* Center the image on the screen */
+  z-index: 9999; /* Ensure the image is above other content */
 }
 
 .expanded-wrapper {
+  display: none; /* Hide the expanded wrapper */
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+body.no-scroll::before {
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5); /* Grey transparent background */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10; /* Ensure the wrapper is above other content */
-}
-
-.expanded {
-  transform: translate(-50%, -50%) scale(2); /* Scale the image */
-  border-radius: 0;
+  z-index: 9998; /* Ensure the background is below the expanded image */
 }
 
 .image-selection{
