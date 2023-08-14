@@ -1,6 +1,6 @@
 const contents = [
-  <div class="main-content">
-				`<div class="content-preview">
+  `<div class="main-content">
+				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
 							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg"></img>
