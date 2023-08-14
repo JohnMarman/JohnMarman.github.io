@@ -196,10 +196,10 @@ items.forEach((item, index) => {
     mainImage.addEventListener('click', function() {
   if (mainImage.classList.contains('expanded')) {
     mainImage.classList.remove('expanded');
-    document.body.classList.remove('no-scroll'); // Enable scrolling
+    expandedWrapper.classList.remove('active');
   } else {
     mainImage.classList.add('expanded');
-    document.body.classList.add('no-scroll'); // Disable scrolling
+    expandedWrapper.classList.add('active');
   }
 });
   });
