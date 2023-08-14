@@ -3,7 +3,7 @@ const contents = [
 				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
-							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg"></img>
+							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg">
 						</div>
 						<ol class="image-selection">
 							<img src="https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e.jpg">
@@ -47,7 +47,7 @@ const contents = [
 				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
-							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg"></img>
+							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg">
 						</div>
 						<ol class="image-selection">
 							<img src="https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e.jpg">
@@ -91,7 +91,7 @@ const contents = [
 				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
-							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg"></img>
+							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg">
 						</div>
 						<ol class="image-selection">
 							<img src="https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e.jpg">
@@ -135,7 +135,7 @@ const contents = [
 				<div class="content-preview">
 					<div class="holder">
 						<div class="main-image">
-							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg"></img>
+							<img src="https://i.kym-cdn.com/entries/icons/mobile/000/025/155/stock.jpg">
 						</div>
 						<ol class="image-selection">
 							<img src="https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e.jpg">
