@@ -193,13 +193,16 @@ items.forEach((item, index) => {
       });
     });
 
-    mainImage.addEventListener('click', function() {
+    const expandedWrapper = document.getElementById('expanded-wrapper');
+
+mainImage.addEventListener('click', function() {
   if (mainImage.classList.contains('expanded')) {
     mainImage.classList.remove('expanded');
     expandedWrapper.classList.remove('active');
   } else {
     mainImage.classList.add('expanded');
     expandedWrapper.classList.add('active');
+    expandedWrapper.appendChild(mainImage.cloneNode(true)); // Add a copy of the main image to the wrapper
   }
 });
   });
