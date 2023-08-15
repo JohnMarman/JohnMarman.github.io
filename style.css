@@ -64,14 +64,13 @@ html, body
 }
 
 .vertical-menu {
-  width: 20%;
-  overflow-y: scroll;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-   z-index: 1;
-   background-color: #FFFFFF;
+    width: 20%;
+    overflow-y: auto;   // changed from scroll to auto
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;   // Added padding-bottom for some space at the end
+    height: calc(100vh - 65px);   // Subtracting the header's height
 }
 
 .items {
