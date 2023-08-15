@@ -203,6 +203,28 @@ items.forEach((item, index) => {
                     e.stopPropagation(); // Prevent the event from propagating to the main image
                     mainImage.src = image.src;
                 });
+
+                // Adding the functionality to expand the image on click
+                image.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent the event from propagating to the main image
+                    const expandedWrapper = document.getElementById('expanded-wrapper');
+            
+                    if (expandedWrapper.classList.contains('active')) {
+                        expandedWrapper.innerHTML = ''; // Remove the cloned image from the wrapper
+                        expandedWrapper.classList.remove('active');
+                    } else {
+                        const clonedImage = image.cloneNode(true);
+                        clonedImage.classList.add('expanded');
+                        expandedWrapper.appendChild(clonedImage); // Add the cloned image to the wrapper
+                        expandedWrapper.classList.add('active');
+
+                        // Add an event listener to the cloned image to close it when clicked
+                        clonedImage.addEventListener('click', function() {
+                            expandedWrapper.innerHTML = '';
+                            expandedWrapper.classList.remove('active');
+                        });
+                    }
+                });
             });
 
             const expandedWrapper = document.getElementById('expanded-wrapper');
