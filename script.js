@@ -33,7 +33,7 @@ const contents = [
 							</li>
 							<li>
 								C#
-							<li>
+							</li>
 						</ol>
 					</div>
 					<div class="content-description">
@@ -77,7 +77,7 @@ const contents = [
 							</li>
 							<li>
 								JavaScript
-							<li>
+							</li>
 						</ol>
 					</div>
 					<div class="content-description">
@@ -121,7 +121,7 @@ const contents = [
 							</li>
 							<li>
 								test
-							<li>
+							</li>
 						</ol>
 					</div>
 					<div class="content-description">
@@ -165,7 +165,7 @@ const contents = [
 							</li>
 							<li>
 								test
-							<li>
+							</li>
 						</ol>
 					</div>
 					<div class="content-description">
