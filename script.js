@@ -178,48 +178,59 @@ const contents = [
 			</div>`
 ];
 
-function expandImage(imgSrc) {
-    const expandedWrapper = document.getElementById('expanded-wrapper');
-    if (expandedWrapper.classList.contains('active')) {
-        expandedWrapper.innerHTML = ''; // Remove the cloned image from the wrapper
-        expandedWrapper.classList.remove('active');
-    } else {
-        const clonedImage = new Image();
-        clonedImage.src = imgSrc;
-        clonedImage.classList.add('expanded');
-        expandedWrapper.appendChild(clonedImage); // Add the cloned image to the wrapper
-        expandedWrapper.classList.add('active');
-
-        // Add an event listener to the cloned image to close it when clicked
-        clonedImage.addEventListener('click', function() {
-            expandedWrapper.innerHTML = '';
-            expandedWrapper.classList.remove('active');
-        });
-    }
-}
-
 items.forEach((item, index) => {
     item.addEventListener('click', function() {
-        document.querySelector('.main-content').innerHTML = contents[index];
+        const mainContent = document.querySelector('.main-content');
 
-        const imagesInSelection = document.querySelectorAll('.image-selection img');
-        const mainImageContainer = document.querySelector('.main-image');
-        const mainImage = mainImageContainer.querySelector('img');
+        // Slide the current main content out to the right
+        mainContent.style.transition = "transform 0.5s ease";
+        mainContent.style.transform = "translateX(100%)"; 
 
-        imagesInSelection.forEach(image => {
-            image.addEventListener('mouseenter', function(e) {
-                e.stopPropagation(); // Prevent the event from propagating to the main image
-                mainImage.src = image.src;
+        setTimeout(() => {
+            // Update content
+            mainContent.innerHTML = contents[index];
+
+            // Reset the main content's position to the left
+            mainContent.style.transition = "none";
+            mainContent.style.transform = "translateX(-100%)"; 
+
+            const imagesInSelection = document.querySelectorAll('.image-selection img');
+            const mainImageContainer = document.querySelector('.main-image');
+            const mainImage = mainImageContainer.querySelector('img');
+
+            imagesInSelection.forEach(image => {
+                image.addEventListener('mouseenter', function(e) {
+                    e.stopPropagation(); // Prevent the event from propagating to the main image
+                    mainImage.src = image.src;
+                });
             });
 
-            // Add the click event to the images in the image selection for expanding
-            image.addEventListener('click', function() {
-                expandImage(image.src);
-            });
-        });
+            const expandedWrapper = document.getElementById('expanded-wrapper');
 
-        mainImageContainer.addEventListener('click', function() {
-            expandImage(mainImage.src);
-        });
+            mainImageContainer.addEventListener('click', function() {
+                if (expandedWrapper.classList.contains('active')) {
+                    expandedWrapper.innerHTML = ''; // Remove the cloned image from the wrapper
+                    expandedWrapper.classList.remove('active');
+                } else {
+                    const clonedImage = mainImage.cloneNode(true);
+                    clonedImage.classList.add('expanded');
+                    expandedWrapper.appendChild(clonedImage); // Add the cloned image to the wrapper
+                    expandedWrapper.classList.add('active');
+
+                    // Add an event listener to the cloned image to close it when clicked
+                    clonedImage.addEventListener('click', function() {
+                        expandedWrapper.innerHTML = '';
+                        expandedWrapper.classList.remove('active');
+                    });
+                }
+            });
+
+            // Slide the new main content in from the left
+            setTimeout(() => {
+                mainContent.style.transition = "transform 0.5s ease";
+                mainContent.style.transform = "translateX(0%)"; 
+            }, 50); 
+
+        }, 500); 
     });
 });
