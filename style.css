@@ -71,6 +71,8 @@ html, body
     padding: 0;
     padding-bottom: 20px;
     height: calc(100vh - 65px);
+  background-color: #FFFFFF;  /* Set background to white */
+    z-index: 1;
 }
 
 .items {
