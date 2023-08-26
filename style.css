@@ -65,6 +65,11 @@ header {
   vertical-align: middle;
 }
 
+.expanded .project-title,
+.expanded .stacks {
+  display: none; /* Hide title and stacks in the expanded view */
+}
+
 .tile:hover .project-title {
   bottom: 35%;
 }
@@ -78,4 +83,5 @@ header {
   position: fixed;
   top: 10px;
   left: 10px;
+  z-index: 2000; /* Make sure back button appears above expanded tiles */
 }
