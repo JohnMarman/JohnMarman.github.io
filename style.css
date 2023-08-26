@@ -25,8 +25,9 @@ header {
   width: 200px;
   height: 200px;
   border-radius: 10px;
-  overflow: hidden;
   transition: all 0.3s;
+  overflow: hidden; /* Hide the overflowing content */
+  background: linear-gradient(to bottom, transparent 0%, transparent 80%, black 100%); /* Overlay at the bottom */
 }
 
 .tile img {
@@ -76,6 +77,7 @@ header {
 
 .tile:hover .stacks {
   opacity: 1;
+  bottom: 5%; /* Make text/images slide upwards */
 }
 
 #back-button {
