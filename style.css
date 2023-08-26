@@ -35,6 +35,14 @@ header {
   object-fit: cover;
 }
 
+.tile.expanded {
+  border-radius: 0; /* Remove rounded corners when expanded */
+}
+
+.tile.expanded img {
+  object-fit: contain; /* Fit the image to screen without cutting off */
+}
+
 .project-title, .stacks {
   position: absolute;
   width: 100%;
@@ -50,6 +58,11 @@ header {
 .stacks {
   bottom: 0;
   opacity: 0;
+}
+
+.stacks img {
+  max-width: 20px; /* Limit image size */
+  vertical-align: middle;
 }
 
 .tile:hover .project-title {
