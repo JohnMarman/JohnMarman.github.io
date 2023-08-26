@@ -9,9 +9,10 @@ function showExpanded(tileId) {
   tile.style.width = "100%";
   tile.style.height = "100vh";
   tile.style.zIndex = "1000";
-  tile.style.margin = "0"; // Remove extra margins
-  tile.style.padding = "0"; // Remove extra padding
+  tile.style.margin = "0";
+  tile.style.padding = "0";
   
+  document.getElementById("back-button").style.zIndex = "2001"; // Make sure back button appears above expanded tiles
   document.getElementById("back-button").style.display = "block";
 }
 
@@ -25,10 +26,11 @@ function hideExpanded() {
     tile.style.width = "200px";
     tile.style.height = "200px";
     tile.style.zIndex = "initial";
-    tile.style.margin = "20px"; // Reset to original margin
-    tile.style.padding = "initial"; // Reset to original padding
+    tile.style.margin = "20px";
+    tile.style.padding = "initial";
   });
   
+  document.getElementById("back-button").style.zIndex = "2000"; // Reset z-index of back button
   document.getElementById("back-button").style.display = "none";
 }
 
