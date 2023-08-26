@@ -1,6 +1,7 @@
-body {
+body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
   background: linear-gradient(to bottom, #000, #333);
   color: white;
   font-family: Arial, sans-serif;
@@ -15,6 +16,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
 }
 
 .tile {
@@ -22,6 +24,7 @@ header {
   margin: 20px;
   width: 200px;
   height: 200px;
+  border-radius: 10px;
   overflow: hidden;
   transition: all 0.3s;
 }
@@ -32,16 +35,34 @@ header {
   object-fit: cover;
 }
 
-.project-title {
+.project-title, .stacks {
   position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.6);
   text-align: center;
-  padding: 10px;
+  transition: all 0.3s ease;
 }
 
-.tile:hover {
-  transform: scale(1.1);
+.project-title {
+  bottom: 30%;
+  font-size: 1.5em;
+}
+
+.stacks {
+  bottom: 0;
+  opacity: 0;
+}
+
+.tile:hover .project-title {
+  bottom: 35%;
+}
+
+.tile:hover .stacks {
+  opacity: 1;
+}
+
+#back-button {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
 }
