@@ -22,8 +22,8 @@ header {
 .tile {
   position: relative;
   margin: 20px;
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 300px;
   border-radius: 10px;
   transition: all 0.3s;
   overflow: hidden; /* Hide the overflowing content */
