@@ -41,7 +41,7 @@ header {
 }
 
 .tile.expanded {
-  border-radius: 0; /* Remove rounded corners when expanded */
+  
 }
 
 .tile.expanded img {
@@ -49,6 +49,7 @@ header {
   filter: blur(5px); /* Keep the blur when tile is expanded */
   width: 100vw; /* Full viewport width */
   transition: all 0.3s;
+  border-radius: 0; /* Remove rounded corners when expanded */
 }
 
 .project-title, .stacks {
