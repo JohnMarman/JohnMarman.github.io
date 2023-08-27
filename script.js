@@ -11,17 +11,16 @@ function showExpanded(tileId) {
   tile.style.zIndex = "1000";
   tile.style.margin = "0";
   tile.style.padding = "0";
-  tile.style.overflow = "hidden";  // Hide overflow
+  tile.style.overflow = "hidden"; // Hide overflow
   
-  // If the tile being clicked is the first tile, add the typewriter text
   if (tileId === 'tile1') {
-    const textDiv = document.createElement("div");
-    textDiv.className = 'typewriter';
-    textDiv.innerText = 'Goodmorning sir. The current weather is cloudy, 23 degrees.';
-    tile.appendChild(textDiv);
+    const typewriter = document.createElement('div');
+    typewriter.className = 'typewriter';
+    typewriter.innerHTML = "Goodmorning sir. The current weather is cloudy, 23 degrees.";
+    tile.appendChild(typewriter);
   }
   
-  document.getElementById("back-button").style.zIndex = "2001";  // Make sure back button appears above expanded tiles
+  document.getElementById("back-button").style.zIndex = "2001"; // Make sure back button appears above expanded tiles
   document.getElementById("back-button").style.display = "block";
 }
 
@@ -32,20 +31,20 @@ function hideExpanded() {
     tile.style.position = "relative";
     tile.style.top = "initial";
     tile.style.left = "initial";
-    tile.style.width = "";  // Removed width set here
-    tile.style.height = "";  // Removed height set here
+    tile.style.width = "";
+    tile.style.height = "";
     tile.style.zIndex = "initial";
     tile.style.margin = "20px";
     tile.style.padding = "initial";
+    tile.style.overflow = "visible"; // Reset overflow
 
-    // Remove typewriter div if it exists
-    const typewriterDiv = tile.querySelector('.typewriter');
-    if (typewriterDiv) {
-      tile.removeChild(typewriterDiv);
+    const typewriter = tile.querySelector('.typewriter');
+    if (typewriter) {
+      tile.removeChild(typewriter);
     }
   });
-
-  document.getElementById("back-button").style.zIndex = "2000";  // Reset z-index of back button
+  
+  document.getElementById("back-button").style.zIndex = "2000"; // Reset z-index of back button
   document.getElementById("back-button").style.display = "none";
 }
 
