@@ -23,8 +23,8 @@ function hideExpanded() {
     tile.style.position = "relative";
     tile.style.top = "initial";
     tile.style.left = "initial";
-    tile.style.width = "200px";
-    tile.style.height = "200px";
+    tile.style.width = "";
+    tile.style.height = "";
     tile.style.zIndex = "initial";
     tile.style.margin = "20px";
     tile.style.padding = "initial";
