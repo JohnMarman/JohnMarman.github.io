@@ -35,6 +35,7 @@ function hideExpanded() {
     tile.style.height = "";
     tile.style.zIndex = "initial";
     tile.style.margin = "20px";
+    tile.style.borderRadius = "10px";
     tile.style.padding = "initial";
     tile.style.overflow = "visible"; // Reset overflow
 
