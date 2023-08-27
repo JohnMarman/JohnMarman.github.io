@@ -6,11 +6,12 @@ function showExpanded(tileId) {
   tile.style.position = "fixed";
   tile.style.top = "0";
   tile.style.left = "0";
-  tile.style.width = "100vw";  // Changed to viewport width
+  tile.style.width = "100vw";
   tile.style.height = "100vh";
   tile.style.zIndex = "1000";
   tile.style.margin = "0";
   tile.style.padding = "0";
+  tile.style.overflow = "hidden";  // Hide overflow
   
   // If the tile being clicked is the first tile, add the typewriter text
   if (tileId === 'tile1') {
