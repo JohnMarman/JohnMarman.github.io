@@ -25,6 +25,9 @@ header {
   width: 400px;
   height: 300px;
   border-radius: 10px;
+  display: flex;
+  align-items: flex-end; /* Align children vertically at the bottom */
+  justify-content: center; /* Center children horizontally */
   transition: all 0.3s;
   overflow: hidden; /* Hide the overflowing content */
   background: linear-gradient(to bottom, transparent 0%, transparent 80%, black 100%); /* Overlay at the bottom */
@@ -53,8 +56,17 @@ header {
 }
 
 .project-title {
-  bottom: 30%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   font-size: 1.5em;
+  text-align: center;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20%; /* Height of the title area at the bottom of the tile */
 }
 
 .stacks {
