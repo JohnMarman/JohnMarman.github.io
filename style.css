@@ -80,6 +80,10 @@ header {
   bottom: 5%; /* Make text/images slide upwards */
 }
 
+.tile:hover img {
+  filter: blur(5px); /* Apply blur to the image when tile is hovered */
+}
+
 #back-button {
   display: none;
   position: fixed;
