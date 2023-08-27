@@ -121,12 +121,18 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
-  color: black;
   font-size: 2em;
   white-space: nowrap;
-  overflow: hidden;
   background-color: white;
   padding: 10px;
+}
+
+.typewriter h1 {
+  margin: 0;
+  color: black;
+  overflow: hidden;
+  border-right: .15em solid black;
+  white-space: nowrap;
   animation: typing 4s steps(40, end), blink-caret .5s step-end infinite;
 }
 
