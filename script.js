@@ -13,12 +13,12 @@ function showExpanded(tileId) {
   tile.style.padding = "0";
   tile.style.overflow = "hidden"; // Hide overflow
   
-  if (tileId === 'tile1' && !tile.querySelector('.typewriter')) {
-    const typewriter = document.createElement('div');
-    typewriter.className = 'typewriter';
-    typewriter.innerHTML = "Goodmorning sir. The current weather is cloudy, 23 degrees.";
-    tile.appendChild(typewriter);
-  }
+ if (tileId === 'tile1' && !tile.querySelector('.typewriter')) {
+  const typewriter = document.createElement('div');
+  typewriter.className = 'typewriter';
+  typewriter.innerHTML = '<h1>Goodmorning sir. The current weather is cloudy, 23 degrees.</h1>';
+  tile.appendChild(typewriter);
+}
 
   document.getElementById("back-button").style.zIndex = "2001"; // Make sure back button appears above expanded tiles
   document.getElementById("back-button").style.display = "block";
