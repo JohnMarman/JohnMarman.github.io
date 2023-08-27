@@ -48,7 +48,7 @@ header {
   object-fit: cover; /* Keep the image to cover */
   filter: blur(5px); /* Keep the blur when tile is expanded */
   width: 100vw; /* Full viewport width */
-  height: auto; /* Auto height to maintain aspect ratio */
+  transition: all 0.3s;
 }
 
 .project-title, .stacks {
@@ -116,12 +116,18 @@ header {
 }
 
 .typewriter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
   border: 2px solid white;
   color: black;
-  animation: typing 4s steps(40, end), blink-caret .5s step-end infinite;
+  font-size: 2em;
   white-space: nowrap;
   overflow: hidden;
   border-right: .15em solid white;
+  animation: typing 4s steps(40, end), blink-caret .5s step-end infinite;
 }
 
 @keyframes typing {
