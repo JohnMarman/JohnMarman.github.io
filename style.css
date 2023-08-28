@@ -116,6 +116,10 @@ header {
   z-index: 2000; /* Make sure back button appears above expanded tiles */
 }
 
+.hidden {
+  display: none;
+}
+
 .typewriter {
   position: absolute;
   top: 50%;
@@ -137,7 +141,7 @@ header {
   border-right: .15em solid black;
   overflow: hidden;
   animation: typing 4s steps(40, end), blink-caret .5s step-end infinite;
-  max-width: 100%; /* Set a maximum width to control the typewriter animation */
+  max-width: 100%;
 }
 
 @keyframes typing {
