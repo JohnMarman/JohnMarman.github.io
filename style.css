@@ -120,33 +120,19 @@ header {
   display: none;
 }
 
-.typewriter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1001;
-  font-size: 2em;
-  white-space: nowrap;
-  background-color: white;
-  overflow: hidden;
-  padding: 10px;
-  width: 500px;
-}
-
 .typewriter h1 {
   margin: 0;
   color: black;
+  background-color: white;
   white-space: nowrap;
   border-right: .15em solid black;
   overflow: hidden;
-  animation: typing 4s steps(40, end), blink-caret .5s step-end infinite;
-  max-width: 100%;
+  animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite;
 }
 
 @keyframes typing {
-  from { max-width: 0; } /* Starts from zero */
-  to { max-width: 100%; } /* Goes to 100% of whatever maximum width you've set */
+  from { width: 0; } /* Starts from zero */
+  to { width: 100%; } /* Goes to 100% of whatever maximum width you've set */
 }
 
 @keyframes blink-caret {
