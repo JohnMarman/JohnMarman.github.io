@@ -128,7 +128,6 @@ header {
   transform: translate(-50%, -50%);
   width: auto; /* Adjust based on your needs */
   font-size: 2em;
-  display: none; /* Initially hidden */
 }
 
 .typewriter h1 {
