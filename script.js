@@ -14,9 +14,9 @@ function showExpanded(tileId) {
   tile.style.overflow = "hidden"; // Hide overflow
   
  if (tileId === 'tile1') {
-    const typewriter = document.querySelector("#tile1 .typewriter");
-    typewriter.classList.remove("hidden");
-  }
+  const typewriter = document.querySelector(".typewriter");
+  typewriter.classList.remove("hidden");
+}
 
   document.getElementById("back-button").style.zIndex = "2001"; // Make sure back button appears above expanded tiles
   document.getElementById("back-button").style.display = "block";
@@ -37,10 +37,10 @@ function hideExpanded() {
     tile.style.padding = "initial";
     tile.style.overflow = "visible"; // Reset overflow
 
-    const typewriter = document.querySelector("#tile1 .typewriter");
-  if (typewriter) {
-    typewriter.classList.add("hidden");
-  }
+    const typewriter = document.querySelector(".typewriter");
+if (typewriter) {
+  typewriter.classList.add("hidden");
+}
   });
   
   document.getElementById("back-button").style.zIndex = "2000"; // Reset z-index of back button
