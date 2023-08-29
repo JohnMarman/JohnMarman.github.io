@@ -11,7 +11,7 @@ function showExpanded(tileId) {
   tile.style.zIndex = "1000";
   tile.style.margin = "0";
   tile.style.padding = "0";
-  tile.style.overflow = "hidden"; // Hide overflow
+  tile.style.borderRadius = "0";
   
  if (tileId === 'tile1') {
   const typewriter = document.querySelector(".typewriter");
@@ -35,7 +35,8 @@ function hideExpanded() {
     tile.style.margin = "20px";
     tile.style.borderRadius = "10px";
     tile.style.padding = "initial";
-    tile.style.overflow = "visible"; // Reset overflow
+    tile.style.overflow = "hidden"; // Hide overflow
+    tile.style.borderRadius = "10px";
 
     const typewriter = document.querySelector(".typewriter");
 if (typewriter) {
