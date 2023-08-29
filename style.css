@@ -120,6 +120,17 @@ header {
   display: none;
 }
 
+.typewriter {
+  position: fixed; /* or absolute */
+  z-index: 2002; /* any value higher than the highest z-index used in other elements */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto; /* Adjust based on your needs */
+  font-size: 2em;
+  display: none; /* Initially hidden */
+}
+
 .typewriter h1 {
   margin: 0;
   color: black;
