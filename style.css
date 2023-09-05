@@ -128,6 +128,7 @@ header {
   transform: translate(-50%, -50%);
   width: auto; /* Adjust based on your needs */
   font-size: 2em;
+  font-family: 'Courier', monospace;
 }
 
 .typewriter h1 {
@@ -137,7 +138,7 @@ header {
   white-space: nowrap;
   border-right: .15em solid black;
   overflow: hidden;
-  animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite;
+  animation: typing 4.5s steps(61, end), blink-caret .5s step-end infinite;
 }
 
 @keyframes typing {
