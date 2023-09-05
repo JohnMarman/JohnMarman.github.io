@@ -13,7 +13,7 @@ function showExpanded(tileId) {
   tile.style.padding = "0";
   tile.style.borderRadius = "0";
   
- if (tileId === 'tile1') {
+ if (tileId === 'tile2') {
   const typewriter = document.querySelector(".typewriter");
   typewriter.classList.remove("hidden");
 }
