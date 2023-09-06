@@ -46,9 +46,10 @@ header {
 }
 
 .tile.expanded img {
-  object-fit: cover; /* Keep the image to cover */
-  filter: blur(5px); /* Keep the blur when tile is expanded */
-  width: 100vw; /* Full viewport width */
+  object-fit: contain; /* Adjust to contain to prevent image from being cut off */
+  filter: blur(5px); 
+  width: 100vw; 
+  height: 100vh; /* Adjust to viewport height to ensure the image fills the screen */
   transition: all 0.3s;
 }
 
