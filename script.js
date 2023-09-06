@@ -55,7 +55,7 @@ function showExpanded(tileId) {
   tile.style.top = "0";
   tile.style.left = "0";
   tile.style.width = "100vw";
-  tile.style.height = "100vh";
+  tile.style.height = "auto";
   tile.style.zIndex = "1000";
   tile.style.margin = "0";
   tile.style.padding = "0";
