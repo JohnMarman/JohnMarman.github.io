@@ -104,7 +104,7 @@ header {
   bottom: 5%; /* Make text/images slide upwards */
 }
 
-.tile:hover img {
+.tile:not(.expanded):hover img {
   opacity: 1;
   filter: blur(5px); /* Apply blur to the image when tile is hovered */
   transition: opacity 0.5s ease-in-out;
