@@ -45,7 +45,6 @@ header {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%) scale(2.5); /* or other scale value you'd like */
   z-index: 1000;
   width: 400px; /* Reset the width and height */
   height: 300px; 
