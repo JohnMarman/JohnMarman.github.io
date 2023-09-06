@@ -12,7 +12,11 @@ async function getWeatherData() {
     const weatherCode = weatherData.current_weather.weathercode;
     let weatherCondition = getWeatherDescription(weatherCode);
     
-    weatherInfoDiv.textContent = `"Good morning sir. The current weather is ${weatherCondition}, ${temperature} degrees."`;
+    const textContent = `"Good morning sir. The current weather is ${weatherCondition}, ${temperature} degrees."`;
+    const textLength = textContent.length;
+
+    weatherInfoDiv.style.animation = `typing 4.5s steps(${textLength}, end), blink-caret .5s step-end infinite;`;
+    weatherInfoDiv.textContent = textContent;
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
   }
