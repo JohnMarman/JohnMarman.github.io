@@ -79,6 +79,7 @@ function hideExpanded() {
     tile.style.left = "initial";
     tile.style.width = "";
     tile.style.height = "";
+    tile.style.position = "fixed";
     tile.style.zIndex = "initial";
     tile.style.margin = "20px";
     tile.style.padding = "initial";
@@ -90,6 +91,10 @@ if (typewriter) {
   typewriter.classList.add("hidden");
 }
   });
+
+  setTimeout(() => {
+      tile.style.position = "relative"; // revert back to relative after transition ends
+    }, 300);
   
   document.getElementById("back-button").style.zIndex = "2000"; // Reset z-index of back button
   document.getElementById("back-button").style.display = "none";
