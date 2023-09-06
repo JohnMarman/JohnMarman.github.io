@@ -28,7 +28,7 @@ header {
   display: flex;
   align-items: flex-end; /* Align children vertically at the bottom */
   justify-content: center; /* Center children horizontally */
-  transition: all 0.3s;
+  transition: transform 0.3s ease-in-out;
   overflow: hidden; /* Hide the overflowing content */
   background: linear-gradient(to bottom, transparent 0%, transparent 80%, black 100%); /* Overlay at the bottom */
 }
@@ -42,13 +42,19 @@ header {
 }
 
 .tile.expanded {
-  
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(2.5); /* or other scale value you'd like */
+  z-index: 1000;
+  width: 400px; /* Reset the width and height */
+  height: 300px; 
 }
 
 .tile.expanded img {
-  object-fit: cover; /* Keep the image to cover */
-  filter: blur(5px); /* Keep the blur when tile is expanded */
-  width: 100vw; /* Full viewport width */
+  object-fit: cover;
+  width: 100vw; 
+  height: auto;
   transition: all 0.3s;
 }
 
