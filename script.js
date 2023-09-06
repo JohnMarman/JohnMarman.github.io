@@ -104,3 +104,5 @@ document.querySelectorAll('.tile').forEach(tile => {
     showExpanded(tile.id);
   });
 });
+
+getWeatherData();
