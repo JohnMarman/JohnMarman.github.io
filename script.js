@@ -8,7 +8,7 @@ async function getWeatherData() {
     }
     const weatherData = await response.json();
     const weatherInfoDiv = document.querySelector('.typewriter h1');
-    const temperature = weatherData.current_weather.temperature;
+    const temperature = Math.round(weatherData.current_weather.temperature);
     const weatherCode = weatherData.current_weather.weathercode;
     let weatherCondition = getWeatherDescription(weatherCode);
     
