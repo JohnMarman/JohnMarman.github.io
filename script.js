@@ -1,5 +1,3 @@
-let timer;
-
 async function getWeatherData() {
   try {
     const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=42.9834&longitude=-81.233&current_weather=true');
@@ -48,65 +46,105 @@ function getWeatherDescription(weatherCode) {
   }
 }
 
-function showExpanded(tileId) {
-  const tile = document.getElementById(tileId);
-  tile.classList.add("expanded");
-  tile.style.position = "fixed";
-  tile.style.top = "0";
-  tile.style.left = "0";
-  tile.style.width = "100vw";
-  tile.style.height = "auto";
-  tile.style.zIndex = "1000";
-  tile.style.margin = "0";
-  tile.style.padding = "0";
-  tile.style.borderRadius = "0";
-  
- if (tileId === 'tile2') {
-  const typewriter = document.querySelector(".typewriter");
-  typewriter.classList.remove("hidden");
+let timer;
+let clonedImgClick = null;
+let clonedImgHover = null;
+let originalPosition = null;
+let originalDimensions = null;
+
+function enlargeImg(imgElement, source) {
+    if (source === 'click' && clonedImgClick) {
+        // Don't enlarge the image again if it's already enlarged through a click.
+        return;
+    } else if (source === 'hover' && clonedImgHover) {
+        resetImg('hover');
+        return;
+    }
+
+    console.log("Enlarging Image");
+    document.getElementById('reset-btn').style.display = 'block';
+
+    originalPosition = imgElement.getBoundingClientRect();
+    originalDimensions = { width: imgElement.offsetWidth, height: imgElement.offsetHeight };
+
+    let clonedImg = imgElement.cloneNode(true);
+    clonedImg.style.position = "fixed";
+    clonedImg.style.top = `${originalPosition.top}px`;
+    clonedImg.style.left = `${originalPosition.left}px`;
+    clonedImg.style.width = `${originalPosition.width}px`;
+    clonedImg.style.height = `${originalPosition.height}px`;
+    clonedImg.style.zIndex = "1000";
+    clonedImg.style.transition = "all 0.5s";
+
+    document.body.appendChild(clonedImg);
+
+    const newHeight = (originalDimensions.height * window.innerWidth) / originalDimensions.width;
+    const newTop = (window.innerHeight - newHeight) / 2;
+
+    setTimeout(() => {
+        clonedImg.style.width = "100vw";
+        clonedImg.style.height = `${newHeight}px`;
+        clonedImg.style.top = `${newTop >= 0 ? newTop : 0}px`;
+        clonedImg.style.left = '0';
+        clonedImg.style.transform = 'none';
+        clonedImg.style.pointerEvents = 'none';  // Disable further interactions with the cloned image
+    }, 0);
+
+    if (source === 'click') {
+        clonedImgClick = clonedImg;
+    } else {
+        clonedImgHover = clonedImg;
+    }
 }
 
-  document.getElementById("back-button").style.zIndex = "2001"; // Make sure back button appears above expanded tiles
-  document.getElementById("back-button").style.display = "block";
+function resetImg(source) {
+    console.log("Resetting Image");
+    let clonedImg = source === 'click' ? clonedImgClick : clonedImgHover;
+    if (clonedImg) {
+        document.getElementById('reset-btn').style.display = 'none';
+
+        clonedImg.style.width = `${originalDimensions.width}px`;
+        clonedImg.style.height = `${originalDimensions.height}px`;
+        clonedImg.style.top = `${originalPosition.top}px`;
+        clonedImg.style.left = `${originalPosition.left}px`;
+
+        setTimeout(() => {
+            if (clonedImg) {
+                document.body.removeChild(clonedImg);
+            }
+            if (source === 'click') {
+                clonedImgClick = null;
+            } else {
+                clonedImgHover = null;
+            }
+            originalPosition = null;
+            originalDimensions = null;
+        }, 500);
+    }
 }
 
-function hideExpanded() {
-  const tiles = document.querySelectorAll(".tile");
-  tiles.forEach(tile => {
-    tile.classList.remove("expanded");
-    tile.style.position = "relative";
-    tile.style.top = "initial";
-    tile.style.left = "initial";
-    tile.style.width = "";
-    tile.style.height = "";
-    tile.style.zIndex = "initial";
-    tile.style.margin = "20px";
-    tile.style.padding = "initial";
-    tile.style.overflow = "hidden"; // Hide overflow
-    tile.style.borderRadius = "10px";
+document.querySelectorAll('.tile img').forEach(img => {
+    img.addEventListener('mouseenter', function () {
+        timer = setTimeout(() => enlargeImg(img, 'hover'), 3000);
+    });
 
-    const typewriter = document.querySelector(".typewriter");
-if (typewriter) {
-  typewriter.classList.add("hidden");
-}
-  });
-  
-  document.getElementById("back-button").style.zIndex = "2000"; // Reset z-index of back button
-  document.getElementById("back-button").style.display = "none";
-}
+    img.addEventListener('mouseleave', function () {
+        clearTimeout(timer);
+    });
 
-document.querySelectorAll('.tile').forEach(tile => {
-  tile.addEventListener('mouseenter', function() {
-    timer = setTimeout(() => showExpanded(tile.id), 3000);
-  });
+    img.addEventListener('click', function (event) {
+        event.stopPropagation();
+        clearTimeout(timer);
+        enlargeImg(img, 'click');
+    });
+});
 
-  tile.addEventListener('mouseleave', function() {
-    clearTimeout(timer);
-  });
-
-  tile.addEventListener('click', function() {
-    showExpanded(tile.id);
-  });
+document.getElementById('reset-btn').addEventListener('click', function () {
+    if (clonedImgClick) {
+        resetImg('click');
+    } else {
+        resetImg('hover');
+    }
 });
 
 getWeatherData();
