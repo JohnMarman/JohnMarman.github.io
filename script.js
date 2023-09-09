@@ -75,6 +75,7 @@ function enlargeImg(imgElement, source) {
     clonedImg.style.height = `${originalPosition.height}px`;
     clonedImg.style.zIndex = "1000";
     clonedImg.style.transition = "all 0.5s";
+  clonedImg.style.filter = "blur(5px)";
 
     document.body.appendChild(clonedImg);
 
@@ -82,13 +83,14 @@ function enlargeImg(imgElement, source) {
     const newTop = (window.innerHeight - newHeight) / 2;
 
     setTimeout(() => {
-        clonedImg.style.width = "100vw";
-        clonedImg.style.height = `${newHeight}px`;
-        clonedImg.style.top = `${newTop >= 0 ? newTop : 0}px`;
-        clonedImg.style.left = '0';
-        clonedImg.style.transform = 'none';
-        clonedImg.style.pointerEvents = 'none';  // Disable further interactions with the cloned image
-    }, 0);
+    clonedImg.style.width = "100vw";
+    clonedImg.style.height = `${newHeight}px`;
+    clonedImg.style.objectFit = "cover"; // Add this line to maintain aspect ratio
+    clonedImg.style.top = `${newTop >= 0 ? newTop : 0}px`;
+    clonedImg.style.left = '0';
+    clonedImg.style.transform = 'none';
+    clonedImg.style.pointerEvents = 'none';  // Disable further interactions with the cloned image
+}, 0);
 
     if (source === 'click') {
         clonedImgClick = clonedImg;
