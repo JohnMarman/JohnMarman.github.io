@@ -109,6 +109,8 @@ function resetImg(source) {
         clonedImg.style.height = `${originalDimensions.height}px`;
         clonedImg.style.top = `${originalPosition.top}px`;
         clonedImg.style.left = `${originalPosition.left}px`;
+      clonedImg.style.transition = "all 0.5s, filter 0.5s";  // Set transition for filter
+        clonedImg.style.filter = "blur(0px)";
 
         setTimeout(() => {
             if (clonedImg) {
