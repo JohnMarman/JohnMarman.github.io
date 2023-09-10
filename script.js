@@ -54,7 +54,6 @@ let originalDimensions = null;
 
 function enlargeImg(imgElement, source) {
     if (source === 'click' && clonedImgClick) {
-        // Don't enlarge the image again if it's already enlarged through a click.
         return;
     } else if (source === 'hover' && clonedImgHover) {
         resetImg('hover');
@@ -75,8 +74,9 @@ function enlargeImg(imgElement, source) {
     clonedImg.style.height = `${originalPosition.height}px`;
     clonedImg.style.zIndex = "1000";
     clonedImg.style.transition = "all 0.5s";
-    clonedImg.style.borderRadius = "10px"; // Set initial border radius
+    clonedImg.style.borderRadius = "10px";
     clonedImg.style.filter = "brightness(1) blur(5px)";
+    clonedImg.style.objectFit = "cover";
 
     document.body.appendChild(clonedImg);
 
@@ -86,12 +86,12 @@ function enlargeImg(imgElement, source) {
     setTimeout(() => {
     clonedImg.style.width = "100vw";
     clonedImg.style.height = `${newHeight}px`;
-    clonedImg.style.objectFit = "cover"; // Add this line to maintain aspect ratio
+    clonedImg.style.objectFit = "cover";
     clonedImg.style.top = `${newTop >= 0 ? newTop : 0}px`;
     clonedImg.style.left = '0';
     clonedImg.style.transform = 'none';
-    clonedImg.style.pointerEvents = 'none';  // Disable further interactions with the cloned image
-    clonedImg.style.borderRadius = "0px"; // Transition border radius to 0
+    clonedImg.style.pointerEvents = 'none';
+    clonedImg.style.borderRadius = "0px";
     clonedImg.style.filter = "brightness(0.5) blur(5px)";
 }, 0);
 
@@ -112,8 +112,8 @@ function resetImg(source) {
         clonedImg.style.height = `${originalDimensions.height}px`;
         clonedImg.style.top = `${originalPosition.top}px`;
         clonedImg.style.left = `${originalPosition.left}px`;
-        clonedImg.style.transition = "all 0.5s, filter 0.5s, border-radius 0.5s"; // Add transition for border-radius
-        clonedImg.style.filter = "brightness(1) blur(0px)"; // Transition to remove blur and darken
+        clonedImg.style.transition = "all 0.5s, filter 0.5s, border-radius 0.5s";
+        clonedImg.style.filter = "brightness(1) blur(0px)";
         clonedImg.style.borderRadius = "10px";
 
         setTimeout(() => {
