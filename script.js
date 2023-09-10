@@ -76,7 +76,7 @@ function enlargeImg(imgElement, source) {
     clonedImg.style.zIndex = "1000";
     clonedImg.style.transition = "all 0.5s";
     clonedImg.style.borderRadius = "10px"; // Set initial border radius
-    clonedImg.style.filter = "brightness(0.75) blur(5px)";
+    clonedImg.style.filter = "brightness(1) blur(5px)";
 
     document.body.appendChild(clonedImg);
 
@@ -92,7 +92,7 @@ function enlargeImg(imgElement, source) {
     clonedImg.style.transform = 'none';
     clonedImg.style.pointerEvents = 'none';  // Disable further interactions with the cloned image
     clonedImg.style.borderRadius = "0px"; // Transition border radius to 0
-    clonedImg.style.filter = "brightness(1) blur(5px)";
+    clonedImg.style.filter = "brightness(0.5) blur(5px)";
 }, 0);
 
     if (source === 'click') {
