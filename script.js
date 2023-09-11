@@ -52,7 +52,7 @@ let clonedImgHover = null;
 let originalPosition = null;
 let originalDimensions = null;
 
-function enlargeImg(imgElement, source) {
+function enlargeImg(imgElement, source, tileId) {
     if (source === 'click' && clonedImgClick) {
         return;
     } else if (source === 'hover' && clonedImgHover) {
@@ -82,6 +82,13 @@ function enlargeImg(imgElement, source) {
 
     const newHeight = (originalDimensions.height * window.innerWidth) / originalDimensions.width;
     const newTop = (window.innerHeight - newHeight) / 2;
+  
+  if (tileId === 'tile2') {
+        const typewriter = document.querySelector(".typewriter");
+        if (typewriter) {
+            typewriter.classList.remove("hidden");
+        }
+    }
 
     setTimeout(() => {
     clonedImg.style.width = "100vw";
@@ -93,7 +100,7 @@ function enlargeImg(imgElement, source) {
     clonedImg.style.pointerEvents = 'none';
     clonedImg.style.borderRadius = "0px";
     clonedImg.style.filter = "brightness(0.5) blur(5px)";
-}, 0);
+    }, 0);
 
     if (source === 'click') {
         clonedImgClick = clonedImg;
@@ -128,12 +135,16 @@ function resetImg(source) {
             originalPosition = null;
             originalDimensions = null;
         }, 500);
+      const typewriter = document.querySelector(".typewriter");
+        if (typewriter) {
+            typewriter.classList.add("hidden");
+        }
     }
 }
 
 document.querySelectorAll('.tile img').forEach(img => {
     img.addEventListener('mouseenter', function () {
-        timer = setTimeout(() => enlargeImg(img, 'hover'), 3000);
+        timer = setTimeout(() => enlargeImg(img, 'hover', img.parentElement.id), 3000);
     });
 
     img.addEventListener('mouseleave', function () {
@@ -143,7 +154,7 @@ document.querySelectorAll('.tile img').forEach(img => {
     img.addEventListener('click', function (event) {
         event.stopPropagation();
         clearTimeout(timer);
-        enlargeImg(img, 'click');
+        enlargeImg(img, 'click', img.parentElement.id);
     });
 });
 
