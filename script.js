@@ -67,6 +67,7 @@ function enlargeImg(imgElement, source, tileId) {
     originalDimensions = { width: imgElement.offsetWidth, height: imgElement.offsetHeight };
 
     let clonedImg = imgElement.cloneNode(true);
+    disableOtherTiles(tileId);
     clonedImg.style.position = "fixed";
     clonedImg.style.top = `${originalPosition.top}px`;
     clonedImg.style.left = `${originalPosition.left}px`;
@@ -114,7 +115,7 @@ function resetImg(source) {
     let clonedImg = source === 'click' ? clonedImgClick : clonedImgHover;
     if (clonedImg) {
         document.getElementById('reset-btn').style.display = 'none';
-
+        enableAllTiles();
         clonedImg.style.width = `${originalDimensions.width}px`;
         clonedImg.style.height = `${originalDimensions.height}px`;
         clonedImg.style.top = `${originalPosition.top}px`;
@@ -140,6 +141,20 @@ function resetImg(source) {
             typewriter.classList.add("hidden");
         }
     }
+}
+
+function disableOtherTiles(exceptId) {
+    document.querySelectorAll('.tile').forEach(tile => {
+        if (tile.id !== exceptId) {
+            tile.style.pointerEvents = 'none';
+        }
+    });
+}
+
+function enableAllTiles() {
+    document.querySelectorAll('.tile').forEach(tile => {
+        tile.style.pointerEvents = '';
+    });
 }
 
 document.querySelectorAll('.tile img').forEach(img => {
