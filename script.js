@@ -51,6 +51,7 @@ let clonedImgClick = null;
 let clonedImgHover = null;
 let originalPosition = null;
 let originalDimensions = null;
+let isEnlarged = false;
 
 function enlargeImg(imgElement, source, tileId) {
     if (source === 'click' && clonedImgClick) {
@@ -67,7 +68,7 @@ function enlargeImg(imgElement, source, tileId) {
     originalDimensions = { width: imgElement.offsetWidth, height: imgElement.offsetHeight };
 
     let clonedImg = imgElement.cloneNode(true);
-    disableOtherTiles(tileId);
+    isEnlarged = true;
     clonedImg.style.position = "fixed";
     clonedImg.style.top = `${originalPosition.top}px`;
     clonedImg.style.left = `${originalPosition.left}px`;
@@ -115,7 +116,7 @@ function resetImg(source) {
     let clonedImg = source === 'click' ? clonedImgClick : clonedImgHover;
     if (clonedImg) {
         document.getElementById('reset-btn').style.display = 'none';
-        enableAllTiles();
+        isEnlarged = false;
         clonedImg.style.width = `${originalDimensions.width}px`;
         clonedImg.style.height = `${originalDimensions.height}px`;
         clonedImg.style.top = `${originalPosition.top}px`;
@@ -143,20 +144,6 @@ function resetImg(source) {
     }
 }
 
-function disableOtherTiles(exceptId) {
-    document.querySelectorAll('.tile').forEach(tile => {
-        if (tile.id !== exceptId) {
-            tile.style.pointerEvents = 'none';
-        }
-    });
-}
-
-function enableAllTiles() {
-    document.querySelectorAll('.tile').forEach(tile => {
-        tile.style.pointerEvents = '';
-    });
-}
-
 document.querySelectorAll('.tile img').forEach(img => {
     img.addEventListener('mouseenter', function () {
         timer = setTimeout(() => enlargeImg(img, 'hover', img.parentElement.id), 3000);
@@ -169,7 +156,9 @@ document.querySelectorAll('.tile img').forEach(img => {
     img.addEventListener('click', function (event) {
         event.stopPropagation();
         clearTimeout(timer);
-        enlargeImg(img, 'click', img.parentElement.id);
+        if (!isEnlarged) {
+            enlargeImg(img, 'click', img.parentElement.id);
+        }
     });
 });
 
