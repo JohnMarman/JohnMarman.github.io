@@ -54,6 +54,7 @@ let originalDimensions = null;
 let isEnlarged = false;
 
 function enlargeImg(imgElement, source, tileId) {
+    if (isEnlarged) return;
     if (source === 'click' && clonedImgClick) {
         return;
     } else if (source === 'hover' && clonedImgHover) {
