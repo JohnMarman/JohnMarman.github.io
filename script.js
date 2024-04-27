@@ -54,13 +54,16 @@ let originalDimensions = null;
 let isEnlarged = false;
 
 function enlargeImg(imgElement, source, tileId) {
+    if (!imgElement || !source || !tileId) {
+        console.error("Invalid parameters passed to enlargeImg:", imgElement, source, tileId);
+        return;
+    }
     if (isEnlarged) return;
     if ((source === 'click' && clonedImgClick) || (source === 'hover' && clonedImgHover)) {
         resetImg(source);
         return;
     }
 
-    console.log("Enlarging Image");
     document.getElementById('reset-btn').style.display = 'block';
 
     originalPosition = imgElement.getBoundingClientRect();
@@ -102,6 +105,11 @@ function enlargeImg(imgElement, source, tileId) {
     clonedImg.style.borderRadius = "0px";
     clonedImg.style.filter = "brightness(0.5) blur(5px)";
     }, 0);
+  
+    if (tileId === 'tile4') {
+        console.log('Tile 4 detected, attempting to show game jams tiles');
+        showGameJamsTiles();
+    }
 
     if (source === 'click') {
         clonedImgClick = clonedImg;
@@ -111,7 +119,6 @@ function enlargeImg(imgElement, source, tileId) {
 }
 
 function resetImg(source) {
-    console.log("Resetting Image");
     let clonedImg = source === 'click' ? clonedImgClick : clonedImgHover;
     if (clonedImg) {
         document.getElementById('reset-btn').style.display = 'none';
@@ -140,6 +147,25 @@ function resetImg(source) {
         if (typewriter) {
             typewriter.classList.add("hidden");
         }
+      
+        hideGameJamsTiles();
+    }
+}
+
+function showGameJamsTiles() {
+    console.log('Attempting to display Game Jams Tiles');
+    const gameJamsTiles = document.querySelector('.game-jams-tiles');
+    if (gameJamsTiles) {
+        gameJamsTiles.classList.add('show');
+        gameJamsTiles.classList.remove('hidden');
+    }
+}
+
+function hideGameJamsTiles() {
+    const gameJamsTiles = document.querySelector('.game-jams-tiles');
+    if (gameJamsTiles) {
+        gameJamsTiles.classList.remove('show'); // Remove the 'show' class
+        gameJamsTiles.classList.add('hidden');
     }
 }
 
