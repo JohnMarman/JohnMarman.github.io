@@ -7,20 +7,6 @@ body, html {
   font-family: Arial, sans-serif;
 }
 
-.game-jams-tiles {
-    display: none; /* Initially hidden */
-    position: fixed; /* or 'absolute' if you want it relative to a positioned parent */
-    top: 0; /* Align to the top of the viewport */
-    left: 0; /* Align to the left of the viewport */
-    right: 0; /* Ensure it stretches to the right of the viewport */
-    bottom: 0; /* Ensure it stretches to the bottom of the viewport */
-    z-index: 2000; /* A high value to ensure it's on top */
-    justify-content: center; /* Center the tiles horizontally */
-    align-items: center; /* Center the tiles vertically */
-    flex-wrap: wrap; /* Allow tiles to wrap as needed */
-    overflow-y: auto; /* Add scroll if the content is too tall */
-}
-
 .game-jams-tiles.show {
     display: flex;
 }
@@ -30,11 +16,21 @@ header {
   padding: 1em;
 }
 
-.project-tiles {
+.project-tiles, .game-jams-tiles {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
+}
+
+.game-jams-tiles {
+  z-index: 1001;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
 }
 
 .tile {
@@ -44,11 +40,11 @@ header {
   height: 300px;
   border-radius: 10px;
   display: flex;
-  align-items: flex-end; /* Align children vertically at the bottom */
-  justify-content: center; /* Center children horizontally */
+  align-items: flex-end;
+  justify-content: center;
   transition: transform 0.3s ease-in-out;
-  overflow: hidden; /* Hide the overflowing content */
-  background: linear-gradient(to bottom, transparent 0%, transparent 80%, black 100%); /* Overlay at the bottom */
+  overflow: hidden;
+  background: linear-gradient(to bottom, transparent 0%, transparent 80%, black 100%);
 }
 
 .tile img {
@@ -65,7 +61,7 @@ header {
   top: 0;
   left: 50%;
   z-index: 1000;
-  width: 400px; /* Reset the width and height */
+  width: 400px;
   height: 300px; 
 }
 
@@ -94,7 +90,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 20%; /* Height of the title area at the bottom of the tile */
+  height: 20%;
 }
 
 .stacks {
@@ -103,14 +99,14 @@ header {
 }
 
 .stacks img {
-  max-width: 20px; /* Limit image size */
+  max-width: 20px;
   vertical-align: middle;
   filter: none !important;
 }
 
 .expanded .project-title,
 .expanded .stacks {
-  display: none; /* Hide title and stacks in the expanded view */
+  display: none;
 }
 
 .tile:hover .project-title {
@@ -119,12 +115,12 @@ header {
 
 .tile:hover .stacks {
   opacity: 1;
-  bottom: 5%; /* Make text/images slide upwards */
+  bottom: 5%;
 }
 
 .tile:not(.expanded):hover img {
   opacity: 1;
-  filter: blur(5px); /* Apply blur to the image when tile is hovered */
+  filter: blur(5px);
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -137,7 +133,7 @@ header {
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 2000; /* Make sure back button appears above expanded tiles */
+  z-index: 2100;
 }
 
 .hidden {
@@ -145,12 +141,12 @@ header {
 }
 
 .typewriter {
-  position: fixed; /* or absolute */
-  z-index: 2002; /* any value higher than the highest z-index used in other elements */
+  position: fixed;
+  z-index: 2002;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: auto; /* Adjust based on your needs */
+  width: auto;
   font-size: 2em;
   font-family: 'Courier', monospace;
 }
@@ -166,8 +162,8 @@ header {
 }
 
 @keyframes typing {
-  from { width: 0; } /* Starts from zero */
-  to { width: 100%; } /* Goes to 100% of whatever maximum width you've set */
+  from { width: 0; }
+  to { width: 100%; }
 }
 
 @keyframes blink-caret {
