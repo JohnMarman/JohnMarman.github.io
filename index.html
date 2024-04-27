@@ -82,7 +82,18 @@
       </div>
       <!-- Add more tiles here -->
     </section>
-    <button id="reset-btn" onclick="resetImg()" style="display: none; position: fixed; z-index: 1001; top: 10px; right: 10px;">Reset</button>
+    <section class="game-jams-tiles hidden">
+    <div class="tile" id="game1">
+        <img src="images/game1.jpg" alt="Game Jam 1">
+        <p class="project-title">Game Jam Project 1</p>
+    </div>
+    <div class="tile" id="game2">
+        <img src="images/game2.jpg" alt="Game Jam 2">
+      <p class="project-title">Game Jam Project 2</p>
+    </div>
+    <!-- More tiles for each game jam project -->
+    </section>
+    <button id="reset-btn" onclick="resetImg()" style="display: none; position: fixed; z-index: 2000; top: 10px; right: 10px;">Reset</button>
   </main>
   <script src="script.js"></script>
 </body>
