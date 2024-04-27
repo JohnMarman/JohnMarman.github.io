@@ -55,10 +55,8 @@ let isEnlarged = false;
 
 function enlargeImg(imgElement, source, tileId) {
     if (isEnlarged) return;
-    if (source === 'click' && clonedImgClick) {
-        return;
-    } else if (source === 'hover' && clonedImgHover) {
-        resetImg('hover');
+    if ((source === 'click' && clonedImgClick) || (source === 'hover' && clonedImgHover)) {
+        resetImg(source);
         return;
     }
 
@@ -127,7 +125,7 @@ function resetImg(source) {
         clonedImg.style.borderRadius = "10px";
 
         setTimeout(() => {
-            if (clonedImg) {
+            if (clonedImg && clonedImg.parentNode === document.body) {
                 document.body.removeChild(clonedImg);
             }
             if (source === 'click') {
@@ -155,6 +153,7 @@ document.querySelectorAll('.tile img').forEach(img => {
     });
 
     img.addEventListener('click', function (event) {
+        event.preventDefault();
         event.stopPropagation();
         clearTimeout(timer);
         if (!isEnlarged) {
