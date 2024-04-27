@@ -31,6 +31,7 @@ header {
   right: 0;
   bottom: 0;
   overflow-y: auto;
+  top: 16px;
 }
 
 .tile {
