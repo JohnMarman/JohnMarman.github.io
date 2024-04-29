@@ -200,3 +200,7 @@ header {
   right: 10px;
   z-index: 2100;
 }
+
+.enlarged-container img {
+    transition: all 0.5s ease;
+}
