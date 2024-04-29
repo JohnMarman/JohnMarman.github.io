@@ -54,73 +54,86 @@ let originalDimensions = null;
 let isEnlarged = false;
 
 function enlargeImg(imgElement, source, tileId) {
-    if (!imgElement || !source || !tileId) {
-        console.error("Invalid parameters passed to enlargeImg:", imgElement, source, tileId);
-        return;
-    }
-    if (isEnlarged) return;
-    if ((source === 'click' && clonedImgClick) || (source === 'hover' && clonedImgHover)) {
-        resetImg(source);
-        return;
-    }
-
+    if (!imgElement || !source || !tileId || isEnlarged) return;
+    resetImg(source); // Reset any previous enlargement
     document.getElementById('reset-btn').style.display = 'block';
-
     originalPosition = imgElement.getBoundingClientRect();
     originalDimensions = { width: imgElement.offsetWidth, height: imgElement.offsetHeight };
-
     let clonedImg = imgElement.cloneNode(true);
-    isEnlarged = true;
-    clonedImg.style.position = "fixed";
-    clonedImg.style.top = `${originalPosition.top}px`;
-    clonedImg.style.left = `${originalPosition.left}px`;
-    clonedImg.style.width = `${originalPosition.width}px`;
-    clonedImg.style.height = `${originalPosition.height}px`;
-    clonedImg.style.zIndex = "1000";
-    clonedImg.style.transition = "all 0.5s";
-    clonedImg.style.borderRadius = "10px";
-    clonedImg.style.filter = "brightness(1) blur(5px)";
-    clonedImg.style.objectFit = "cover";
+    
+    let container = document.createElement('div');
+    container.className = 'enlarged-container';
+    container.style.cssText = `
+        position: fixed;
+        top: ${originalPosition.top}px;
+        left: ${originalPosition.left}px;
+        width: ${originalDimensions.width}px;
+        height: ${originalDimensions.height}px;
+        overflow: hidden;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.5);
+        transition: top 0.5s ease, left 0.5s ease, width 0.5s ease, height 0.5s ease;
+    `;
+    document.body.appendChild(container);
+    container.appendChild(clonedImg);
 
-    document.body.appendChild(clonedImg);
+    clonedImg.style.cssText = `
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        filter: blur(5px); // Maintain the blurred state when enlarging
+    `;
 
-    const newHeight = (originalDimensions.height * window.innerWidth) / originalDimensions.width;
-    const newTop = (window.innerHeight - newHeight) / 2;
+    let details = document.createElement('div');
+    details.className = 'detailed-description-overlay';
+    details.innerHTML = document.getElementById(tileId).querySelector('.detailed-description').innerHTML;
+    details.style.cssText = `
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 40px);  // Adjust width to prevent overflow
+        color: white;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);  // Semi-transparent background
+        box-sizing: border-box;
+        transition: opacity 0.5s ease;
+        opacity: 0;
+    `;
+    container.appendChild(details);
+
+    setTimeout(() => {
+        container.style.width = '100vw';
+        container.style.height = '100vh';
+        container.style.top = '0px';
+        container.style.left = '0px';
+        container.style.overflow = 'auto';
+        details.style.opacity = '1';  // Fade in the description as the container expands
+    }, 0);
+     
+    document.body.style.overflow = 'hidden';
   
-  if (tileId === 'tile2') {
+    if (tileId === 'tile2') {
         const typewriter = document.querySelector(".typewriter");
         if (typewriter) {
             typewriter.classList.remove("hidden");
         }
     }
-
-    setTimeout(() => {
-    clonedImg.style.width = "100vw";
-    clonedImg.style.height = `${newHeight}px`;
-    clonedImg.style.objectFit = "cover";
-    clonedImg.style.top = `${newTop >= 0 ? newTop : 0}px`;
-    clonedImg.style.left = '0';
-    clonedImg.style.transform = 'none';
-    clonedImg.style.pointerEvents = 'none';
-    clonedImg.style.borderRadius = "0px";
-    clonedImg.style.filter = "brightness(0.5) blur(5px)";
-    }, 0);
   
     if (tileId === 'tile4') {
         console.log('Tile 4 detected, attempting to show game jams tiles');
         showGameJamsTiles();
     }
 
-    if (source === 'click') {
-        clonedImgClick = clonedImg;
-    } else {
-        clonedImgHover = clonedImg;
-    }
+    isEnlarged = true;
+    if (source === 'click') { clonedImgClick = container; }
+    else { clonedImgHover = container; }
 }
 
 function resetImg(source) {
     let clonedImg = source === 'click' ? clonedImgClick : clonedImgHover;
     if (clonedImg) {
+        let details = clonedImg.querySelector('.detailed-description-overlay');  // Ensure this matches the class used for your details
+        details.style.opacity = '0';  // Hide details immediately
+        clonedImg.style.transition = 'filter 0.5s ease'; // Prepare the image for blur transition
         document.getElementById('reset-btn').style.display = 'none';
         isEnlarged = false;
         clonedImg.style.width = `${originalDimensions.width}px`;
@@ -130,6 +143,7 @@ function resetImg(source) {
         clonedImg.style.transition = "all 0.5s, filter 0.5s, border-radius 0.5s";
         clonedImg.style.filter = "brightness(1) blur(0px)";
         clonedImg.style.borderRadius = "10px";
+        clonedImg.style.overflow = 'hidden';
 
         setTimeout(() => {
             if (clonedImg && clonedImg.parentNode === document.body) {
@@ -152,6 +166,10 @@ function resetImg(source) {
     }
 }
 
+
+
+
+
 function showGameJamsTiles() {
     const gameJamsTiles = document.querySelector('.game-jams-tiles');
     const projectTiles = document.querySelector('.project-tiles');
@@ -167,30 +185,19 @@ function hideGameJamsTiles() {
 }
 
 document.querySelectorAll('.tile img').forEach(img => {
-    img.addEventListener('mouseenter', function () {
-        timer = setTimeout(() => enlargeImg(img, 'hover', img.parentElement.id), 3000);
-    });
-
-    img.addEventListener('mouseleave', function () {
-        clearTimeout(timer);
-    });
-
+    img.addEventListener('mouseenter', function () {timer = setTimeout(() => enlargeImg(img, 'hover', img.parentElement.id), 3000);});
+    img.addEventListener('mouseleave', function () {clearTimeout(timer);});
     img.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
         clearTimeout(timer);
-        if (!isEnlarged) {
-            enlargeImg(img, 'click', img.parentElement.id);
-        }
+        if (!isEnlarged) {enlargeImg(img, 'click', img.parentElement.id);}
     });
 });
 
 document.getElementById('reset-btn').addEventListener('click', function () {
-    if (clonedImgClick) {
-        resetImg('click');
-    } else {
-        resetImg('hover');
-    }
+    if (clonedImgClick) {resetImg('click');}
+	else {resetImg('hover');}
 });
 
 getWeatherData();
