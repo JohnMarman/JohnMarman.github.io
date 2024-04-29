@@ -153,20 +153,17 @@ function resetImg(source) {
 }
 
 function showGameJamsTiles() {
-    console.log('Attempting to display Game Jams Tiles');
     const gameJamsTiles = document.querySelector('.game-jams-tiles');
-    if (gameJamsTiles) {
-        gameJamsTiles.classList.add('show');
-        gameJamsTiles.classList.remove('hidden');
-    }
+    const projectTiles = document.querySelector('.project-tiles');
+    gameJamsTiles.style.display = 'flex';
+    projectTiles.style.display = 'none';
 }
 
 function hideGameJamsTiles() {
     const gameJamsTiles = document.querySelector('.game-jams-tiles');
-    if (gameJamsTiles) {
-        gameJamsTiles.classList.remove('show'); // Remove the 'show' class
-        gameJamsTiles.classList.add('hidden');
-    }
+    const projectTiles = document.querySelector('.project-tiles');
+    gameJamsTiles.style.display = 'none';
+    projectTiles.style.display = 'flex';
 }
 
 document.querySelectorAll('.tile img').forEach(img => {
