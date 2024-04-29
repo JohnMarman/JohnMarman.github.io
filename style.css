@@ -25,13 +25,15 @@ header {
 
 .game-jams-tiles {
   z-index: 1001;
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 32px;
   left: 0;
   right: 0;
   bottom: 0;
-  overflow-y: auto;
-  top: 32px;
+  overflow: hidden;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .tile {
