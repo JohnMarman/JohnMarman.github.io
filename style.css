@@ -5,6 +5,7 @@ body, html {
   background: linear-gradient(to bottom, #000, #333);
   color: white;
   font-family: Arial, sans-serif;
+  padding-top: 50px;
 }
 
 header {
@@ -172,4 +173,18 @@ header {
 
 .hidden {
   display: none;
+}
+
+.work-in-progress-bar {
+  background-color: yellow; /* Yellow background */
+  color: black; /* Black text */
+  text-align: center; /* Centers text */
+  width: 100%; /* Full width */
+  padding: 10px 0; /* Some padding to give it height */
+  box-sizing: border-box; /* Makes sure padding doesn't add to the width */
+  position: fixed; /* Fixed at the top */
+  top: 0; /* Aligns to the top of the page */
+  left: 0; /* Aligns to the left of the page */
+  z-index: 2000; /* Ensures it's on top of other elements */
+  font-weight: bold;
 }
