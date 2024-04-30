@@ -7,13 +7,30 @@ body, html {
   font-family: Arial, sans-serif;
 }
 
-.game-jams-tiles.show {
-    display: flex;
-}
-
 header {
   text-align: center;
   padding: 1em;
+}
+
+.typewriter {
+  position: fixed;
+  z-index: 2002;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  font-size: 2em;
+  font-family: 'Courier', monospace;
+}
+
+.typewriter h1 {
+  margin: 0;
+  color: black;
+  background-color: white;
+  white-space: nowrap;
+  border-right: .15em solid black;
+  overflow: hidden;
+  animation: typing 4.5s steps(61, end), blink-caret .5s step-end infinite;
 }
 
 .project-tiles, .game-jams-tiles {
@@ -36,6 +53,10 @@ header {
   align-items: flex-start;
 }
 
+.game-jams-tiles.show {
+    display: flex;
+}
+
 .tile {
   position: relative;
   margin: 20px;
@@ -50,14 +71,6 @@ header {
   background: linear-gradient(to bottom, transparent 0%, transparent 80%, black 100%);
 }
 
-.tile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(0px);
-  transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out !important;
-}
-
 .tile.expanded {
   position: absolute;
   filter: blur(5px);
@@ -66,6 +79,14 @@ header {
   z-index: 1000;
   width: 400px;
   height: 300px; 
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(0px);
+  transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out !important;
 }
 
 .tile.expanded img {
@@ -107,11 +128,6 @@ header {
   filter: none !important;
 }
 
-.expanded .project-title,
-.expanded .stacks {
-  display: none;
-}
-
 .tile:hover .project-title {
   bottom: 35%;
 }
@@ -131,37 +147,17 @@ header {
   filter: none !important;
 }
 
+.expanded .project-title,
+.expanded .stacks {
+  display: none;
+}
+
 #back-button {
   display: none;
   position: fixed;
   top: 10px;
   left: 10px;
   z-index: 2100;
-}
-
-.hidden {
-  display: none;
-}
-
-.typewriter {
-  position: fixed;
-  z-index: 2002;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: auto;
-  font-size: 2em;
-  font-family: 'Courier', monospace;
-}
-
-.typewriter h1 {
-  margin: 0;
-  color: black;
-  background-color: white;
-  white-space: nowrap;
-  border-right: .15em solid black;
-  overflow: hidden;
-  animation: typing 4.5s steps(61, end), blink-caret .5s step-end infinite;
 }
 
 @keyframes typing {
@@ -174,33 +170,6 @@ header {
   50% { border-color: white; }
 }
 
-.container {
-  position: relative;
-  text-align: center;
-  margin-top: 5em;
-}
-.container img {
-  width: 200px;
-  height: auto;
-  transition: all 0.5s ease;
-  margin: 0 10px;
-}
-.clone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: auto;
-  z-index: 10;
-  transition: all 0.5s ease;
-}
-.reset-btn {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 2100;
-}
-
-.enlarged-container img {
-    transition: all 0.5s ease;
+.hidden {
+  display: none;
 }
