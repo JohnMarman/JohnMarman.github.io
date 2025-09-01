@@ -151,7 +151,7 @@ function enlargeImg(imgElement, source, tileId)
     
 	document.body.style.overflow = 'hidden';
   
-	if (tileId === 'tile2')
+	if (tileId === 'tile4')
 	{
 		const typewriter = document.querySelector(".typewriter");
 		if (typewriter)
@@ -160,7 +160,7 @@ function enlargeImg(imgElement, source, tileId)
 		}
 	}
 	
-	if (tileId === 'tile4')
+	if (tileId === 'tile7')
 	{
 		showGameJamsTiles();
 	}
