@@ -71,174 +71,229 @@ function getWeatherDescription(weatherCode)
 	}
 }
 
+// NEW: declare these if they aren't already
+let originalPosition = null;
+let originalDimensions = null;
+
+// NEW: robust body-only scroll lock (no scrollbars needed)
+let __scrollLockCount = 0;
+
+function lockBodyScroll() {
+  if (__scrollLockCount === 0) {
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.dataset.scrollY = String(y);
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${y}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+  __scrollLockCount++;
+}
+
+function unlockBodyScroll() {
+  __scrollLockCount = Math.max(0, __scrollLockCount - 1);
+  if (__scrollLockCount === 0) {
+    const y = parseInt(document.body.dataset.scrollY || '0', 10);
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.removeAttribute('data-scroll-y');
+    // restore the exact scroll position
+    window.scrollTo(0, y);
+  }
+}
+
+
 let timer;
 let clonedImgClick = null;
 let clonedImgHover = null;
-let originalPosition = null;
-let originalDimensions = null;
 let isEnlarged = false;
 
-function enlargeImg(imgElement, source, tileId)
-{
-	if (!imgElement || !source || !tileId || isEnlarged) return;
-	resetImg(source);
-	document.getElementById('reset-btn').style.display = 'block';
-  
-	originalPosition = imgElement.getBoundingClientRect();
-	originalDimensions = { width: imgElement.offsetWidth, height: imgElement.offsetHeight };
-	let clonedImg = imgElement.cloneNode(true);
-    
-	let container = document.createElement('div');
-	container.className = 'enlarged-container';
-	container.style.cssText = `
-		position: fixed;
-		top: ${originalPosition.top}px;
-		left: ${originalPosition.left}px;
-		width: ${originalDimensions.width}px;
-		height: ${originalDimensions.height}px;
-		overflow: hidden;
-		z-index: 1000;
-		background: rgba(0, 0, 0, 0.5);
-		transition: top 0.5s ease, left 0.5s ease, width 0.5s ease, height 0.5s ease;
-	`;
-	document.body.appendChild(container);
-	container.appendChild(clonedImg);
+// track target tile so we can re-measure on close (more robust if layout shifts)
+let activeTileId = null;
+let originalRect = null;
 
-	clonedImg.style.cssText = `
-		width: 100%;
-		height: auto;
-		object-fit: cover;
-		filter: blur(5px);
-	`;
-    
-	let details;
-	let detailedDescription = document.getElementById(tileId).querySelector('.detailed-description');
-	if (detailedDescription)
-	{
-		details = document.createElement('div');
-		details.className = 'detailed-description-overlay';
-		details.innerHTML = detailedDescription.innerHTML;
-		details.style.cssText = `
-			position: absolute;
-			bottom: 0;
-			width: calc(100% - 40px);
-			color: white;
-			padding: 20px;
-			background: rgba(0, 0, 0, 0.7);
-			box-sizing: border-box;
-			transition: opacity 0.5s ease;
-			opacity: 0;
-		`;
-		
-	container.appendChild(details);
-	}
-	else
-	{
-		console.log("no detailed description")
-	}
-	
-	setTimeout(() => {
-		container.style.width = '100vw';
-		container.style.height = '100vh';
-		container.style.top = '0px';
-		container.style.left = '0px';
-		container.style.overflow = 'auto';
-		if (details)
-		{
-			details.style.opacity = '1';
-		}
-        }, 0);
-    
-	document.body.style.overflow = 'hidden';
-  
-	if (tileId === 'tile4')
-	{
-		const typewriter = document.querySelector(".typewriter");
-		if (typewriter)
-		{
-			typewriter.classList.remove("hidden");
-		}
-	}
-	
-	if (tileId === 'tile7')
-	{
-		showGameJamsTiles();
-	}
-
-	isEnlarged = true;
-	if (source === 'click')
-	{
-		clonedImgClick = container;
-	}
-	else
-	{
-		clonedImgHover = container;
-	}
+function scrollToBottom(el) {
+  el.scrollTop = el.scrollHeight;
 }
 
-function resetImg(source)
-{
-	let clonedImg = source === 'click' ? clonedImgClick : clonedImgHover;
-	if (clonedImg)
-	{
-		let details = clonedImg.querySelector('.detailed-description-overlay'); 
-		if (details)
-		{
-			details.style.opacity = '0';
-		}
-		clonedImg.style.transition = 'filter 0.5s ease';
-		document.getElementById('reset-btn').style.display = 'none';
-		isEnlarged = false;
-		clonedImg.style.width = `${originalDimensions.width}px`;
-		clonedImg.style.height = `${originalDimensions.height}px`;
-		clonedImg.style.top = `${originalPosition.top}px`;
-		clonedImg.style.left = `${originalPosition.left}px`;
-		clonedImg.style.transition = "all 0.5s, filter 0.5s, border-radius 0.5s";
-		clonedImg.style.filter = "brightness(1) blur(0px)";
-		clonedImg.style.borderRadius = "10px";
-		clonedImg.style.overflow = 'hidden';
 
-		setTimeout(() => {
-			if (clonedImg && clonedImg.parentNode === document.body)
-			{
-				document.body.removeChild(clonedImg);
-			}
-			if (source === 'click')
-			{
-				clonedImgClick = null;
-			}
-			else
-			{
-				clonedImgHover = null;
-			}
-			originalPosition = null;
-			originalDimensions = null;
-		}, 500);
-		
-		const typewriter = document.querySelector(".typewriter");
-		if (typewriter)
-		{
-			typewriter.classList.add("hidden");
-		}
-      
-		hideGameJamsTiles();
-	}
+function enlargeImg(imgElement, source, tileId) {
+  if (!imgElement || !source || !tileId || isEnlarged) return;
+
+  // Close any existing enlarged containers first
+  resetImg('click');
+  resetImg('hover');
+
+  // Measure BEFORE locking
+  const tileEl = imgElement.closest('.tile') || imgElement;
+  const rect = tileEl.getBoundingClientRect();
+  originalPosition = rect;
+  originalDimensions = { width: rect.width, height: rect.height };
+
+  // Build overlay (unchanged except z-index)
+  const container = document.createElement('div');
+  container.className = 'enlarged-container';
+  container.style.cssText = `
+    position: fixed;
+    top: ${rect.top}px;
+    left: ${rect.left}px;
+    width: ${rect.width}px;
+    height: ${rect.height}px;
+    background: rgba(0, 0, 0, 0.5);
+    transition: top .5s ease, left .5s ease, width .5s ease, height .5s ease, border-radius .5s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1000;
+  `;
+  document.body.appendChild(container);
+
+  const clonedImg = imgElement.cloneNode(true);
+  clonedImg.style.cssText = `
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: blur(5px);
+    transition: filter .5s ease;
+  `;
+  container.appendChild(clonedImg);
+
+  const detailedDescription = document.getElementById(tileId).querySelector('.detailed-description');
+  let details;
+  if (detailedDescription) {
+    details = document.createElement('div');
+    details.className = 'detailed-description-overlay';
+    details.innerHTML = detailedDescription.innerHTML;
+    container.appendChild(details);
+
+    // Initial pin to bottom (next frame so layout is ready)
+    requestAnimationFrame(() => scrollToBottom(details));
+
+    // Keep pinned to bottom while new content is appended, unless user scrolled up
+    const stickThreshold = 8; // px tolerance
+    const observer = new MutationObserver(() => {
+      const atBottom =
+        details.scrollHeight - details.clientHeight - details.scrollTop <= stickThreshold;
+      if (atBottom) scrollToBottom(details);
+    });
+    observer.observe(details, { childList: true, subtree: true, characterData: true });
+    // store to clean up later
+    details.__observer = observer;
+
+    // Optional: if you add content via JS later, call scrollToBottom(details) after the append
+  }
+
+  // Lock ONLY the body (no layout shift now that main has the offset)
+  document.body.classList.add('no-scroll');
+
+  // Animate to fullscreen (under the header)
+  container.getBoundingClientRect();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      container.style.top = '0px';
+      container.style.left = '0px';
+      container.style.width = '100vw';
+      container.style.height = '100vh';
+      container.style.borderRadius = '0px';
+      if (details) {
+        details.style.opacity = '1';
+        // ensure we’re still at the bottom after fade-in
+        requestAnimationFrame(() => scrollToBottom(details));
+      }
+    });
+  });
+
+  document.getElementById('reset-btn').style.display = 'block';
+
+  if (tileId === 'tile4') document.querySelector(".typewriter")?.classList.remove("hidden");
+  if (tileId === 'tile7') showGameJamsTiles();
+
+  isEnlarged = true;
+  if (source === 'click') { clonedImgClick = container; } else { clonedImgHover = container; }
 }
 
-function showGameJamsTiles()
-{
-	const gameJamsTiles = document.querySelector('.game-jams-tiles');
-	const projectTiles = document.querySelector('.project-tiles');
-	gameJamsTiles.style.display = 'flex';
-	projectTiles.style.display = 'none';
+function resetImg(source) {
+  const container = source === 'click' ? clonedImgClick : clonedImgHover;
+  if (!container) return;
+
+  const img = container.querySelector('img');
+  const details = container.querySelector('.detailed-description-overlay');
+  if (details && details.__observer) {
+    details.__observer.disconnect();
+    delete details.__observer;
+  }
+
+  if (details) details.style.opacity = '0';
+  document.getElementById('reset-btn').style.display = 'none';
+  isEnlarged = false;
+
+  container.style.width  = `${originalDimensions.width}px`;
+  container.style.height = `${originalDimensions.height}px`;
+  container.style.top    = `${originalPosition.top}px`;
+  container.style.left   = `${originalPosition.left}px`;
+  container.style.borderRadius = '10px';
+  if (img) img.style.filter = 'blur(0px)';
+
+  const cleanup = (ev) => {
+    if (ev.target !== container) return;
+    if (ev.propertyName !== 'width' && ev.propertyName !== 'height') return;
+
+    // remove overlay
+    if (container.parentNode === document.body) document.body.removeChild(container);
+    if (source === 'click') { clonedImgClick = null; } else { clonedImgHover = null; }
+    originalPosition = null;
+    originalDimensions = null;
+
+    // ✅ Only now, at the very end, re-enable page scroll
+    if (!document.querySelector('.enlarged-container')) {
+      document.body.classList.remove('no-scroll');
+    }
+
+    document.querySelector(".typewriter")?.classList.add("hidden");
+    hideGameJamsTiles();
+
+    container.removeEventListener('transitionend', cleanup);
+  };
+
+  container.addEventListener('transitionend', cleanup);
 }
 
-function hideGameJamsTiles()
-{
-	const gameJamsTiles = document.querySelector('.game-jams-tiles');
-	const projectTiles = document.querySelector('.project-tiles');
-	gameJamsTiles.style.display = 'none';
-	projectTiles.style.display = 'flex';
+
+function showGameJamsTiles() {
+  const gameJamsTiles = document.querySelector('.game-jams-tiles');
+  const projectTiles  = document.querySelector('.project-tiles');
+
+  // Prepare and reveal the section so it can animate
+  gameJamsTiles.classList.remove('hidden');
+
+  // Stagger each tile slightly
+  gameJamsTiles.querySelectorAll('.tile').forEach((tile, i) => {
+    tile.style.transitionDelay = `${i * 50}ms`;
+  });
+
+  // Hide the project grid right away (no need to animate it unless you want to)
+  projectTiles.style.display = 'none';
+
+  // Kick off the animation
+  requestAnimationFrame(() => gameJamsTiles.classList.add('is-active'));
+}
+
+function hideGameJamsTiles() {
+  const gameJamsTiles = document.querySelector('.game-jams-tiles');
+  const projectTiles  = document.querySelector('.project-tiles');
+
+  // Remove the active class to animate out
+  gameJamsTiles.classList.remove('is-active');
+
+  // After transition finishes, hide it and bring back projects
+  setTimeout(() => {
+    gameJamsTiles.classList.add('hidden');
+    projectTiles.style.display = 'flex';
+  }, 350); // match the CSS transition duration
 }
 
 document.querySelectorAll('.tile img').forEach(img => {
