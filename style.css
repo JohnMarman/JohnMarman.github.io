@@ -194,7 +194,7 @@ header {
 
 /* Override for the Machine Learning tile only */
 #tile2 { --title-color: black; }
-
+#tile5 { --title-color: black; }
 
 .stacks {
   bottom: 0;
@@ -203,6 +203,7 @@ header {
 }
 
 #tile2 { --stack-color: black; }
+#tile5 { --stack-color: black; }
 
 .stacks img {
   max-width: 20px;
