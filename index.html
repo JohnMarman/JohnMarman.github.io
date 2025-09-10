@@ -23,6 +23,53 @@
 	  <div class="tile" id="tile2">
         <img src="images/q_values.svg" alt="Machine Learning">
         <div class="detailed-description hidden">
+			<p>Brainstorming: I didn’t initially intend for this to be a project—how most of them start.
+
+One night, my friends and I were drawn back by nostalgia to Garry’s Mod, into an old gamemode—a sandbox with a player-driven economy—that now included a casino my friends had tested as a decent money-maker. The only gambling I do with real money is in the stock market.
+While playing blackjack, I noticed that the cards weren’t just displayed in the 3D worldspace, but were also mirrored in the top-right corner of the UI. The cards appeared in the same spot every round.
+
+*picture of table and UI*
+
+Before my friends even joked that we could automate it, I had already opened Sikuli—a little known but powerful and versatile program developed as a side project at MIT. I first discovered it over a decade ago and have been using it ever since: originally for RuneScape scripts, later for automating simple tasks.
+
+Consistency made this feasible, which meant I could take advantage of? image and pattern recognition. I’ve found ways to engineer consistency in 3D games by normalizing the player camera but this was served to me on a platter.
+
+The first step was the usual, defining regions on the screen where the program should search for the cards.
+
+*picture of card region (slightly larger card region -> slightly more cropped card region)
+*caption* (a trick I learned early on for optimization/efficiency/speed to search a smaller area of the screen rather than the entire area).
+
+The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but it wasn’t really viable for scalability (detecting suit or color). I thought maybe the creator of the casino was lazy and ripped an existing card image pack from somewhere on the internet and i got pretty close but couldnt find the exact font/style which would mean i would have to manually take a picture of every. single. 52. cards. Ugh
+
+So I wrote a script to do it automatically.
+
+As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs so it was easy to automate the entire game from starting a new round, placing bets, hit/hold/double, and starting a new round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)
+
+I implemented the Basic Strategy Chart logic and done!
+
+*picture of basic strategy chart*
+
+Almost too easy, right? Wrong. Irony-because it happens every single time. Lulled into a false sense of security. Through multiple projects I’ve become well acquainted with edge-cases.
+
+As I was rewarding myself with a coffee, basking in the accomplishment of my “completed” project, I came back to the computer and noticed other players had joined the blackjack table. No big deal-until I realized the dealer’s cards weren’t in the same position anymore. Like the smirk sliding off my face, the dealer’s cards slid further down the screen as more players joined. My cards were still at the top, but now other players’ hands slotted between mine and the dealer’s.
+
+I couldn’t just leave every time someone else joined, or only play at empty tables-that would raise alarm bells. Back to the drawing board.
+
+But I also realized the potential. More players = a larger sample set which meant one thing: I could count cards 💡
+
+At this point it was too late for me. I was down the rabbit hole of advanced blackjack strategy: Hi-Lo, running count, true count, deviations, betting adjustments, etc. I could improve the bot ten fold.
+
+But before I could queue up Rain Man on Netflix, I had to solve the roadblock: the bot didn’t know how many players were seated at the table. Without that, this project wasn’t viable. And I wasn’t about to give up here-there’s so much more this project has to offer. After multiple analyzing games, coffees, walks, wracking my brain trying to think of a solution until i finally caught something. The dealers cards were dealt first. So after the input to begin the round, i had the bot analyze every possible card region several times per second. Depending which region the dealers cards showed up first I could deduce how many players were at the table with me.
+
+Worked great but if I was going to let it run I didn’t want to come back to $0 in the bank so I implemented safe guards. Keep track of bankroll/money spent/gained. Bets were dynamically adjusted based on that, and the other card counting variables, recalculating every round. Conservative betting, only placing bets if the EV (expected value) is positive. Had to account for more edge-cases; if the running count changed significantly (trying to detect reshuffles) the script reset the estimated decks. Only increase min bet after a 50 round threshold.
+
+I started getting paranoid about the possible existence of anti-card counting techniques so I implemented a custom streak counter, if I’ve won too many times in a row and the variables haven’t changed much, dial the betting amounts back abit. Researching other things like Rule of Three (if a certain event did not occur in a sample of n subjects, assume that the event has happened) -> (if a dealer is using 6 decks, and we've seen 312 cards, we should assume the deck has been shuffled at least once)
+
+The more research I did, the more I realized I needed to figure out how the blackjack game was programmed. Implementing the advanced strategy seemed to work less than just using the basic strategy. 
+
+Until I stumbled across a research paper from Stanford from 2019. It was like a hand extending from the heavens. 
+
+Trial and error, didnt seem to be making much progress, not sure if the logic was implemented correctly or if it was the way the game was programmed (how many decks, infinite decks, reshuffling, anti-card counting measures?), not sure of the ruleset so i couldnt simulate my own findings, each round took around 10 seconds so i wouldnt be able to do it that way either, realized it would need to learn and improve during playing. i always wanted to experiment with machine learning so i looked online for blackjack papers and sure enough i found a research paper from stanford that did exactly that, and with all of the restrictions/etc (it was almost identical, even aces low) of the blackjack game i was playing. alpha/omega/epsilon, q-values, unfortunately it would have to be super rudimentary because i wasnt able to run millions of simulations per second but the script would keep track of every single turn in a JSON file dealers total, upcount or value based on the rank, running count, true count, player total, depending on how high the q-value was to hit or stand and the result of that decision, and would iterate based off of that. new card detected, make a decision based on saved knowledge, if q-value was high enough to make a decision make it based on that, save if the decision was good or not, if there was no decision fallback to original non-machine learning strategy, continue.</p>
         </div>
         <p class="project-title">Machine Learning</p>
         <div class="stacks">
@@ -34,7 +81,7 @@
       <div class="tile" id="tile3">
         <img src="images/automatedschedule.jpg" alt="Automated Schedule">
         <div class="detailed-description hidden">
-          <p>Started in 2015 when I was working at The Source, the 'Automated Schedule' was first built to keep track of my constantly changing scheduled hours. It quickly became more than just a schedule tracker as I incorporated features to monitor my earnings and commission. Over the years, it has turned into an essential tool for budgeting and tax referencing.</p>
+          <p>Placeholder slop: Started in 2015 when I was working at The Source, the 'Automated Schedule' was first built to keep track of my constantly changing scheduled hours. It quickly became more than just a schedule tracker as I incorporated features to monitor my earnings and commission. Over the years, it has turned into an essential tool for budgeting and tax referencing.</p>
           <p>The need to manually update the system each week reminded me of the scripting capabilities in Microsoft Excel. Having some background in simple macros, I searched for a similar solution in Google Sheets. This exploration led me to Google Apps Script, a perfect fit since it's based on JavaScript, which I had experience with. Automating the extension of columns, formulas, and color coding led to features like displaying holidays, tracking actual worked hours against the schedule to calculate overtime and discrepancies, and breaking down taxes (for each pay period and total).</p>
           <p>Today, this tool not only displays holidays and manages color coding but also provides a detailed breakdown of taxes and total hours worked each month, helping me keep a precise record of my financials. I continue to use this system almost a decade later, proving its enduring utility and effectiveness."</p>
         </div>
@@ -50,7 +97,7 @@
       <div class="tile" id="tile4">
         <img src="images/homeassistant.jpg" alt="Home Assistant">
         <div class="detailed-description hidden">
-          <p>I've always been fascinated with the idea of a "smart home" and smart technology. I stumbled across a Google Home Mini sale for $25 each and decided that four was enough coverage for the majority of my apartment. This setup not only provides my preferred background sounds—like instrumental music, smooth jazz, lofi, and natural ambiances such as rain or a fireplace—but also gives my laptop a break.</p>
+          <p>Placeholder slop: I've always been fascinated with the idea of a "smart home" and smart technology. I stumbled across a Google Home Mini sale for $25 each and decided that four was enough coverage for the majority of my apartment. This setup not only provides my preferred background sounds—like instrumental music, smooth jazz, lofi, and natural ambiances such as rain or a fireplace—but also gives my laptop a break.</p>
           <p>My experience with Google Home was limited; I had only temporarily used a Google phone and found its UI and settings too rigid, preferring Samsung instead. Nevertheless, my experiments with a Raspberry Pi piqued my interest in potential integrations. This led to discovering pychromecast, which, despite its occasional inconsistencies in queuing YouTube links, fit well with my programming interests and significantly improved my sleep.</p>
           <p>Encouraged by the initial success, I expanded the system's capabilities to include personal daily assistance. Using the schedule tracking from my Automated Schedule project, I set Google Home to wake me up one hour and thirty minutes before my work start time, remind me to go to bed eight hours before, and give a final reminder thirty minutes before bedtime. Additionally, it provides weather updates and bus schedules each morning, tailored to my daily activities.</p>
         </div>
@@ -71,7 +118,7 @@
       <div class="tile" id="tile6">
         <img src="images/server.jpg" alt="Server">
         <div class="detailed-description hidden">
-          <p>I've always been interested in creating a dedicated server that could remain operational around the clock—hosting FTP, video game servers, bots, movies, and more. While browsing pcpartpicker, I came across an intriguing "incognito" or "sleeper" build, reminiscent of a sleeper car but using an old radio instead of an old beige tower. I bookmarked this innovative idea for future inspiration.</p>
+          <p>Placeholder slop: I've always been interested in creating a dedicated server that could remain operational around the clock—hosting FTP, video game servers, bots, movies, and more. While browsing pcpartpicker, I came across an intriguing "incognito" or "sleeper" build, reminiscent of a sleeper car but using an old radio instead of an old beige tower. I bookmarked this innovative idea for future inspiration.</p>
           <p>A few months later, while ordering a replacement motherboard for a friend’s laptop, I received the wrong item: a micro ATX motherboard, unexpectedly perfect for my first home server. It boasted RAID support, onboard graphics, and compatibility with older chipsets. This mistake kicked off my search for an old radio or similar enclosure to house the server. Despite visits to places like Value Village and Goodwill, I found nothing suitable until an accidental discovery at my cousin's house. I found their old Bell satellite receiver/HD PVR box while searching for an ethernet cable. The measurements were perfect, the condition was impeccable—it was an ideal match.</p>
           <p>I built the server inside the Bell box, running it 24/7 for several years now on Windows 10. It hosts a Minecraft server, multiple Discord bots, and continuously streams VLC TV shows for background noise. The performance of the integrated graphics still surprises me given their workload. For assembly, I used three standoffs to mount the motherboard safely and secured everything else with velcro strips—the SSD is attached to the inside top of the case. I added a 3D printed LED holder to the front panel for power and load indicators, and integrated a toggle switch behind the original power button for aesthetic consistency.</p>
           <p>Originally, the only modifications were holes in the bottom and back for the power supply fan and motherboard I/O. Later, I added a hole on the top for a small CPU fan and another in the front panel for a programmable LCD display that shows CPU and RAM usage. It’s almost miraculous how well everything fits together, with just 2mm of clearance above the CPU fan and standoffs.</p>
