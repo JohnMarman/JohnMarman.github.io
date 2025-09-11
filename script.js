@@ -112,9 +112,20 @@ let clonedImgClick = null;
 let clonedImgHover = null;
 let isEnlarged = false;
 
-// track target tile so we can re-measure on close (more robust if layout shifts)
-let activeTileId = null;
 let originalRect = null;
+
+// ADD near the top with your other globals
+let activeTileId = null;           // track which tile is open
+let activeTileEl = null;
+
+// Helper: safely (re)measure the tile if it's visible
+function getVisibleRect(el) {
+  if (!el) return null;
+  // If an ancestor is display:none, rect width/height will be 0
+  const rect = el.getBoundingClientRect();
+  if (rect.width > 0 && rect.height > 0) return rect;
+  return null;
+}
 
 function scrollToBottom(el) {
   el.scrollTop = el.scrollHeight;
@@ -127,6 +138,9 @@ function enlargeImg(imgElement, source, tileId) {
   // Close any existing enlarged containers first
   resetImg('click');
   resetImg('hover');
+  
+  activeTileId = tileId;
+  activeTileEl = document.getElementById(tileId);
 
   // Measure BEFORE locking
   const tileEl = imgElement.closest('.tile') || imgElement;
@@ -216,9 +230,29 @@ function enlargeImg(imgElement, source, tileId) {
   if (source === 'click') { clonedImgClick = container; } else { clonedImgHover = container; }
 }
 
+window.addEventListener('resize', () => {
+  if (!isEnlarged || !activeTileEl) return;
+  const rect = getVisibleRect(activeTileEl);
+  if (rect) {
+    // only update if the tile is visible; otherwise keep the saved rect
+    originalPosition = rect;
+    originalDimensions = { width: rect.width, height: rect.height };
+  }
+});
+
 function resetImg(source) {
   const container = source === 'click' ? clonedImgClick : clonedImgHover;
   if (!container) return;
+
+  // Re-measure the active tile unless it's hidden (width/height 0)
+  if (activeTileEl) {
+    const rect = getVisibleRect(activeTileEl);
+    if (rect) {
+      originalPosition = rect;
+      originalDimensions = { width: rect.width, height: rect.height };
+    }
+    // if not visible, we keep the saved originalPosition as a fallback
+  }
 
   const img = container.querySelector('img');
   const details = container.querySelector('.detailed-description-overlay');
@@ -231,6 +265,7 @@ function resetImg(source) {
   document.getElementById('reset-btn').style.display = 'none';
   isEnlarged = false;
 
+  // Animate back to the (possibly re-measured) rect
   container.style.width  = `${originalDimensions.width}px`;
   container.style.height = `${originalDimensions.height}px`;
   container.style.top    = `${originalPosition.top}px`;
@@ -248,13 +283,17 @@ function resetImg(source) {
     originalPosition = null;
     originalDimensions = null;
 
-    // ✅ Only now, at the very end, re-enable page scroll
+    // ✅ Re-enable scroll if nothing else is enlarged
     if (!document.querySelector('.enlarged-container')) {
       document.body.classList.remove('no-scroll');
     }
 
     document.querySelector(".typewriter")?.classList.add("hidden");
     hideGameJamsTiles();
+
+    // clear active tile tracking
+    activeTileId = null;
+    activeTileEl = null;
 
     container.removeEventListener('transitionend', cleanup);
   };
