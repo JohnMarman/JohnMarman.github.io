@@ -32,31 +32,38 @@ body.no-scroll { overflow: hidden !important; }
 
 .detailed-description-overlay {
   position: absolute;
-  top: 64px !important;          /* sits under your fixed yellow bar */
-  left: 50% !important;
-  transform: translateX(-50%);   /* remove vertical centering */
-  width: 50vw;
-  max-height: 70vh;              /* a bit taller since we’re not centering */
-  padding: 20px;
+  top: 64px !important;            /* stays under the yellow bar */
+  left: 50% !important;            /* keep it centered */
+  transform: translateX(-50%);
+  width: 50vw;                     /* same width as before */
+  bottom: 0 !important;            /* <-- extend all the way to the bottom */
+  max-height: none !important;     /* <-- remove the 70vh cap */
 
-  background: rgba(255,255,255,0.95) !important;
+  padding: 20px;
+  background: rgba(255,255,255,0.7) !important; /* <-- ~70% opacity */
   color: #000 !important;
-  border-radius: 16px;
+  border-radius: 0 !important;     /* <-- no rounded corners */
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
 
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 
-  /* make sure old bottom anchoring never wins */
-  bottom: auto !important;
-  right: auto !important;
+  right: auto !important;          /* ensure previous right/bottom rules don't re-apply */
 }
 
-.detailed-description,
-.detailed-description-overlay {
+.detailed-description {
   background: #fff !important;
   color: #000 !important;
-  border-radius: 16px;
+  border-radius: 16px;     /* keep rounded for the inline, non-overlay version */
+}
+
+.detailed-description-overlay {
+  background: rgba(255,255,255,0.7) !important; /* translucent */
+  color: #000 !important;
+  top: 64px !important;
+  bottom: 0 !important;
+  max-height: none !important;
+  border-radius: 0 !important; /* square corners on the overlay */
 }
 
 .detailed-description p,
@@ -64,12 +71,59 @@ body.no-scroll { overflow: hidden !important; }
   color: #000 !important;
 }
 
-/* Small screens */
+/* black separators */
+.detail-rule {
+  height: 1px;
+  background: #000;
+  opacity: 1;
+  margin: 16px 0;
+}
+
+/* tags/chips */
+.detail-tags { margin: 8px 0 12px; }
+.detail-tags .tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid #000;
+  border-radius: 9999px;
+  font-size: 12px;
+  margin-right: 6px;
+  margin-top: 6px;
+}
+
+/* white highlight card with black border */
+.highlight-card {
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+
+.highlight-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.highlight-card ul { margin: 0; padding-left: 18px; }
+
+/* optional: right-aligned action row (e.g., “Source” button) */
+.detail-actions { margin-top: 14px; display: flex; justify-content: flex-end; }
+.detail-actions .btn {
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* mobile keeps the white panel all the way to the bottom */
 @media (max-width: 768px) {
   .detailed-description-overlay {
-    width: 90vw;
-    top: 72px !important;       /* a tiny bit more breathing room */
-    max-height: 70vh;
+    top: 72px !important;
+    height: calc(100vh - 72px) !important;
   }
 }
 

@@ -23,53 +23,171 @@
 	  <div class="tile" id="tile2">
         <img src="images/q_values.svg" alt="Machine Learning">
         <div class="detailed-description hidden">
-			<p>Brainstorming: I didn’t initially intend for this to be a project—how most of them start.
+			<div class="dpanel">
+			  <h2 class="detail-title">Machine Learning</h2>
+			  <p class="detail-subtitle">Lightweight Q-learning.</p>
 
-One night, my friends and I were drawn back by nostalgia to Garry’s Mod, into an old gamemode—a sandbox with a player-driven economy—that now included a casino my friends had tested as a decent money-maker. The only gambling I do with real money is in the stock market.
-While playing blackjack, I noticed that the cards weren’t just displayed in the 3D worldspace, but were also mirrored in the top-right corner of the UI. The cards appeared in the same spot every round.
+			  <div class="detail-rule"></div>
+			  
+			  <p class="detail-lead">
+				Lightweight Q-learning
+			  </p>
 
-*picture of table and UI*
+			  <div class="detail-tags">
+				<span class="tag">SikuliX</span>
+				<span class="tag">Python</span>
+				<span class="tag">JSON</span>
+			  </div>
+			  
+			  <div class="highlight-card">
+				<h3>Highlights</h3>
+				<ul>
+				  <li>SikuliX image &amp; pattern recognition with tight search regions for speed.</li>
+				  <li>Full keyboard-driven automation with human-like random delays.</li>
+				  <li>Basic Strategy baseline + Hi-Lo counting and EV-aware bet sizing.</li>
+				  <li>Dealer-first detection to infer player count in real time.</li>
+				  <li>Safeguards: bankroll tracking, reshuffle detection, conservative progression.</li>
+				  <li>Online Q-learning layer that improves during play and stores knowledge in JSON.</li>
+				</ul>
+			  </div>
 
-Before my friends even joked that we could automate it, I had already opened Sikuli—a little known but powerful and versatile program developed as a side project at MIT. I first discovered it over a decade ago and have been using it ever since: originally for RuneScape scripts, later for automating simple tasks.
+			  <p>I didn’t initially intend for this to be a project—how most of them start.</p>
 
-Consistency made this feasible, which meant I could take advantage of? image and pattern recognition. I’ve found ways to engineer consistency in 3D games by normalizing the player camera but this was served to me on a platter.
+			  <p>
+				One night, my friends and I were drawn back by nostalgia to Garry’s Mod, into an old gamemode—a sandbox
+				with a player-driven economy—that now included a casino my friends had tested as a decent money-maker.
+				The only gambling I do with real money is in the stock market.
+			  </p>
 
-The first step was the usual, defining regions on the screen where the program should search for the cards.
+			  <p>
+				While playing blackjack, I noticed that the cards weren’t just displayed in the 3D worldspace, but were
+				also mirrored in the top-right corner of the UI. The cards appeared in the same spot every round.
+			  </p>
 
-*picture of card region (slightly larger card region -> slightly more cropped card region)
-*caption* (a trick I learned early on for optimization/efficiency/speed to search a smaller area of the screen rather than the entire area).
+			  <figure class="media">
+				<!-- replace src with your screenshot -->
+				<img src="images/placeholders/table-ui.jpg" alt="Blackjack table and UI">
+				<figcaption><em>picture of table and UI</em></figcaption>
+			  </figure>
 
-The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but it wasn’t really viable for scalability (detecting suit or color). I thought maybe the creator of the casino was lazy and ripped an existing card image pack from somewhere on the internet and i got pretty close but couldnt find the exact font/style which would mean i would have to manually take a picture of every. single. 52. cards. Ugh
+			  <p>
+				Before my friends even joked that we could automate it, I had already opened Sikuli—a little known but
+				powerful and versatile program developed as a side project at MIT?. I first discovered it over a decade
+				ago and have been using it ever since: originally for RuneScape scripts, later for automating simple tasks.
+			  </p>
 
-So I wrote a script to do it automatically.
+			  <p>
+				Consistency made this feasible, which meant I could take advantage of image and pattern recognition.
+				I’ve found ways to engineer consistency in 3D games by normalizing the player camera, but this was served
+				to me on a platter.
+			  </p>
 
-As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs so it was easy to automate the entire game from starting a new round, placing bets, hit/hold/double, and starting a new round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)
+			  <p>The first step was the usual: defining regions on the screen where the program should search for the cards.</p>
 
-I implemented the Basic Strategy Chart logic and done!
+			  <figure class="media">
+				<!-- replace src with your region comparison -->
+				<img src="images/placeholders/card-region-compare.jpg" alt="Card region optimization">
+				<figcaption>
+				  <em>a trick I learned early on for optimization—search a smaller region of the screen rather than the whole area</em>
+				</figcaption>
+			  </figure>
 
-*picture of basic strategy chart*
+			  <p>
+				The next step was to identify every card. I figured I’d start simple with OCR (optical character
+				recognition), but it wasn’t really viable for scalability (detecting suit or color). I thought maybe the
+				creator of the casino was lazy and ripped an existing card image pack from somewhere on the internet; I got
+				pretty close but couldn’t find the exact font/style, which would mean manually capturing every. single. 52.
+				card. Ugh.
+			  </p>
 
-Almost too easy, right? Wrong. Irony-because it happens every single time. Lulled into a false sense of security. Through multiple projects I’ve become well acquainted with edge-cases.
+			  <p>So I wrote a script to do it automatically.</p>
 
-As I was rewarding myself with a coffee, basking in the accomplishment of my “completed” project, I came back to the computer and noticed other players had joined the blackjack table. No big deal-until I realized the dealer’s cards weren’t in the same position anymore. Like the smirk sliding off my face, the dealer’s cards slid further down the screen as more players joined. My cards were still at the top, but now other players’ hands slotted between mine and the dealer’s.
+			  <p>
+				As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so
+				it was easy to automate the entire game: starting a new round, placing bets, hit/hold/double, and starting
+				a new round again. (With random pauses to throw off simple autokey bot detectors.)
+			  </p>
 
-I couldn’t just leave every time someone else joined, or only play at empty tables-that would raise alarm bells. Back to the drawing board.
+			  <p>I implemented the Basic Strategy Chart logic and—done!</p>
 
-But I also realized the potential. More players = a larger sample set which meant one thing: I could count cards 💡
+			  <figure class="media">
+				<!-- your chart image -->
+				<img src="images/q_values.svg" alt="Basic strategy chart">
+				<figcaption><em>basic strategy chart</em></figcaption>
+			  </figure>
 
-At this point it was too late for me. I was down the rabbit hole of advanced blackjack strategy: Hi-Lo, running count, true count, deviations, betting adjustments, etc. I could improve the bot ten fold.
+			  <p>
+				Almost too easy, right? Wrong. Irony—because it happens every single time. Lulled into a false sense of
+				security. Through multiple projects I’ve become well acquainted with edge cases.
+			  </p>
 
-But before I could queue up Rain Man on Netflix, I had to solve the roadblock: the bot didn’t know how many players were seated at the table. Without that, this project wasn’t viable. And I wasn’t about to give up here-there’s so much more this project has to offer. After multiple analyzing games, coffees, walks, wracking my brain trying to think of a solution until i finally caught something. The dealers cards were dealt first. So after the input to begin the round, i had the bot analyze every possible card region several times per second. Depending which region the dealers cards showed up first I could deduce how many players were at the table with me.
+			  <p>
+				As I was rewarding myself with a coffee, basking in the accomplishment of my “completed” project, I came
+				back to the computer and noticed other players had joined the blackjack table. No big deal—until I realized
+				the dealer’s cards weren’t in the same position anymore. Like the smirk sliding off my face, the dealer’s
+				cards slid further down the screen as more players joined. My cards were still at the top, but now other
+				players’ hands slotted between mine and the dealer’s.
+			  </p>
 
-Worked great but if I was going to let it run I didn’t want to come back to $0 in the bank so I implemented safe guards. Keep track of bankroll/money spent/gained. Bets were dynamically adjusted based on that, and the other card counting variables, recalculating every round. Conservative betting, only placing bets if the EV (expected value) is positive. Had to account for more edge-cases; if the running count changed significantly (trying to detect reshuffles) the script reset the estimated decks. Only increase min bet after a 50 round threshold.
+			  <p>
+				I couldn’t just leave every time someone else joined, or only play at empty tables—that would raise alarm
+				bells. Back to the drawing board. But I also realized the potential: more players = a larger sample set
+				which meant one thing: I could count cards 💡
+			  </p>
 
-I started getting paranoid about the possible existence of anti-card counting techniques so I implemented a custom streak counter, if I’ve won too many times in a row and the variables haven’t changed much, dial the betting amounts back abit. Researching other things like Rule of Three (if a certain event did not occur in a sample of n subjects, assume that the event has happened) -> (if a dealer is using 6 decks, and we've seen 312 cards, we should assume the deck has been shuffled at least once)
+			  <p>
+				At this point it was too late for me. I was down the rabbit hole of advanced blackjack strategy: Hi-Lo,
+				running count, true count, deviations, betting adjustments, etc. I could improve the bot ten-fold.
+			  </p>
 
-The more research I did, the more I realized I needed to figure out how the blackjack game was programmed. Implementing the advanced strategy seemed to work less than just using the basic strategy. 
+			  <p>
+				But before I could queue up <em>Rain Man</em> on Netflix, I had to solve the roadblock: the bot didn’t know
+				how many players were seated at the table. Without that, this project wasn’t viable. After analyzing many
+				games (and coffees, and walks), I finally caught something: the dealer’s cards were dealt first. After the
+				input to begin the round, I had the bot analyze every possible card region several times per second.
+				Depending on which region the dealer’s cards appeared first, I could deduce how many players were at the
+				table with me.
+			  </p>
 
-Until I stumbled across a research paper from Stanford from 2019. It was like a hand extending from the heavens. 
+			  <p>
+				That worked great, but if I was going to let it run, I didn’t want to come back to $0 in the bank—so I
+				implemented safeguards. Keep track of bankroll / money spent / gained. Bets dynamically adjusted based on
+				bankroll and the counting variables, recalculated every round. Conservative betting, only placing bets if
+				EV (expected value) is positive. Handle edge cases: if the running count changed significantly (trying to
+				detect reshuffles), reset the estimated decks. Only increase min bet after a 50-round threshold.
+			  </p>
 
-Trial and error, didnt seem to be making much progress, not sure if the logic was implemented correctly or if it was the way the game was programmed (how many decks, infinite decks, reshuffling, anti-card counting measures?), not sure of the ruleset so i couldnt simulate my own findings, each round took around 10 seconds so i wouldnt be able to do it that way either, realized it would need to learn and improve during playing. i always wanted to experiment with machine learning so i looked online for blackjack papers and sure enough i found a research paper from stanford that did exactly that, and with all of the restrictions/etc (it was almost identical, even aces low) of the blackjack game i was playing. alpha/omega/epsilon, q-values, unfortunately it would have to be super rudimentary because i wasnt able to run millions of simulations per second but the script would keep track of every single turn in a JSON file dealers total, upcount or value based on the rank, running count, true count, player total, depending on how high the q-value was to hit or stand and the result of that decision, and would iterate based off of that. new card detected, make a decision based on saved knowledge, if q-value was high enough to make a decision make it based on that, save if the decision was good or not, if there was no decision fallback to original non-machine learning strategy, continue.</p>
+			  <p>
+				Paranoid about possible anti-card-counting techniques, I added a custom streak counter: if I’d won too many
+				times in a row and the variables hadn’t changed much, dial the betting back a bit. I researched things like
+				the “Rule of Three” (if a certain event did not occur in a sample of <em>n</em> subjects, assume that the
+				event has happened) → e.g., if a dealer is using 6 decks and we’ve seen 312 cards, assume the deck has been
+				shuffled at least once.
+			  </p>
+
+			  <p>
+				The more research I did, the more I realized I needed to figure out how the blackjack game was programmed.
+				Implementing the advanced strategy seemed to work less well than just using the basic strategy.
+			  </p>
+
+			  <p>
+				Until I stumbled across a research paper from Stanford from 2019. It was like a hand extending from the
+				heavens. Trial and error didn’t seem to be making much progress—unclear logic, unknown ruleset (how many
+				decks, infinite decks, reshuffling, anti-counting measures?), and I couldn’t simulate at scale because each
+				round took ~10 seconds. So I looked for blackjack ML papers and found one that matched my constraints
+				closely (even aces low).
+			  </p>
+
+			  <p>
+				I implemented a super-rudimentary online learner: the script logs every single turn to JSON (dealer total,
+				rank-based deltas, running count, true count, player total). It maintains Q-values for actions (hit/stand,
+				etc.). When a Q-value is confident enough, it makes that decision; otherwise it falls back to the
+				non-ML strategy. After each outcome, it updates the Q-value and iterates.
+			  </p>
+
+			  <div class="detail-rule"></div>
+			</div>
+
         </div>
         <p class="project-title">Machine Learning</p>
         <div class="stacks">
