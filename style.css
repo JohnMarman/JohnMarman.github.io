@@ -32,27 +32,40 @@ body.no-scroll { overflow: hidden !important; }
 
 .detailed-description-overlay {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;                 /* anchored to bottom edge */
-  max-height: 60vh;          /* cap; grows upward visually from bottom edge */
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  width: 50vw;                 /* 25% margins on each side */
+  max-height: 60vh;
   padding: 20px;
-  color: white;
-  background: rgba(0, 0, 0, 0.7);
-  box-sizing: border-box;
-  transition: opacity .5s ease;
-  opacity: 0;
-
-  /* NEW: allow internal scrolling; smooth on mobile; no bars (yours are globally hidden) */
-  overflow: auto;
+  bottom: auto !important;     /* cancel old bottom anchor */
+  right: auto !important;
+  background: rgba(255,255,255,0.95) !important;  /* soft white */
+  color: #000 !important;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  overflow: auto;              /* keep scrollable if content is long */
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-
-  /* IMPORTANT: normal flow (remove the old flex/justify-end that forced “grow up”) */
-  display: block;            /* or just omit; default is fine */
 }
 
+.detailed-description,
+.detailed-description-overlay {
+  background: #fff !important;
+  color: #000 !important;
+  border-radius: 16px;
+}
 
+.detailed-description p,
+.detailed-description-overlay p {
+  color: #000 !important;
+}
+
+@media (max-width: 768px) {
+  .detailed-description-overlay {
+    width: 90vw;               /* ~5vw margins */
+    max-height: 70vh;
+  }
+}
 
 header {
   text-align: center;
