@@ -32,20 +32,24 @@ body.no-scroll { overflow: hidden !important; }
 
 .detailed-description-overlay {
   position: absolute;
-  top: 50% !important;
+  top: 64px !important;          /* sits under your fixed yellow bar */
   left: 50% !important;
-  transform: translate(-50%, -50%);
-  width: 50vw;                 /* 25% margins on each side */
-  max-height: 60vh;
+  transform: translateX(-50%);   /* remove vertical centering */
+  width: 50vw;
+  max-height: 70vh;              /* a bit taller since we’re not centering */
   padding: 20px;
-  bottom: auto !important;     /* cancel old bottom anchor */
-  right: auto !important;
-  background: rgba(255,255,255,0.95) !important;  /* soft white */
+
+  background: rgba(255,255,255,0.95) !important;
   color: #000 !important;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
-  overflow: auto;              /* keep scrollable if content is long */
+
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
+
+  /* make sure old bottom anchoring never wins */
+  bottom: auto !important;
+  right: auto !important;
 }
 
 .detailed-description,
@@ -60,9 +64,11 @@ body.no-scroll { overflow: hidden !important; }
   color: #000 !important;
 }
 
+/* Small screens */
 @media (max-width: 768px) {
   .detailed-description-overlay {
-    width: 90vw;               /* ~5vw margins */
+    width: 90vw;
+    top: 72px !important;       /* a tiny bit more breathing room */
     max-height: 70vh;
   }
 }

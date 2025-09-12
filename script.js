@@ -184,19 +184,7 @@ function enlargeImg(imgElement, source, tileId) {
     details.innerHTML = detailedDescription.innerHTML;
     container.appendChild(details);
 
-    // Initial pin to bottom (next frame so layout is ready)
-    requestAnimationFrame(() => scrollToBottom(details));
-
-    // Keep pinned to bottom while new content is appended, unless user scrolled up
-    const stickThreshold = 8; // px tolerance
-    const observer = new MutationObserver(() => {
-      const atBottom =
-        details.scrollHeight - details.clientHeight - details.scrollTop <= stickThreshold;
-      if (atBottom) scrollToBottom(details);
-    });
-    observer.observe(details, { childList: true, subtree: true, characterData: true });
-    // store to clean up later
-    details.__observer = observer;
+    details.scrollTop = 0;
 
     // Optional: if you add content via JS later, call scrollToBottom(details) after the append
   }
@@ -214,10 +202,10 @@ function enlargeImg(imgElement, source, tileId) {
       container.style.height = '100vh';
       container.style.borderRadius = '0px';
       if (details) {
-        details.style.opacity = '1';
-        // ensure we’re still at the bottom after fade-in
-        requestAnimationFrame(() => scrollToBottom(details));
-      }
+		details.style.opacity = '1';
+		// keep user at the top on open
+		details.scrollTop = 0;
+	}
     });
   });
 
@@ -262,7 +250,6 @@ function resetImg(source) {
   }
 
   if (details) details.style.opacity = '0';
-  document.getElementById('reset-btn').style.display = 'none';
   isEnlarged = false;
 
   // Animate back to the (possibly re-measured) rect
@@ -274,29 +261,32 @@ function resetImg(source) {
   if (img) img.style.filter = 'blur(0px)';
 
   const cleanup = (ev) => {
-    if (ev.target !== container) return;
-    if (ev.propertyName !== 'width' && ev.propertyName !== 'height') return;
+	  if (ev.target !== container) return;
+	  if (ev.propertyName !== 'width' && ev.propertyName !== 'height') return;
 
-    // remove overlay
-    if (container.parentNode === document.body) document.body.removeChild(container);
-    if (source === 'click') { clonedImgClick = null; } else { clonedImgHover = null; }
-    originalPosition = null;
-    originalDimensions = null;
+	  if (container.parentNode === document.body) document.body.removeChild(container);
 
-    // ✅ Re-enable scroll if nothing else is enlarged
-    if (!document.querySelector('.enlarged-container')) {
-      document.body.classList.remove('no-scroll');
-    }
+	  // ✅ Only null the ref if it still points to THIS container
+	  if (source === 'click' && clonedImgClick === container) clonedImgClick = null;
+	  if (source === 'hover' && clonedImgHover === container) clonedImgHover = null;
 
-    document.querySelector(".typewriter")?.classList.add("hidden");
-    hideGameJamsTiles();
+	  // Re-enable scroll only if none left
+	  if (!document.querySelector('.enlarged-container')) {
+		document.body.classList.remove('no-scroll');
+	  }
 
-    // clear active tile tracking
-    activeTileId = null;
-    activeTileEl = null;
+	  document.querySelector(".typewriter")?.classList.add("hidden");
+	  hideGameJamsTiles();
+	  activeTileId = null;
+	  activeTileEl = null;
 
-    container.removeEventListener('transitionend', cleanup);
-  };
+	  // Show/hide BACK depending on whether any overlay remains
+	  const stillOpen = document.querySelector('.enlarged-container');
+	  document.getElementById('reset-btn').style.display = stillOpen ? 'block' : 'none';
+
+	  container.removeEventListener('transitionend', cleanup);
+	};
+
 
   container.addEventListener('transitionend', cleanup);
 }
@@ -335,6 +325,11 @@ function hideGameJamsTiles() {
   }, 350); // match the CSS transition duration
 }
 
+function getTopOverlay() {
+  const list = document.querySelectorAll('.enlarged-container');
+  return list.length ? list[list.length - 1] : null;
+}
+
 document.querySelectorAll('.tile img').forEach(img => {
 	img.addEventListener('mouseenter', function () {timer = setTimeout(() => enlargeImg(img, 'hover', img.parentElement.id), 3000);});
 	img.addEventListener('mouseleave', function () {clearTimeout(timer);});
@@ -348,8 +343,11 @@ document.querySelectorAll('.tile img').forEach(img => {
 });
 
 document.getElementById('reset-btn').addEventListener('click', function () {
-	if (clonedImgClick) {resetImg('click');}
-	else {resetImg('hover');}
+  const top = getTopOverlay();
+  if (!top) return;
+  // Decide which ref it belongs to
+  const useSource = (top === clonedImgClick) ? 'click' : 'hover';
+  resetImg(useSource);
 });
 
 getWeatherData();
