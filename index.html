@@ -120,7 +120,7 @@
 				-if the running count changed significantly (trying to detect reshuffles), reset the estimated decks<br>
 				-only increase minimum bet after a 50 round threshold to avoid early, misleading data<br>
 				-in case there were anti-card counting techniques, I implemented a custom streak counter; if I’d won too many rounds in a row and the variables hadn’t changed much, I dialed back betting amounts<br>
-				-Rule of Three: if a certain event does not occur in a sample of n subjects, assume it has occurred at least once. For example, if a dealer is using 6 decks and we've seen 312 cards, we should assume the deck has been reshuffled at least once</p>
+				-Complementary event: if a certain event does not occur in a sample of n subjects, assume it has occurred at least once. For example, if a dealer is using 6 decks and we've seen 312 cards, we should assume the deck has been reshuffled at least once</p>
 
 			  <p>Research suggested that running millions of simulations could determine the exact mechanics of the game, but since each round took ~10 seconds (even after rewriting/optimizing the code afew times), it wasn’t viable. The program would need to make real-time decisions based on real-time and historical data and improve itself.</p>
 
