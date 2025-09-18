@@ -7,7 +7,7 @@
 </head>
 <body>
   <header class="work-in-progress-bar">
-    WORK IN PROGRESS
+    ONGOING UPDATES
   </header>
   <main>
     <section class="project-tiles">
@@ -51,140 +51,102 @@
 				</ul>
 			  </div>
 
-			  <p>I didn’t initially intend for this to be a project—how most of them start.</p>
+			  <p>I didn’t initially intend for this to be a project, how most of them start.</p>
 
-			  <p>
-				One night, my friends and I were drawn back by nostalgia to Garry’s Mod, into an old gamemode—a sandbox
-				with a player-driven economy—that now included a casino my friends had tested as a decent money-maker.
-				The only gambling I do with real money is in the stock market.
-			  </p>
+			  <p>One night, my friends and I were drawn back by nostalgia to Garry’s Mod into an old gamemode, a sandbox with a player-driven economy, that now included a casino my friends had tested as a decent moneymaker.<br>
+			  <i>The only gambling I do with real money is in the stock market.</i> While playing blackjack, I noticed the cards weren’t just displayed in the 3D worldspace; they were also mirrored in the top-right corner of the UI. The cards appeared in the same spot every round.</p>
 
-			  <p>
-				While playing blackjack, I noticed that the cards weren’t just displayed in the 3D worldspace, but were
-				also mirrored in the top-right corner of the UI. The cards appeared in the same spot every round.
-			  </p>
+				<figure class="media">
+				<!-- replace src with your screenshot -->
+				<img src="" alt="picture of table and UI">
+				<figcaption><em>probably no caption</em></figcaption>
+				</figure>
 
+			  <p>Before my friends even joked that we could automate it I had already opened Sikuli, a little known but powerful and versatile program originally developed at MIT’s Computer Science & Artificial Intelligence Laboratory.</p>
+
+			  <p>Consistency meant I could rely on image and pattern recognition. Unlike most video games with a free-look camera, tracking objects is not trivial, but this was served to me on a platter.</p>
+
+			  <p>The first step is always defining regions on the screen, in this case the placement of the cards.</p>
+			  
 			  <figure class="media">
 				<!-- replace src with your screenshot -->
-				<img src="images/placeholders/table-ui.jpg" alt="Blackjack table and UI">
-				<figcaption><em>picture of table and UI</em></figcaption>
-			  </figure>
+				<img src="" alt="picture of card region">
+				<figcaption><em>a trick I learned early on to improve optimization: search a smaller area of the screen rather than the entire screen</em></figcaption>
+				</figure>
 
-			  <p>
-				Before my friends even joked that we could automate it, I had already opened Sikuli—a little known but
-				powerful and versatile program developed as a side project at MIT?. I first discovered it over a decade
-				ago and have been using it ever since: originally for RuneScape scripts, later for automating simple tasks.
-			  </p>
-
-			  <p>
-				Consistency made this feasible, which meant I could take advantage of image and pattern recognition.
-				I’ve found ways to engineer consistency in 3D games by normalizing the player camera, but this was served
-				to me on a platter.
-			  </p>
-
-			  <p>The first step was the usual: defining regions on the screen where the program should search for the cards.</p>
-
+			  <p>The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but it wasn’t really viable for scalability (detecting suit or color). Dreading the alternative, I hoped maybe the creator was lazy and ripped an existing card image pack from somewhere on the internet, but I found nothing. Which meant that I would have to play enough rounds to manually take a picture of every. single. 52. cards. Ugh.</p>
+				
+				<p>So I wrote a script to do it automatically.</p>
+				
 			  <figure class="media">
 				<!-- replace src with your region comparison -->
-				<img src="images/placeholders/card-region-compare.jpg" alt="Card region optimization">
+				<img src="" alt="picture of card folder and suits folder">
 				<figcaption>
-				  <em>a trick I learned early on for optimization—search a smaller region of the screen rather than the whole area</em>
+				  <em>another trick i learned to improve optimization was to search for suit and value separately</em>
 				</figcaption>
 			  </figure>
 
-			  <p>
-				The next step was to identify every card. I figured I’d start simple with OCR (optical character
-				recognition), but it wasn’t really viable for scalability (detecting suit or color). I thought maybe the
-				creator of the casino was lazy and ripped an existing card image pack from somewhere on the internet; I got
-				pretty close but couldn’t find the exact font/style, which would mean manually capturing every. single. 52.
-				card. Ugh.
-			  </p>
+			  <p>As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so I could automate the entire round without moving the mouse: starting a new round, placing bets, hit/hold/double, and starting the next round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)</p>
 
-			  <p>So I wrote a script to do it automatically.</p>
-
-			  <p>
-				As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so
-				it was easy to automate the entire game: starting a new round, placing bets, hit/hold/double, and starting
-				a new round again. (With random pauses to throw off simple autokey bot detectors.)
-			  </p>
-
-			  <p>I implemented the Basic Strategy Chart logic and—done!</p>
+			  <p>I implemented the Basic Strategy Chart logic, and done! Almost too easy, right?</p>
 
 			  <figure class="media">
 				<!-- your chart image -->
-				<img src="images/q_values.svg" alt="Basic strategy chart">
-				<figcaption><em>basic strategy chart</em></figcaption>
+				<img src="" alt="picture of basic strategy chart">
+				<figcaption><em>image reference probably</em></figcaption>
 			  </figure>
 
-			  <p>
-				Almost too easy, right? Wrong. Irony—because it happens every single time. Lulled into a false sense of
-				security. Through multiple projects I’ve become well acquainted with edge cases.
-			  </p>
+			  <p>Lulled into a false sense of security. Ironic, because it happens every single time. Through multiple projects I’ve become well acquainted with edge cases.</p>
 
-			  <p>
-				As I was rewarding myself with a coffee, basking in the accomplishment of my “completed” project, I came
-				back to the computer and noticed other players had joined the blackjack table. No big deal—until I realized
-				the dealer’s cards weren’t in the same position anymore. Like the smirk sliding off my face, the dealer’s
-				cards slid further down the screen as more players joined. My cards were still at the top, but now other
-				players’ hands slotted between mine and the dealer’s.
-			  </p>
+			  <p>As I was rewarding myself with a coffee, basking in the accomplishment of my “completed” project, I came back to the computer and noticed other players had joined the blackjack table. No big deal, until I realized my cards weren’t in the same position on the screen anymore. Like the smirk sliding off my face, my cards slid further down the screen as more players joined. The dealer’s cards were still at the top, but other players’ hands now slotted between mine and the dealer’s.</p>
 
-			  <p>
-				I couldn’t just leave every time someone else joined, or only play at empty tables—that would raise alarm
-				bells. Back to the drawing board. But I also realized the potential: more players = a larger sample set
-				which meant one thing: I could count cards 💡
-			  </p>
+			  <p>I couldn’t just leave every time someone else joined or only play at empty tables, that would raise alarm bells. Back to the drawing board.</p>
 
-			  <p>
-				At this point it was too late for me. I was down the rabbit hole of advanced blackjack strategy: Hi-Lo,
-				running count, true count, deviations, betting adjustments, etc. I could improve the bot ten-fold.
-			  </p>
+			  <p>But I also realized the potential: more players = a larger sample set 💡 I could count cards.</p>
 
-			  <p>
-				But before I could queue up <em>Rain Man</em> on Netflix, I had to solve the roadblock: the bot didn’t know
-				how many players were seated at the table. Without that, this project wasn’t viable. After analyzing many
-				games (and coffees, and walks), I finally caught something: the dealer’s cards were dealt first. After the
-				input to begin the round, I had the bot analyze every possible card region several times per second.
-				Depending on which region the dealer’s cards appeared first, I could deduce how many players were at the
-				table with me.
-			  </p>
+			  <p>At this point it was too late for me. I was down the rabbit hole of advanced blackjack strategy, I could improve the bot tenfold. But before I could queue up Rain Man on Netflix, I had to solve the roadblock: the bot didn’t know how many players were seated at the table. Without that, this project wasn’t viable. And I wasn’t about to give up here; there was so much more this project could offer.</p>
 
-			  <p>
-				That worked great, but if I was going to let it run, I didn’t want to come back to $0 in the bank—so I
-				implemented safeguards. Keep track of bankroll / money spent / gained. Bets dynamically adjusted based on
-				bankroll and the counting variables, recalculated every round. Conservative betting, only placing bets if
-				EV (expected value) is positive. Handle edge cases: if the running count changed significantly (trying to
-				detect reshuffles), reset the estimated decks. Only increase min bet after a 50-round threshold.
-			  </p>
+			  <p>After analyzing multiple games, drinking too much coffee, walk breaks, racking my brain for a solution, I finally caught something. My cards were dealt first. So after the input to begin the round, I had the bot analyze every possible card region several times per second. Depending on which region detected cards first, I could deduce how many players were at the table.</p>
 
-			  <p>
-				Paranoid about possible anti-card-counting techniques, I added a custom streak counter: if I’d won too many
-				times in a row and the variables hadn’t changed much, dial the betting back a bit. I researched things like
-				the “Rule of Three” (if a certain event did not occur in a sample of <em>n</em> subjects, assume that the
-				event has happened) → e.g., if a dealer is using 6 decks and we’ve seen 312 cards, assume the deck has been
-				shuffled at least once.
-			  </p>
+			  <p>I implemented Hi-Lo, running count, true count, betting adjustments. I also added safeguards that tracked bankroll (money spent and gained) in case the bot went rogue and tried to bet all of my money, and I used conservative betting that increased only when the expected value (EV) was positive.</p>
+				
+				<figure class="media">
+				<!-- your chart image -->
+				<img src="" alt="picture of console">
+				<figcaption><em>probably no caption</em></figcaption>
+			  </figure>
+				
+			  <p>But the problem was the same throughout: I was relying on observational data when I needed experimental data. However, the more I researched, the more I realized that I would need to know the exact mechanics of the game, specifically how many decks it was programmed to use. There could be an infinite number of cards, or the deck could be reshuffled every hand, which would make the application of advanced blackjack strategy difficult, if not impossible. I tried frequency analysis twice, letting the bot play afew hundred rounds each time, and got results of 5.94 and 6.69 decks. That made me somewhat confident that the game used a limited number of decks, but I added additional safeguards anyway, just in case:<br>
+				-if the running count changed significantly (trying to detect reshuffles), reset the estimated decks<br>
+				-only increase minimum bet after a 50 round threshold to avoid early, misleading data<br>
+				-in case there were anti-card counting techniques, I implemented a custom streak counter; if I’d won too many rounds in a row and the variables hadn’t changed much, I dialed back betting amounts<br>
+				-Rule of Three: if a certain event does not occur in a sample of n subjects, assume it has occurred at least once. For example, if a dealer is using 6 decks and we've seen 312 cards, we should assume the deck has been reshuffled at least once</p>
 
-			  <p>
-				The more research I did, the more I realized I needed to figure out how the blackjack game was programmed.
-				Implementing the advanced strategy seemed to work less well than just using the basic strategy.
-			  </p>
+			  <p>Research suggested that running millions of simulations could determine the exact mechanics of the game, but since each round took ~10 seconds (even after rewriting/optimizing the code afew times), it wasn’t viable. The program would need to make real-time decisions based on real-time and historical data and improve itself.</p>
 
-			  <p>
-				Until I stumbled across a research paper from Stanford from 2019. It was like a hand extending from the
-				heavens. Trial and error didn’t seem to be making much progress—unclear logic, unknown ruleset (how many
-				decks, infinite decks, reshuffling, anti-counting measures?), and I couldn’t simulate at scale because each
-				round took ~10 seconds. So I looked for blackjack ML papers and found one that matched my constraints
-				closely (even aces low).
-			  </p>
-
-			  <p>
-				I implemented a super-rudimentary online learner: the script logs every single turn to JSON (dealer total,
-				rank-based deltas, running count, true count, player total). It maintains Q-values for actions (hit/stand,
-				etc.). When a Q-value is confident enough, it makes that decision; otherwise it falls back to the
-				non-ML strategy. After each outcome, it updates the Q-value and iterates.
-			  </p>
-
+			  <p>It would have to learn.<br>
+				💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡<br>
+				Cool.</p>
+				
+				<p>I’ve always wanted a practical excuse to experiment with machine learning, a slightly daunting task. What have I gotten myself into? But on one of my very first searches, like a hand extending from the heavens, I stumbled across a 2019 Stanford research paper that was almost identical to my use case with the same rule set. And as a cherry on top, their findings concluded that running simulations for each decision “has little influence on the current state due to the fact that at the end of each Blackjack game, the true state of the game is revealed”. It uses Monte Carlo Tree Search for each decision, using “action pairs” to build a real-time prediction model, which I adapted to build historical data.</p>
+				
+				<p>But I had to be careful about the size of the dataset. The number of combinations exponentially increases, so I had to set constraints:<br>
+				(Player Hand Values)×(Dealer Upcard Values)×(True Count Values)<br>
+				18×10×21=3,780 total combinations<br>
+				18×10×21×21 (running count)=79,380 total combinations<br>
+				18×10×21×21×100 (betting range)=7,938,000 total combinations</p>
+				
+				<p>It was almost too good, not in that sense, it was as if it was getting ahead of itself. It was confident in making a decision before it had enough data to justify it. It needed to build a complete dataset before it started to improve itself. Thankfully, the paper briefly touches on “exploration vs exploitation”, which set me on the right path. I implemented an epsilon-greedy strategy that favors exploration early (focusing on populating the dataset and making decisions based on hardcoded strategy) in the learning process but gradually shifts towards exploitation (making decisions based on learned experience) as more episodes are played. This means that over time, the historical data will increasingly influence the action decisions, guiding the script toward better strategies based on past experiences.</p>
+				
+				<figure class="media">
+				<!-- your chart image -->
+				<img src="" alt="picture of logic chart">
+				<figcaption><em>probably no caption</em></figcaption>
+			  </figure>
+				
+				<p>Overall, this turned out to be a great project. Every roadblock opened a door to an opportunity to learn something new.</p>
+				
+				
 			  <div class="detail-rule"></div>
 			</div>
 

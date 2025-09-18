@@ -171,7 +171,7 @@ function enlargeImg(imgElement, source, tileId) {
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    filter: blur(5px);
+    filter: blur(10px);
     transition: filter .5s ease;
   `;
   container.appendChild(clonedImg);
