@@ -12,16 +12,16 @@
   <main>
     <section class="project-tiles">
 	<div class="tile" id="tile1">
-        <img src="images/vibeoganebot.jpg" alt="Discord Bot">
+        <img src="images/trace.webp" alt="Discord Bot">
         <p class="project-title">Trace</p>
         <div class="stacks">
-          <img src="images/logos/dpy.png" alt="Discordpy"> discord.py<br>
-		  <img src="images/logos/aws.png" alt="AWS"> AWS<br>
-          <img src="images/logos/sqlite.png" alt="💾"/> SQLite
+          <img src="images/logos/discordpy.webp" alt="Discordpy"> discord.py<br>
+		  <img src="images/logos/aws.webp" alt="AWS"> AWS<br>
+          <img src="images/logos/sqlite.webp" alt="💾"/> SQLite
         </div>
       </div>
 	  <div class="tile" id="tile2">
-        <img src="images/q_values.svg" alt="Machine Learning">
+        <img src="images/q_values.webp" alt="Machine Learning">
         <div class="detailed-description hidden">
 			<div class="dpanel">
 			  <h2 class="detail-title">Machine Learning</h2>
@@ -55,12 +55,18 @@
 
 			  <p>One night, my friends and I were drawn back by nostalgia to Garry’s Mod into an old gamemode, a sandbox with a player-driven economy, that now included a casino my friends had tested as a decent moneymaker.<br>
 			  <i>The only gambling I do with real money is in the stock market.</i> While playing blackjack, I noticed the cards weren’t just displayed in the 3D worldspace; they were also mirrored in the top-right corner of the UI. The cards appeared in the same spot every round.</p>
+		
+			<figure class="focus-img">
+			  <img class="base" src="images/table.webp" alt="card table">
 
-				<figure class="media">
-				<!-- replace src with your screenshot -->
-				<img src="" alt="picture of table and UI">
-				<figcaption><em>probably no caption</em></figcaption>
-				</figure>
+			  <!-- the two sharp cutouts -->
+			  <img class="clear c1" src="images/table.webp" alt="" aria-hidden="true">
+			  <img class="clear c2" src="images/table.webp" alt="" aria-hidden="true">
+
+			  <!-- visual rings + labels -->
+			  <span class="ring r1"></span><span class="label l1">3D worldspace</span>
+			  <span class="ring r2"></span><span class="label l2">2D UI</span>
+			</figure>
 
 			  <p>Before my friends even joked that we could automate it I had already opened Sikuli, a little known but powerful and versatile program originally developed at MIT’s Computer Science & Artificial Intelligence Laboratory.</p>
 
@@ -74,27 +80,31 @@
 				<figcaption><em>a trick I learned early on to improve optimization: search a smaller area of the screen rather than the entire screen</em></figcaption>
 				</figure>
 
-			  <p>The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but it wasn’t really viable for scalability (detecting suit or color). Dreading the alternative, I hoped maybe the creator was lazy and ripped an existing card image pack from somewhere on the internet, but I found nothing. Which meant that I would have to play enough rounds to manually take a picture of every. single. 52. cards. Ugh.</p>
+			  <p>The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but it wasn’t really viable for scalability (detecting suit or color). Dreading the alternative, I hoped maybe the creator was lazy and ripped an existing card image pack from somewhere on the internet, but I found nothing.</p>
 				
-				<p>So I wrote a script to do it automatically.</p>
+				<p>Which meant that I would have to play enough rounds to manually take a picture of every. single. 52. cards. Ugh. So I wrote a script to do it automatically.</p>
 				
 			  <figure class="media">
 				<!-- replace src with your region comparison -->
 				<img src="" alt="picture of card folder and suits folder">
 				<figcaption>
-				  <em>another trick i learned to improve optimization was to search for suit and value separately</em>
+				  <em>another trick i learned to improve optimization was to search for suit and value separately. in hindsight maybe I could optimize it even further by desaturating the colors to reduce the number of files, although that might reduce matching certainty</em>
 				</figcaption>
 			  </figure>
 
 			  <p>As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so I could automate the entire round without moving the mouse: starting a new round, placing bets, hit/hold/double, and starting the next round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)</p>
-
-			  <p>I implemented the Basic Strategy Chart logic, and done! Almost too easy, right?</p>
-
-			  <figure class="media">
-				<!-- your chart image -->
-				<img src="" alt="picture of basic strategy chart">
-				<figcaption><em>image reference probably</em></figcaption>
-			  </figure>
+				
+				<div style="display: flex;align-items: center;gap: 1rem;margin: 1rem 0;">
+				<img src="images/basicstrategy.webp"
+					alt="Blackjack basic strategy"
+					style="width:50%; min-width: 50%; height:auto; float:left; margin-right:clamp(8px,2vw,16px);margin-bottom:clamp(8px,2vw,16px);">
+					<div>
+						<p style="text-align: center;font-size: clamp(14px, 1.3vw, 18px);color: #111;  padding: .2rem .5rem;  border-radius: 6px;  display: inline-block;">I implemented the Basic Strategy Chart logic, and done!</p>
+						<p style="text-align:center; margin-top: .5rem;  font-size: clamp(18px, 2.2vw, 28px);  font-weight: 700;">Almost too easy, right?</p>
+					</div>
+				</div>
+				
+			  <!-- <p>I implemented the Basic Strategy Chart logic, and done! Almost too easy, right?</p> -->
 
 			  <p>Lulled into a false sense of security. Ironic, because it happens every single time. Through multiple projects I’ve become well acquainted with edge cases.</p>
 
@@ -153,13 +163,13 @@
         </div>
         <p class="project-title">Machine Learning</p>
         <div class="stacks">
-			<img src="images/logos/json.png" alt="📗"> JSON<br>
-          <img src="images/logos/sikulix.png" alt="📗"> SikuliX<br>
-          <img src="images/logos/py.png" alt="🐍"> Python
+			<img src="images/logos/json.webp" alt="📗"> JSON<br>
+          <img src="images/logos/sikulix.webp" alt="📗"> SikuliX<br>
+          <img src="images/logos/python.webp" alt="🐍"> Python
         </div>
       </div>
       <div class="tile" id="tile3">
-        <img src="images/automatedschedule.jpg" alt="Automated Schedule">
+        <img src="images/automatedschedule.webp" alt="Automated Schedule">
         <div class="detailed-description hidden">
           <p>Placeholder slop: Started in 2015 when I was working at The Source, the 'Automated Schedule' was first built to keep track of my constantly changing scheduled hours. It quickly became more than just a schedule tracker as I incorporated features to monitor my earnings and commission. Over the years, it has turned into an essential tool for budgeting and tax referencing.</p>
           <p>The need to manually update the system each week reminded me of the scripting capabilities in Microsoft Excel. Having some background in simple macros, I searched for a similar solution in Google Sheets. This exploration led me to Google Apps Script, a perfect fit since it's based on JavaScript, which I had experience with. Automating the extension of columns, formulas, and color coding led to features like displaying holidays, tracking actual worked hours against the schedule to calculate overtime and discrepancies, and breaking down taxes (for each pay period and total).</p>
@@ -167,15 +177,15 @@
         </div>
         <p class="project-title">Automated Schedule</p>
         <div class="stacks">
-          <img src="images/logos/gsheets.png" alt="📗"> Google Sheets<br>
-          <img src="images/logos/js.png" alt="🇯🇸"> JavaScript
+          <img src="images/logos/googlesheets.webp" alt="📗"> Google Sheets<br>
+          <img src="images/logos/javascript.webp" alt="🇯🇸"> JavaScript
         </div>
       </div>
 	  <div class="typewriter hidden">
           <h1 id="weather-info">"Goodmorning sir. The current weather is cloudy, 23 degrees."</h1>
         </div>
       <div class="tile" id="tile4">
-        <img src="images/homeassistant.jpg" alt="Home Assistant">
+        <img src="images/homeassistant.webp" alt="Home Assistant">
         <div class="detailed-description hidden">
           <p>Placeholder slop: I've always been fascinated with the idea of a "smart home" and smart technology. I stumbled across a Google Home Mini sale for $25 each and decided that four was enough coverage for the majority of my apartment. This setup not only provides my preferred background sounds—like instrumental music, smooth jazz, lofi, and natural ambiances such as rain or a fireplace—but also gives my laptop a break.</p>
           <p>My experience with Google Home was limited; I had only temporarily used a Google phone and found its UI and settings too rigid, preferring Samsung instead. Nevertheless, my experiments with a Raspberry Pi piqued my interest in potential integrations. This led to discovering pychromecast, which, despite its occasional inconsistencies in queuing YouTube links, fit well with my programming interests and significantly improved my sleep.</p>
@@ -183,20 +193,20 @@
         </div>
         <p class="project-title">Home Assistant</p>
         <div class="stacks">
-          <img src="images/logos/rpi.png" alt="🏮"> RPI<br>
-          <img src="images/logos/py.png" alt="🐍"> Python
+          <img src="images/logos/raspberrypi.webp" alt="🏮"> Raspberry Pi<br>
+          <img src="images/logos/python.webp" alt="🐍"> Python
         </div>
       </div>
 	  <div class="tile" id="tile5">
-        <img src="images/lookup.svg" alt="Customer Search Interface">
+        <img src="images/lookup.webp" alt="Customer Search Interface">
         <p class="project-title">Customer Search Interface</p>
         <div class="stacks">
-          <img src="images/logos/sqlite.png" alt="💾"/> SQLite<br>
-          <img src="images/logos/py.png" alt="🐍"> Python
+          <img src="images/logos/sqlite.webp" alt="💾"/> SQLite<br>
+          <img src="images/logos/python.webp" alt="🐍"> Python
         </div>
       </div>
       <div class="tile" id="tile6">
-        <img src="images/server.jpg" alt="Server">
+        <img src="images/server.webp" alt="Server">
         <div class="detailed-description hidden">
           <p>Placeholder slop: I've always been interested in creating a dedicated server that could remain operational around the clock—hosting FTP, video game servers, bots, movies, and more. While browsing pcpartpicker, I came across an intriguing "incognito" or "sleeper" build, reminiscent of a sleeper car but using an old radio instead of an old beige tower. I bookmarked this innovative idea for future inspiration.</p>
           <p>A few months later, while ordering a replacement motherboard for a friend’s laptop, I received the wrong item: a micro ATX motherboard, unexpectedly perfect for my first home server. It boasted RAID support, onboard graphics, and compatibility with older chipsets. This mistake kicked off my search for an old radio or similar enclosure to house the server. Despite visits to places like Value Village and Goodwill, I found nothing suitable until an accidental discovery at my cousin's house. I found their old Bell satellite receiver/HD PVR box while searching for an ethernet cable. The measurements were perfect, the condition was impeccable—it was an ideal match.</p>
@@ -205,24 +215,24 @@
         </div>
         <p class="project-title">Home Server</p>
         <div class="stacks">
-          <img src="images/logos/pcpp.png" alt="🛠️"/> PcPartPicker<br>
-          <img src="images/logos/wg.png" alt="WireGuard"/> WireGuard
+          <img src="images/logos/pcpartpicker.webp" alt="🛠️"/> PCPartPicker<br>
+          <img src="images/logos/wireguard.webp" alt="WireGuard"/> WireGuard
         </div>
       </div>
       <div class="tile" id="tile7">
-        <img src="images/gamejam.jpg" alt="Game Jams">
+        <img src="images/gamejams.webp" alt="Game Jams">
         <p class="project-title">Game Jams</p>
         <div class="stacks">
-          <img src="images/logos/unity.png" alt="🎮"> Unity<br>
-          <img src="images/logos/blender.png" alt="🎨"> Blender<br>
-          <img src="images/logos/csharp.png" alt="🇨✂️"> C#
+          <img src="images/logos/unity.webp" alt="🎮"> Unity<br>
+          <img src="images/logos/blender.webp" alt="🎨"> Blender<br>
+          <img src="images/logos/csharp.webp" alt="🇨✂️"> C#
         </div>
       </div>
       <div class="tile" id="tile8">
-        <img src="images/workstation.jpg" alt="Workstations">
+        <img src="images/workstations.webp" alt="Workstations">
         <p class="project-title">Workstations</p>
         <div class="stacks">
-          <img src="images/logos/pcpp.png" alt="🛠️"/> PcPartPicker<br>
+          <img src="images/logos/pcpartpicker.webp" alt="🛠️"/> PCPartPicker<br>
         </div>
       </div>
 	  <div class="tile" id="tile9">
@@ -235,10 +245,14 @@
         <img src="https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e.jpg" alt="This Website">
         <p class="project-title">This Website</p>
         <div class="stacks">
-          <img src="images/logos/html5.png" alt="HTML"> HTML<br>
-          <img src="images/logos/css.png" alt="CSS"> CSS<br>
-          <img src="images/logos/js.png" alt="🇯🇸"> JavaScript
+          <img src="images/logos/html5.webp" alt="HTML"> HTML<br>
+          <img src="images/logos/css.webp" alt="CSS"> CSS<br>
+          <img src="images/logos/javascript.webp" alt="🇯🇸"> JavaScript
         </div>
+      </div>
+	  <div class="tile" id="tile10">
+        <img src="https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e.jpg" alt="# whoami">
+        <p class="project-title"># whoami</p>
       </div>
       <!-- Add more tiles here -->
     </section>

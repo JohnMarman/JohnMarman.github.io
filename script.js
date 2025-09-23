@@ -291,7 +291,6 @@ function resetImg(source) {
   container.addEventListener('transitionend', cleanup);
 }
 
-
 function showGameJamsTiles() {
   const gameJamsTiles = document.querySelector('.game-jams-tiles');
   const projectTiles  = document.querySelector('.project-tiles');
