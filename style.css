@@ -66,9 +66,17 @@ body.no-scroll { overflow: hidden !important; }
   border-radius: 0 !important; /* square corners on the overlay */
 }
 
+@media (max-width: 1919px) {
+  .detailed-description-overlay {
+    min-width: 80%;
+  }
+}
+
 .detailed-description p,
 .detailed-description-overlay p {
   color: #000 !important;
+  font-size: 1.05rem;
+  line-height: 1.5;
 }
 
 /* black separators */
@@ -361,6 +369,16 @@ header {
   /* responsive label text */
   --label-size: clamp(10px, 1.1vw, 14px);
 }
+
+/* mobile keeps the white panel all the way to the bottom */
+@media (max-width: 1919px) {
+  .focus-img{
+    margin-right: 0px;
+	margin-left: 0px;
+  }
+}
+
+
 
 .focus-img img{ display:block; width:100%; height:auto; }
 
