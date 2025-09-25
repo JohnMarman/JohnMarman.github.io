@@ -426,11 +426,17 @@ header {
   position:absolute;
   background: rgba(0,0,0,.65);
   color: var(--ring-color);
-  font: 600 clamp(10px,1.1vw,14px)/1.1 system-ui;
+  font-size: 20px;
   padding: .2rem .45rem;
   border-radius: 6px;
   pointer-events:none;
   white-space: nowrap;
+}
+
+@media (max-width: 1919px) {
+  .focus-img .label{
+    font-size: 18px;
+  }
 }
 
 /* Center circle label → to the RIGHT of its ring */

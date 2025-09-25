@@ -80,19 +80,64 @@
 				<figcaption><em>a trick I learned early on to improve optimization: search a smaller area of the screen rather than the entire screen</em></figcaption>
 				</figure>
 
-			  <p>The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but it wasn’t really viable for scalability (detecting suit or color). Dreading the alternative, I hoped maybe the creator was lazy and ripped an existing card image pack from somewhere on the internet, but I found nothing.</p>
+			  <p>The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but I realized it wasn’t really viable for scalability (detecting suit or color). Dreading the alternative, I hoped maybe the creator was lazy and ripped an existing card image pack from somewhere on the internet, but I found nothing.</p>
 				
 				<p>Which meant that I would have to play enough rounds to manually take a picture of every. single. 52. cards. Ugh. So I wrote a script to do it automatically.</p>
 				
-			  <figure class="media">
-				<!-- replace src with your region comparison -->
-				<img src="" alt="picture of card folder and suits folder">
-				<figcaption>
-				  <em>another trick i learned to improve optimization was to search for suit and value separately. in hindsight maybe I could optimize it even further by desaturating the colors to reduce the number of files, although that might reduce matching certainty</em>
-				</figcaption>
-			  </figure>
+			  <figure>
+			  <div style="
+				display:grid;
+				grid-template-columns: 1fr auto 1fr;  /* left image | arrow | right image */
+				align-items:center;
+				width:100%;
+			  ">
+				<!-- LEFT image (anchored to arrow) -->
+				<img
+				  src="file:///C:/Users/Johnnie/Documents/GitHub/JohnMarman.github.io/images/cardfolderv1.webp"
+				  alt="full card set folder"
+				  style="
+					justify-self:end;               /* hug the arrow */
+					margin-right:5px;               /* 5px from arrow */
+					border-radius:8px; background:#fff;
+					box-shadow:0 12px 26px rgba(0,0,0,.35);
+				  "
+				/>
 
-			  <p>As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so I could automate the entire round without moving the mouse: starting a new round, placing bets, hit/hold/double, and starting the next round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)</p>
+				<!-- ARROW in the middle -->
+				<div aria-hidden="true" style="
+				  grid-column:2;
+				  font-size:clamp(36px, 7vw, 72px);
+				  line-height:1; color:#fff;
+				  text-shadow:0 0 2px rgba(0,0,0,.45), 0 2px 10px rgba(0,0,0,.55);
+				  transform: translateY(-6%);
+				">➜</div>
+
+				<!-- RIGHT image (anchored to arrow) -->
+				<img
+				  src="file:///C:/Users/Johnnie/Documents/GitHub/JohnMarman.github.io/images/cardfolderv2.webp"
+				  alt="reduced search set"
+				  style="
+					justify-self:start;             /* hug the arrow */
+					margin-left:5px;                /* 5px from arrow */
+					border-radius:8px; background:#fff;
+					box-shadow:0 12px 26px rgba(0,0,0,.35);
+				  "
+				/>
+			  </div>
+
+			  <figcaption style="
+				margin:12px auto 0; max-width:980px;
+				text-align:center; font-style:italic; color:#000;
+				font-size:clamp(13px,1.05rem,18px); line-height:1.45;
+			  ">
+				another trick i learned to improve optimization was to search for suit and value separately.<br>
+				(in hindsight I could maybe optimize it even further by desaturating the colors to reduce the number of files to iterate through,
+				although that might reduce matching certainty)
+			  </figcaption>
+			</figure>
+
+
+			  <p>As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so I could automate the entire game without moving the mouse: starting a new round, placing bets, hit/hold/double, and starting the next round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)</p>
 				
 				<div style="display: flex;align-items: center;gap: 1rem;margin: 1rem 0;">
 				<img src="images/basicstrategy.webp"
@@ -128,7 +173,7 @@
 				-if the running count changed significantly (trying to detect reshuffles), reset the estimated decks<br>
 				-only increase minimum bet after a 50 round threshold to avoid early, misleading data<br>
 				-in case there were anti-card counting techniques, I implemented a custom streak counter; if I’d won too many rounds in a row and the variables hadn’t changed much, I dialed back betting amounts<br>
-				-Complementary event: if a certain event does not occur in a sample of n subjects, assume it has occurred at least once. For example, if a dealer is using 6 decks and we've seen 312 cards, we should assume the deck has been reshuffled at least once</p>
+				-Law of truly large numbers: if a particular event has not been observed within fewer than n independent trials, once the number of trials exceeds n, assume that the event has occurred at least once. For example, if a dealer is using 6 decks and we've seen each unique card in a deck 6 times, we should assume the deck has been reshuffled at least once</p>
 
 			  <p>Research suggested that running millions of simulations could determine the exact mechanics of the game, but since each round took ~10 seconds (even after rewriting/optimizing the code afew times), it wasn’t viable. The program would need to make real-time decisions based on real-time and historical data and improve itself.</p>
 
