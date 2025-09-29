@@ -105,7 +105,6 @@ body.no-scroll { overflow: hidden !important; }
   border: 1px solid #000;
   border-radius: 12px;
   padding: 16px 20px;
-  margin-top: 16px;
 }
 
 .highlight-card h3 {
@@ -114,6 +113,62 @@ body.no-scroll { overflow: hidden !important; }
 }
 
 .highlight-card ul { margin: 0; padding-left: 18px; }
+
+
+/* === Thesis Classic (matches the canvas component) === */
+
+/* container uses your highlight-card chrome; this just sets rhythm */
+.project-block { padding: 18px 20px; }
+
+/* tiny uppercase line above the title */
+.project-meta{
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+/* title + subtitle (serif, two-tone) */
+.project-block .detail-title{
+  display: block;                 /* ensure normal flow */
+  margin: 0;                      /* canvas uses tight stack */
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;               /* bold main title */
+  font-size: 34px;                /* ~text-3xl */
+  line-height: 1.15;              /* leading-tight */
+  color: #000;
+}
+.project-block .detail-title .subtitle{
+  font-weight: 400;               /* normal weight for subtitle */
+  color: #666;                    /* grey subtitle in light mode */
+}
+
+/* byline */
+.project-block .byline{
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-size: 14px;                /* canvas text-sm */
+  color: #444;
+}
+.project-block .byline .thin{ color: #777; }
+.project-block .byline .sep{ margin: 0 8px; color: #bbb; }
+
+/* abstract paragraph (canvas uses text-[15px] leading-relaxed) */
+.project-block .project-abstract{
+  margin-top: 14px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #222;                    /* readable on white card */
+}
+
+/* stack chips: reuse your .detail-tags/.tag, just align timing */
+.project-block .project-stack{
+  margin-top: 12px;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+
+
 
 /* optional: right-aligned action row (e.g., “Source” button) */
 .detail-actions { margin-top: 14px; display: flex; justify-content: flex-end; }

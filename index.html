@@ -24,32 +24,30 @@
         <img src="images/q_values.webp" alt="Machine Learning">
         <div class="detailed-description hidden">
 			<div class="dpanel">
-			  <h2 class="detail-title">Machine Learning</h2>
-			  <p class="detail-subtitle">Lightweight Q-learning.</p>
+				
+				<div class="highlight-card project-block">
+				  
+				  <div class="project-meta">Proceedings of: Nights & Weekends</div>
 
-			  <div class="detail-rule"></div>
-			  
-			  <p class="detail-lead">
-				Lightweight Q-learning
-			  </p>
+				  <h2 class="detail-title">
+					Machine Learning:
+					<span class="subtitle">Epsilon-Greedy Q-Learning (MDP)</span>
+				  </h2>
 
-			  <div class="detail-tags">
-				<span class="tag">SikuliX</span>
-				<span class="tag">Python</span>
-				<span class="tag">JSON</span>
-			  </div>
-			  
-			  <div class="highlight-card">
-				<h3>Highlights</h3>
-				<ul>
-				  <li>SikuliX image &amp; pattern recognition with tight search regions for speed.</li>
-				  <li>Full keyboard-driven automation with human-like random delays.</li>
-				  <li>Basic Strategy baseline + Hi-Lo counting and EV-aware bet sizing.</li>
-				  <li>Dealer-first detection to infer player count in real time.</li>
-				  <li>Safeguards: bankroll tracking, reshuffle detection, conservative progression.</li>
-				  <li>Online Q-learning layer that improves during play and stores knowledge in JSON.</li>
-				</ul>
-			  </div>
+				  <div class="byline">
+					<span class="thin">From Heuristics</span> to Policy
+				  </div>
+
+				  <p class="project-abstract">
+					Exploring how fundamental techniques scale in a stable environment. Image recognition drives reinforcement learning with constraints to adapt in situ. Safeguards limit variance as the decision policy converges toward profitable actions.
+				  </p>
+
+				  <div class="detail-tags project-stack">
+					<span class="tag">SikuliX</span>
+					<span class="tag">Python</span>
+					<span class="tag">JSON</span>
+				  </div>
+				</div>
 
 			  <p>I didn’t initially intend for this to be a project, how most of them start.</p>
 
@@ -72,17 +70,9 @@
 
 			  <p>Consistency meant I could rely on image and pattern recognition. Unlike most video games with a free-look camera, tracking objects is not trivial, but this was served to me on a platter.</p>
 
-			  <p>The first step is always defining regions on the screen, in this case the placement of the cards.</p>
-			  
-			  <figure class="media">
-				<!-- replace src with your screenshot -->
-				<img src="" alt="picture of card region">
-				<figcaption><em>a trick I learned early on to improve optimization: search a smaller area of the screen rather than the entire screen</em></figcaption>
-				</figure>
-
-			  <p>The next step was to identify every card. I figured I’d start simple with OCR (optical character recognition), but I realized it wasn’t really viable for scalability (detecting suit or color). Dreading the alternative, I hoped maybe the creator was lazy and ripped an existing card image pack from somewhere on the internet, but I found nothing.</p>
+			  <p>I figured I’d start simple with OCR (optical character recognition), but I realized it wasn’t really viable for scalability (detecting suit or color). Dreading the alternative, I hoped maybe the creator was lazy and ripped an existing card image pack from somewhere on the internet, but I found nothing.</p>
 				
-				<p>Which meant that I would have to play enough rounds to manually take a picture of every. single. 52. cards. Ugh. So I wrote a script to do it automatically.</p>
+				<p>Which meant that I would have to play enough rounds to manually take a picture of every. single. 52. cards. So I wrote a script to do it automatically.</p>
 				
 			  <figure>
 			  <div style="
@@ -136,20 +126,19 @@
 			  </figcaption>
 			</figure>
 
-
 			  <p>As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so I could automate the entire game without moving the mouse: starting a new round, placing bets, hit/hold/double, and starting the next round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)</p>
 				
-				<div style="display: flex;align-items: center;gap: 1rem;margin: 1rem 0;">
-				<img src="images/basicstrategy.webp"
-					alt="Blackjack basic strategy"
-					style="width:50%; min-width: 50%; height:auto; float:left; margin-right:clamp(8px,2vw,16px);margin-bottom:clamp(8px,2vw,16px);">
-					<div>
-						<p style="text-align: center;font-size: clamp(14px, 1.3vw, 18px);color: #111;  padding: .2rem .5rem;  border-radius: 6px;  display: inline-block;">I implemented the Basic Strategy Chart logic, and done!</p>
-						<p style="text-align:center; margin-top: .5rem;  font-size: clamp(18px, 2.2vw, 28px);  font-weight: 700;">Almost too easy, right?</p>
-					</div>
+			<p>I implemented the Basic Strategy Chart logic, and <b>done!</b></p>
+			
+				<div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0;">
+				  <img src="images/basicstrategy.webp" alt="Blackjack basic strategy" style="width:50%; min-width:50%; height:auto;">
+				  <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+					<h1 style="text-align: center;">Almost too easy, right?</h1>
+				  </div>
 				</div>
-
-			  <p>Lulled into a false sense of security. Ironic, because it happens every single time. Through multiple projects I’ve become well acquainted with edge cases.</p>
+				
+				<p>Lulled into a false sense of security. Ironic, because it happens every single time.
+					  Through multiple projects I’ve become well acquainted with edge cases.</p>
 
 			  <p>As I was rewarding myself with a coffee, basking in the accomplishment of my “completed” project, I came back to the computer and noticed other players had joined the blackjack table. No big deal, until I realized my cards weren’t in the same position on the screen anymore. Like the smirk sliding off my face, my cards slid further down the screen as more players joined. The dealer’s cards were still at the top, but other players’ hands now slotted between mine and the dealer’s.</p>
 
