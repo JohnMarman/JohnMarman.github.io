@@ -586,7 +586,7 @@ header {
 }
 
 /* Optional: if very small devices still inflate text, hard opt-out here */
-@media (max-width: 420px) {
+@media (max-width: 1919px) {
   .project-block {
     -webkit-text-size-adjust: none;
     text-size-adjust: none;

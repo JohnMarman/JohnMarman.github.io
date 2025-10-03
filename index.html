@@ -128,10 +128,10 @@
 
 			  <p>As if the consistent card placement weren’t convenient enough, the game also accepted keyboard inputs, so I could automate the entire game without moving the mouse: starting a new round, placing bets, hit/hold/double, and starting the next round. (Learning from experience and making sure to implement random pauses to throw off simple autokey bot detectors.)</p>
 				
-			<p>I implemented the Basic Strategy Chart logic, and <b>done!</b></p>
+			<p>I implemented the basic strategy chart logic, and <b>done!</b></p>
 			
 				<div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0;">
-				  <img src="images/basicstrategy.webp" alt="Blackjack basic strategy" style="width:50%; min-width:50%; height:auto;">
+				  <img src="images/basicstrategy.webp" alt="blackjack basic strategy chart" style="width:50%; min-width:50%; height:auto;">
 				  <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
 					<h1 style="text-align: center;">Almost too easy, right?</h1>
 				  </div>
@@ -154,7 +154,7 @@
 				
 				<figure class="media">
 				<!-- your chart image -->
-				<img src="" alt="picture of console">
+				<img src="images/consoleoutput.webp" alt="console output" style="width:50%; min-width:50%; height:auto;">
 				<figcaption><em>probably no caption</em></figcaption>
 			  </figure>
 				
@@ -203,6 +203,21 @@
       <div class="tile" id="tile3">
         <img src="images/automatedschedule.webp" alt="Automated Schedule">
         <div class="detailed-description hidden">
+		<p>I’ve always realized the importance of budgeting and living below my means, except when I first moved out and 20-year-old me thought eating steak every night was sustainable (this spreadsheet showed me it wasn't!). I wanted one central, reliable place that I could rely on for tracking this, which turned into a multiple-year, long-term side project for tracking other metrics (paychecks, taxes, etc).</p>
+
+		<p>[image of a row from the first version]</p>
+
+		<p>It started very rudimentary: date – shift start – shift end – total hours. From that I could extrapolate paycheck estimates, and at some point I added rough calculations for gross and net.</p>
+
+		<p>[image of a few rows from the second version]</p>
+
+		<p>When I got a better job, I upgraded it by adding commission payout dates, and a metrics tab that gathered all the data into graphs so I could see hours and paychecks over time. I made it more organized – added color coding to paychecks and pay periods so it was easy to read at a glance. I also added another column for ‘actual’ hours worked in case I did overtime, which gave me a better estimate of my real paycheck amount.</p>
+
+		<p>[image of a few rows from the third version]</p>
+
+		<p>With a new job, the spreadsheet was still useful, so I changed it again to fit new needs. I got rid of commission tracking, added more metrics, and functionality to keep track of the two jobs I had. But I was getting tired of manually adding more rows, scrolling to find the current date, and duplicating paycheck equations every two weeks. That’s when I researched automation. Google Apps Script uses JavaScript, which I was already familiar with. I started with the current day bar, then the paycheck template, and finally created the questionnaire to call it done and marketable.</p><br><br>
+
+
           <p>Placeholder slop: Started in 2015 when I was working at The Source, the 'Automated Schedule' was first built to keep track of my constantly changing scheduled hours. It quickly became more than just a schedule tracker as I incorporated features to monitor my earnings and commission. Over the years, it has turned into an essential tool for budgeting and tax referencing.</p>
           <p>The need to manually update the system each week reminded me of the scripting capabilities in Microsoft Excel. Having some background in simple macros, I searched for a similar solution in Google Sheets. This exploration led me to Google Apps Script, a perfect fit since it's based on JavaScript, which I had experience with. Automating the extension of columns, formulas, and color coding led to features like displaying holidays, tracking actual worked hours against the schedule to calculate overtime and discrepancies, and breaking down taxes (for each pay period and total).</p>
           <p>Today, this tool not only displays holidays and manages color coding but also provides a detailed breakdown of taxes and total hours worked each month, helping me keep a precise record of my financials. I continue to use this system almost a decade later, proving its enduring utility and effectiveness."</p>
